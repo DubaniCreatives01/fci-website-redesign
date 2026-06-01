@@ -1349,3 +1349,259 @@ section {
     color: var(--text-white);
 }
 
+/* ==========================================================================
+   MOBILE SPECIFIC RESPONSIVENESS REFINE MODULE (max-width: 991px)
+   ========================================================================== */
+@media (max-width: 991px) {
+    /* 1. Remove Top Utility Bar completely */
+    .tophead {
+        display: none !important;
+    }
+
+    /* 2. Main content center alignment system */
+    section,
+    .section-header,
+    .section-title,
+    .section-subtitle,
+    .page-banner,
+    .hero-content {
+        text-align: center !important;
+    }
+
+    section h1,
+    section h2,
+    section h3,
+    section p,
+    .page-banner-title,
+    .breadcrumbs {
+        text-align: center !important;
+    }
+    
+    .breadcrumbs {
+        justify-content: center !important;
+    }
+
+    /* Center layout structures */
+    .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr !important;
+        justify-items: center !important;
+    }
+
+    .partners-flex {
+        justify-content: center !important;
+        gap: 30px !important;
+    }
+
+    /* 3. Hero content tweaks */
+    .hero-content {
+        padding: 0 20px !important;
+    }
+    
+    .hero h1 {
+        font-size: clamp(2rem, 8vw, 3.2rem) !important;
+        margin-bottom: 16px !important;
+    }
+
+    .hero p {
+        font-size: 1rem !important;
+        margin-bottom: 28px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .hero-actions {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 12px !important;
+        width: 100% !important;
+    }
+
+    .hero-actions .btn {
+        width: 100% !important;
+        max-width: 280px !important;
+        margin: 0 auto !important;
+    }
+
+    .scroll-indicator {
+        bottom: 40px !important;
+    }
+
+    /* 4. Visual Card centering & balance */
+    .card,
+    .team-card,
+    .service-card,
+    .news-card,
+    .download-card {
+        text-align: center !important;
+        align-items: center !important;
+        width: 100% !important;
+        max-width: 380px !important;
+        margin: 0 auto !important;
+    }
+
+    .card-content {
+        text-align: center !important;
+        align-items: center !important;
+    }
+
+    .card-desc {
+        text-align: center !important;
+    }
+
+    .card-link {
+        justify-content: center !important;
+        margin: 0 auto !important;
+    }
+
+    /* Team portrait visual tweaks */
+    .team-info {
+        text-align: center !important;
+    }
+
+    /* 5. Statistics Layout Mobile Balance */
+    .stats-grid {
+        grid-template-columns: 1fr !important;
+        padding: 32px 24px !important;
+        margin-top: -60px !important;
+        gap: 32px !important;
+        width: calc(100% - 48px) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .stat-item {
+        text-align: center !important;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 16px;
+    }
+
+    .stat-item:last-child {
+        border-bottom: none !important;
+        padding-bottom: 0 !important;
+    }
+
+    .stat-num {
+        font-size: 2.8rem !important;
+    }
+
+    /* 6. Symmetrical Footer Mobilization */
+    .main-footer {
+        text-align: center !important;
+        padding: 60px 0 30px !important;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+        text-align: center !important;
+    }
+
+    .footer-brand {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    .footer-brand p {
+        margin: 12px auto 20px auto !important;
+        max-width: 320px !important;
+    }
+
+    .social-links {
+        justify-content: center !important;
+        margin: 0 auto !important;
+    }
+
+    .footer-heading {
+        padding-bottom: 8px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .footer-heading::after {
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+
+    .footer-links {
+        align-items: center !important;
+        padding: 0 !important;
+    }
+
+    .footer-links li {
+        text-align: center !important;
+    }
+
+    .footer-contact-info {
+        align-items: center !important;
+    }
+
+    .footer-contact-item {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 6px !important;
+    }
+
+    .footer-contact-item svg {
+        margin-top: 0 !important;
+    }
+
+    .footer-newsletter {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .newsletter-form {
+        width: 100% !important;
+        max-width: 300px !important;
+        margin: 0 auto !important;
+    }
+
+    .footer-bottom {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 16px !important;
+        padding-top: 30px !important;
+    }
+
+    .footer-legal-links {
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        gap: 16px !important;
+    }
+
+    /* 7. Mobile UX & Readability polish */
+    .btn, 
+    .form-control,
+    .social-icon,
+    .nav-link,
+    .accordion-header,
+    a {
+        min-height: 44px;
+    }
+
+    section {
+        padding: 50px 0 !important;
+    }
+
+    .page-banner {
+        padding: 60px 0 40px !important;
+    }
+
+    .card:hover,
+    .team-card:hover,
+    .social-icon:hover {
+        transform: none !important;
+    }
+    
+    html, body {
+        overflow-x: hidden !important;
+        position: relative;
+        width: 100%;
+    }
+}
+
+
