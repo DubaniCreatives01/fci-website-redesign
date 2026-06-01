@@ -68,61 +68,80 @@
         </video>
         <div class="hero-overlay"></div>
         
-        <!-- Glassmorphic Live Weather & Time Widget -->
-        <div class="glass-widget reveal" id="weather-time-widget">
-            <div class="widget-header">
-                <span class="widget-location">Goodwood, CT</span>
-                <span class="widget-status-dot"></span>
+        <!-- Glassmorphic Widgets Column -->
+        <div class="hero-widgets-column">
+            <!-- Glassmorphic Live Weather & Time Widget -->
+            <div class="glass-widget reveal" id="weather-time-widget">
+                <div class="widget-header">
+                    <span class="widget-location">Goodwood, CT</span>
+                    <span class="widget-status-dot"></span>
+                </div>
+                <div class="widget-weather">
+                    <div class="weather-info">
+                        <div class="weather-temp" id="widget-temp">21°C</div>
+                        <div class="weather-condition" id="widget-cond">Partly Cloudy</div>
+                    </div>
+                    <div class="weather-icon-wrapper">
+                        <svg class="weather-icon-svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+                            <path d="M17 18.5a4 4 0 0 0-4-4h-2.5A4.5 4.5 0 0 0 6 15a4 4 0 0 0 4 4h7z" fill="currentColor" fill-opacity="0.2"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="widget-divider"></div>
+                <div class="widget-time-date">
+                    <div class="widget-time" id="widget-time-display">15:46:19</div>
+                    <div class="widget-date" id="widget-date-display">Friday, 29 May 2026</div>
+                </div>
+                
+                <div class="widget-forecast" id="widget-forecast-days">
+                    <div class="forecast-day">
+                        <span class="day-name" id="forecast-day-1">Sat</span>
+                        <svg class="forecast-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                        <span class="day-temp" id="forecast-temp-1">22°C</span>
+                    </div>
+                    <div class="forecast-day">
+                        <span class="day-name" id="forecast-day-2">Sun</span>
+                        <svg class="forecast-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+                            <path d="M17 18.5a4 4 0 0 0-4-4h-2.5A4.5 4.5 0 0 0 6 15a4 4 0 0 0 4 4h7z" fill="currentColor" fill-opacity="0.2"></path>
+                        </svg>
+                        <span class="day-temp" id="forecast-temp-2">19°C</span>
+                    </div>
+                    <div class="forecast-day">
+                        <span class="day-name" id="forecast-day-3">Mon</span>
+                        <svg class="forecast-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 18.5a4 4 0 0 0-4-4h-2.5A4.5 4.5 0 0 0 6 15a4 4 0 0 0 4 4h7z" fill="currentColor" fill-opacity="0.2"></path>
+                        </svg>
+                        <span class="day-temp" id="forecast-temp-3">21°C</span>
+                    </div>
+                </div>
             </div>
-            <div class="widget-weather">
-                <div class="weather-info">
-                    <div class="weather-temp" id="widget-temp">21°C</div>
-                    <div class="weather-condition" id="widget-cond">Partly Cloudy</div>
+
+            <!-- Glassmorphic Apply Now Widget -->
+            <div class="glass-widget apply-widget reveal" id="apply-now-widget" style="margin-top: 16px;">
+                <div class="widget-header">
+                    <span class="widget-location" style="color: var(--secondary-green);">Active Intakes</span>
+                    <span class="widget-status-dot" style="background-color: var(--accent-orange); box-shadow: 0 0 8px var(--accent-orange); width:8px; height:8px; border-radius:50%;"></span>
                 </div>
-                <div class="weather-icon-wrapper">
-                    <svg class="weather-icon-svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
-                        <path d="M17 18.5a4 4 0 0 0-4-4h-2.5A4.5 4.5 0 0 0 6 15a4 4 0 0 0 4 4h7z" fill="currentColor" fill-opacity="0.2"/>
-                    </svg>
+                <div style="margin-bottom: 12px; text-align: left;">
+                    <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--text-white); margin-bottom: 6px; letter-spacing: -0.02em;">2024 Tenant Intake</h3>
+                    <p style="font-size: 0.82rem; color: rgba(255,255,255,0.78); line-height: 1.4; margin-bottom: 16px;">Apply online instantly. Submit documents and check eligibility in 5 simple steps.</p>
                 </div>
-            </div>
-            <div class="widget-divider"></div>
-            <div class="widget-time-date">
-                <div class="widget-time" id="widget-time-display">15:46:19</div>
-                <div class="widget-date" id="widget-date-display">Friday, 29 May 2026</div>
-            </div>
-            
-            <div class="widget-forecast" id="widget-forecast-days">
-                <div class="forecast-day">
-                    <span class="day-name" id="forecast-day-1">Sat</span>
-                    <svg class="forecast-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                    <span class="day-temp" id="forecast-temp-1">22°C</span>
-                </div>
-                <div class="forecast-day">
-                    <span class="day-name" id="forecast-day-2">Sun</span>
-                    <svg class="forecast-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
-                        <path d="M17 18.5a4 4 0 0 0-4-4h-2.5A4.5 4.5 0 0 0 6 15a4 4 0 0 0 4 4h7z" fill="currentColor" fill-opacity="0.2"></path>
-                    </svg>
-                    <span class="day-temp" id="forecast-temp-2">19°C</span>
-                </div>
-                <div class="forecast-day">
-                    <span class="day-name" id="forecast-day-3">Mon</span>
-                    <svg class="forecast-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M17 18.5a4 4 0 0 0-4-4h-2.5A4.5 4.5 0 0 0 6 15a4 4 0 0 0 4 4h7z" fill="currentColor" fill-opacity="0.2"></path>
-                    </svg>
-                    <span class="day-temp" id="forecast-temp-3">21°C</span>
-                </div>
+                <a href="apply.html" class="btn btn-primary" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 10px 16px; font-size: 0.82rem; font-weight: 700; background-color: var(--accent-orange); border-color: var(--accent-orange); text-transform: uppercase; border-radius: var(--radius-sm); transition: all 0.3s; color: var(--text-white); text-decoration: none;" id="btn-widget-apply">
+                    <span>Apply Online</span>
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                </a>
             </div>
         </div>
 

@@ -1184,12 +1184,21 @@ section {
    GLASSMORPHIC LIVE WEATHER & TIME WIDGET
    ========================================================================== */
 
-.glass-widget {
+.hero-widgets-column {
     position: absolute;
     left: 48px;
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    pointer-events: none;
+}
+
+.glass-widget {
+    position: relative;
+    z-index: 1;
     width: 280px;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(25px);
@@ -1204,9 +1213,21 @@ section {
 }
 
 @keyframes float-widget {
-    0% { transform: translateY(-50%) translateY(0px); }
-    50% { transform: translateY(-50%) translateY(-12px); }
-    100% { transform: translateY(-50%) translateY(0px); }
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+.apply-widget {
+    animation: float-apply 6s ease-in-out infinite;
+    animation-delay: 2s;
+    border-color: rgba(255, 153, 0, 0.25);
+}
+
+@keyframes float-apply {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
 }
 
 .widget-header {

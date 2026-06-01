@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Tenant Application - FCI Community Housing Services</title>
+    <meta name="description" content="Apply online for FCI affordable housing developments, check eligibility, and submit required documents in 5 simple steps.">
+    <link rel="icon" type="image/jpeg" href="assets/images/favicon.jpg">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        /* Custom Stepper Wizard Styles */
+        .stepper-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px auto 60px;
+            max-width: 900px;
+            position: relative;
+            padding: 0 20px;
+        }
+        .stepper-line {
+            position: absolute;
+            top: 25px;
+            left: 50px;
+            right: 50px;
+            height: 3px;
+            background-color: var(--border-color);
+            z-index: 1;
+        }
+        .stepper-line-progress {
+            position: absolute;
+            top: 25px;
+            left: 50px;
+            width: 0%;
+            height: 3px;
+            background-color: var(--accent-orange);
+            z-index: 2;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .step-node {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 3;
+            cursor: pointer;
+            width: 100px;
+        }
+        .step-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+        .step-node.active .step-circle {
+            background-color: var(--primary-teal);
+            border-color: var(--primary-teal);
+            color: var(--text-white);
+            box-shadow: 0 0 15px rgba(2, 59, 60, 0.3);
+        }
+        .step-node.completed .step-circle {
+            background-color: var(--secondary-green);
+            border-color: var(--secondary-green);
+            color: var(--text-white);
+        }
+        .step-label {
+            margin-top: 12px;
+            font-size: 0.78rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            text-align: center;
+            transition: color 0.3s;
+        }
+        .step-node.active .step-label {
+            color: var(--primary-teal);
+        }
+        .step-node.completed .step-label {
+            color: var(--secondary-green);
+        }
+
+        /* Wizard Cards wrapper */
+        .wizard-card {
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 48px;
+            box-shadow: var(--shadow-medium);
+            max-width: 900px;
+            margin: 0 auto 80px;
+            display: none;
+            position: relative;
+        }
+        .wizard-card.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .wizard-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-teal-dark);
+            margin-bottom: 8px;
+            border-bottom: 2px solid rgba(2, 59, 60, 0.06);
+            padding-bottom: 16px;
+        }
+        .wizard-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Eligibility Warning Block */
+        .eligibility-alert {
+            background-color: rgba(255, 153, 0, 0.08);
+            border-left: 4px solid var(--accent-orange);
+            border-radius: 4px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+        .eligibility-alert.active {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Dynamic Upload Elements */
+        .upload-zone {
+            border: 2px dashed var(--border-color);
+            background-color: var(--bg-secondary);
+            border-radius: var(--radius-sm);
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .upload-zone:hover {
+            border-color: var(--primary-teal);
+            background-color: rgba(2, 59, 60, 0.02);
+        }
+        .upload-zone input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .upload-icon {
+            color: var(--text-secondary);
+            transition: color 0.3s;
+        }
+        .upload-zone:hover .upload-icon {
+            color: var(--primary-teal);
+        }
+        .file-status {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        .file-status.selected {
+            color: var(--secondary-green);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Bottom Action row */
+        .wizard-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 24px;
+        }
+
+        .summary-block {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        .summary-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary-teal);
+            margin-bottom: 12px;
+            border-bottom: 1px solid rgba(2, 59, 60, 0.08);
+            padding-bottom: 6px;
+        }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+        }
+        .summary-item {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .summary-item strong {
+            color: var(--text-primary);
+        }
+
+        /* Stepper Mobile Responsive Adjustments */
+        @media (max-width: 768px) {
+            .stepper-container {
+                margin: 30px auto;
+            }
+            .stepper-line, .stepper-line-progress {
+                top: 20px;
+            }
+            .step-circle {
+                width: 40px;
+                height: 40px;
+                font-size: 0.95rem;
+            }
+            .step-label {
+                font-size: 0.65rem;
+                letter-spacing: 0.02em;
+            }
+            .wizard-card {
+                padding: 30px 20px;
+            }
+            .wizard-title {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================================================
+       TOP INFO BAR (Hidden on Mobile automatically by design system CSS)
+       ========================================================================== -->
+    <div class="tophead" id="tophead-bar">
+        <div class="container">
+            <div class="tophead-info">
+                <a href="tel:+27218797363" id="tophead-phone">
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.15 15.15 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    <span>+27 21 879 7363</span>
+                </a>
+                <a href="mailto:info@fcichs.co.za" id="tophead-email">
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <span>info@fcichs.co.za</span>
+                </a>
+            </div>
+            <div>
+                <span>BEE Level 1 Contributor</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       HEADER STICKY NAV
+       ========================================================================== -->
+    <header class="main-header" id="main-header">
+        <div class="container">
+            <a href="index.html" class="logo" id="logo-link">
+                <img src="assets/images/newLogo-300x129.png" alt="FCI Community Housing Services Logo" id="logo-img">
+            </a>
+            
+            <button class="hamburger" id="menu-hamburger" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link" id="nav-home">Home</a></li>
+                <li><a href="about.html" class="nav-link" id="nav-about">About Us</a></li>
+                <li><a href="developments.html" class="nav-link" id="nav-developments">Developments</a></li>
+                <li><a href="projects.html" class="nav-link" id="nav-projects">Projects</a></li>
+                <li><a href="programmes.html" class="nav-link" id="nav-programmes">Programmes</a></li>
+                <li><a href="news.html" class="nav-link" id="nav-news">News</a></li>
+                <li><a href="downloads.html" class="nav-link active" id="nav-downloads">Downloads</a></li>
+                <li><a href="contact.html" class="nav-link" id="nav-contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ==========================================================================
+       PAGE BANNER
+       ========================================================================== -->
+    <section class="page-banner" id="apply-banner">
+        <div class="container">
+            <h1 class="page-banner-title" id="apply-banner-title">Online Application Portal</h1>
+            <div class="breadcrumbs" id="apply-breadcrumbs">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <a href="downloads.html">Downloads</a>
+                <span>/</span>
+                <span>Apply Online</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- ==========================================================================
+           WIZARD STEPPER HEADER
+           ========================================================================== -->
+        <div class="stepper-container" id="apply-stepper">
+            <div class="stepper-line"></div>
+            <div class="stepper-line-progress" id="step-progress-bar"></div>
+            
+            <div class="step-node active" data-step="1" onclick="navigateToStep(1)">
+                <div class="step-circle">1</div>
+                <div class="step-label">Eligibility</div>
+            </div>
+            <div class="step-node" data-step="2" onclick="navigateToStep(2)">
+                <div class="step-circle">2</div>
+                <div class="step-label">Applicant</div>
+            </div>
+            <div class="step-node" data-step="3" onclick="navigateToStep(3)">
+                <div class="step-circle">3</div>
+                <div class="step-label">Employment</div>
+            </div>
+            <div class="step-node" data-step="4" onclick="navigateToStep(4)">
+                <div class="step-circle">4</div>
+                <div class="step-label">Documents</div>
+            </div>
+            <div class="step-node" data-step="5" onclick="navigateToStep(5)">
+                <div class="step-circle">5</div>
+                <div class="step-label">Review</div>
+            </div>
+        </div>
+
+        <form id="online-application-form" onsubmit="handleFormSubmission(event)">
+            <!-- ==========================================================================
+               STEP 1: ELIGIBILITY & INTAKE
+               ========================================================================== -->
+            <div class="wizard-card active" id="step-card-1" data-step="1">
+                <h2 class="wizard-title">1. Housing Intake & Eligibility</h2>
+                <p class="wizard-subtitle">Select your preferred housing project and verify your initial regulatory qualifying criteria.</p>
+                
+                <div class="grid grid-2">
+                    <!-- Project Selection -->
+                    <div class="form-group">
+                        <select class="form-control" id="app-project" required style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill=%22%23023B3C%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>'); background-repeat: no-repeat; background-position: right 16px center;">
+                            <option value="" disabled selected hidden>Select Housing Development</option>
+                            <option value="Goodwood Station Development">Goodwood Station Development (Cape Town)</option>
+                            <option value="Heideveld Station Complex">Heideveld Station Complex (Archived Complex)</option>
+                            <option value="General Rental Waitlist">General Rental Housing Waitlist</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Unit Type Preference -->
+                    <div class="form-group">
+                        <select class="form-control" id="app-unit-type" required style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill=%22%23023B3C%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>'); background-repeat: no-repeat; background-position: right 16px center;">
+                            <option value="" disabled selected hidden>Preferred Unit Layout</option>
+                            <option value="Bachelor Unit">Bachelor Apartment</option>
+                            <option value="1 Bedroom Unit">1 Bedroom Apartment</option>
+                            <option value="2 Bedroom Unit">2 Bedroom Apartment</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="eligibility-alert active" id="elig-info-banner">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="color: var(--accent-orange); flex-shrink:0; margin-top:2px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    <div>
+                        <strong style="color: var(--text-primary);">Municipal Income Limit:</strong> Social housing units are heavily subsidized. The combined gross household income of all applicants must strictly fall within **R1,800 to R22,500 per month** to qualify.
+                    </div>
+                </div>
+
+                <!-- Income Threshold Check -->
+                <div style="background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 24px; margin-top: 30px;">
+                    <p style="font-weight: 700; color: var(--text-primary); margin-bottom: 12px;">Does your combined household monthly income fall within the R1,800 to R22,500 range?</p>
+                    <div style="display: flex; gap: 24px;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="radio" name="eligibility-income-range" value="yes" checked onchange="toggleIncomeWarning(false)" style="accent-color: var(--primary-teal); width:18px; height:18px;">
+                            <span>Yes, my income qualifies</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="radio" name="eligibility-income-range" value="no" onchange="toggleIncomeWarning(true)" style="accent-color: var(--primary-teal); width:18px; height:18px;">
+                            <span>No, my income is outside this range</span>
+                        </label>
+                    </div>
+                    
+                    <div class="eligibility-alert" id="income-warning" style="margin-top: 16px; background-color: rgba(211,47,47,0.06); border-left-color: #d32f2f;">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="color: #d32f2f; flex-shrink:0;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                        <div>
+                            <strong style="color: #c62828;">Qualifying Alert:</strong> Based on your input, you may not satisfy the regulatory threshold. Applications with combined incomes outside this bracket cannot be approved for active social housing.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wizard-actions">
+                    <div></div>
+                    <button type="button" class="btn btn-primary" onclick="nextStep(1)">Next: Applicant Details</button>
+                </div>
+            </div>
+
+            <!-- ==========================================================================
+               STEP 2: APPLICANT DETAILS
+               ========================================================================== -->
+            <div class="wizard-card" id="step-card-2" data-step="2">
+                <h2 class="wizard-title">2. Primary Applicant Details</h2>
+                <p class="wizard-subtitle">Enter your official personal details. All information must match your South African Identity Document.</p>
+                
+                <div class="grid grid-2">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="app-fullname" required placeholder=" ">
+                        <label class="form-label" for="app-fullname">Full Name (as in ID)</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="app-idnumber" required placeholder=" " minlength="13" maxlength="13">
+                        <label class="form-label" for="app-idnumber">SA ID Number (13 digits)</label>
+                    </div>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="form-group">
+                        <input type="tel" class="form-control" id="app-phone" required placeholder=" ">
+                        <label class="form-label" for="app-phone">Mobile Number</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="app-email" required placeholder=" ">
+                        <label class="form-label" for="app-email">Email Address</label>
+                    </div>
+                </div>
+
+                <div class="grid grid-3">
+                    <div class="form-group">
+                        <select class="form-control" id="app-citizenship" required style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill=%22%23023B3C%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>'); background-repeat: no-repeat; background-position: right 16px center;">
+                            <option value="" disabled selected hidden>Citizenship</option>
+                            <option value="SA Citizen">South African Citizen</option>
+                            <option value="Permanent Resident">Permanent Resident</option>
+                            <option value="Other Status">Other / Foreign National</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id="app-marital" required style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill=%22%23023B3C%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>'); background-repeat: no-repeat; background-position: right 16px center;">
+                            <option value="" disabled selected hidden>Marital Status</option>
+                            <option value="Single">Single</option>
+                            <option value="Married">Married (Joint Application)</option>
+                            <option value="Divorced">Divorced</option>
+                            <option value="Widowed">Widowed</option>
+                            <option value="Co-habitating">Co-habitating</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="app-dependents" required placeholder=" " min="0" value="0">
+                        <label class="form-label" for="app-dependents">Number of Dependents</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <textarea class="form-control" id="app-address" required rows="3" placeholder=" "></textarea>
+                    <label class="form-label" for="app-address">Current Residential Address</label>
+                </div>
+
+                <div class="wizard-actions">
+                    <button type="button" class="btn btn-secondary" onclick="prevStep(2)">Back</button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next: Employment Details</button>
+                </div>
+            </div>
+
+            <!-- ==========================================================================
+               STEP 3: EMPLOYMENT & INCOME
+               ========================================================================== -->
+            <div class="wizard-card" id="step-card-3" data-step="3">
+                <h2 class="wizard-title">3. Employment & Household Income</h2>
+                <p class="wizard-subtitle">Please input your current employment details. This information will be cross-referenced with your payslips and bank statements.</p>
+                
+                <div class="grid grid-2">
+                    <div class="form-group">
+                        <select class="form-control" id="app-employment" required style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill=%22%23023B3C%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>'); background-repeat: no-repeat; background-position: right 16px center;" onchange="handleEmploymentChange()">
+                            <option value="" disabled selected hidden>Employment Status</option>
+                            <option value="Employed (Full-Time)">Employed (Full-Time)</option>
+                            <option value="Employed (Part-Time)">Employed (Part-Time)</option>
+                            <option value="Self-Employed">Self-Employed</option>
+                            <option value="Contract Worker">Contract Worker</option>
+                            <option value="Pensioner / Other">Pensioner / Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="app-employer" required placeholder=" ">
+                        <label class="form-label" for="app-employer">Employer / Company Name</label>
+                    </div>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="app-gross" required placeholder=" " min="0" oninput="calculateTotalIncome()">
+                        <label class="form-label" for="app-gross">Primary Applicant Gross Salary (ZAR)</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="app-net" required placeholder=" " min="0">
+                        <label class="form-label" for="app-net">Primary Applicant Net Take-home (ZAR)</label>
+                    </div>
+                </div>
+
+                <!-- Co-applicant / Joint Applicant Grid -->
+                <div style="margin-top: 30px; border-top: 1px solid var(--border-color); padding-top: 24px;" id="co-applicant-section">
+                    <h4 style="color: var(--primary-teal); margin-bottom: 16px;">Spouse / Co-applicant Income (If Joint Application)</h4>
+                    <div class="grid grid-2">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="co-name" placeholder=" ">
+                            <label class="form-label" for="co-name">Co-applicant Full Name (Optional)</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="co-income" placeholder=" " min="0" value="0" oninput="calculateTotalIncome()">
+                            <label class="form-label" for="co-income">Co-applicant Monthly Gross Salary (ZAR)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 20px; display: flex; justify-content: space-between; align-items: center; margin-top: 20px;" id="total-income-row">
+                    <span style="font-weight: 700; color: var(--primary-teal-dark);">Combined Monthly Gross Income:</span>
+                    <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--accent-orange);" id="computed-combined-income">R0.00</span>
+                </div>
+
+                <div class="wizard-actions">
+                    <button type="button" class="btn btn-secondary" onclick="prevStep(3)">Back</button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep(3)">Next: Certified Documents</button>
+                </div>
+            </div>
+
+            <!-- ==========================================================================
+               STEP 4: DOCUMENTS UPLOAD
+               ========================================================================== -->
+            <div class="wizard-card" id="step-card-4" data-step="4">
+                <h2 class="wizard-title">4. Certified Supporting Documents</h2>
+                <p class="wizard-subtitle">Please select or drag in certified copies of the required files. Selected file names will appear with checkmarks.</p>
+                
+                <div class="grid grid-2" style="gap: 24px;">
+                    <!-- Doc 1: SA ID -->
+                    <div>
+                        <p style="font-weight: 700; font-size: 0.9rem; color: var(--text-primary); margin-bottom: 8px;">1. Certified Copy of SA ID (All Members) <span style="color:#d32f2f;">*</span></p>
+                        <div class="upload-zone" id="upload-zone-id">
+                            <svg class="upload-icon" width="32" height="32" fill="currentColor" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+                            <div style="font-size: 0.85rem; font-weight: 700;">Drag or click to choose copy</div>
+                            <span style="font-size: 0.72rem; color: var(--text-muted);">PDF or JPEG format capped at 4MB</span>
+                            <input type="file" id="file-id" accept=".pdf,.png,.jpg,.jpeg" required onchange="handleFileSelect('id')">
+                            <div class="file-status" id="status-id">No file selected</div>
+                        </div>
+                    </div>
+
+                    <!-- Doc 2: 3 Months Bank Statements -->
+                    <div>
+                        <p style="font-weight: 700; font-size: 0.9rem; color: var(--text-primary); margin-bottom: 8px;">2. 3 Months Recent Bank Statements <span style="color:#d32f2f;">*</span></p>
+                        <div class="upload-zone" id="upload-zone-statements">
+                            <svg class="upload-icon" width="32" height="32" fill="currentColor" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+                            <div style="font-size: 0.85rem; font-weight: 700;">Drag or click to choose statements</div>
+                            <span style="font-size: 0.72rem; color: var(--text-muted);">PDF or JPEG format capped at 4MB</span>
+                            <input type="file" id="file-statements" accept=".pdf,.png,.jpg,.jpeg" required onchange="handleFileSelect('statements')">
+                            <div class="file-status" id="status-statements">No file selected</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-2" style="gap: 24px; margin-top: 24px;">
+                    <!-- Doc 3: 3 Months Payslips -->
+                    <div>
+                        <p style="font-weight: 700; font-size: 0.9rem; color: var(--text-primary); margin-bottom: 8px;">3. 3 Months Recent Payslips <span style="color:#d32f2f;">*</span></p>
+                        <div class="upload-zone" id="upload-zone-payslips">
+                            <svg class="upload-icon" width="32" height="32" fill="currentColor" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+                            <div style="font-size: 0.85rem; font-weight: 700;">Drag or click to choose payslips</div>
+                            <span style="font-size: 0.72rem; color: var(--text-muted);">PDF or JPEG format capped at 4MB</span>
+                            <input type="file" id="file-payslips" accept=".pdf,.png,.jpg,.jpeg" required onchange="handleFileSelect('payslips')">
+                            <div class="file-status" id="status-payslips">No file selected</div>
+                        </div>
+                    </div>
+
+                    <!-- Doc 4: Proof of Address -->
+                    <div>
+                        <p style="font-weight: 700; font-size: 0.9rem; color: var(--text-primary); margin-bottom: 8px;">4. Proof of Current Address <span style="color:#d32f2f;">*</span></p>
+                        <div class="upload-zone" id="upload-zone-address">
+                            <svg class="upload-icon" width="32" height="32" fill="currentColor" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+                            <div style="font-size: 0.85rem; font-weight: 700;">Drag or click to choose address</div>
+                            <span style="font-size: 0.72rem; color: var(--text-muted);">PDF or JPEG format capped at 4MB</span>
+                            <input type="file" id="file-address" accept=".pdf,.png,.jpg,.jpeg" required onchange="handleFileSelect('address')">
+                            <div class="file-status" id="status-address">No file selected</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wizard-actions">
+                    <button type="button" class="btn btn-secondary" onclick="prevStep(4)">Back</button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep(4)">Next: POPIA & Review</button>
+                </div>
+            </div>
+
+            <!-- ==========================================================================
+               STEP 5: REVIEW & POPIA COMPLIANCE
+               ========================================================================== -->
+            <div class="wizard-card" id="step-card-5" data-step="5">
+                <h2 class="wizard-title">5. POPIA Consent & Declaration Summary</h2>
+                <p class="wizard-subtitle">Review your compiled social housing application metadata and accept the statutory data compliance terms to finalize submission.</p>
+                
+                <!-- Compiled summaries -->
+                <div class="summary-block">
+                    <div class="summary-title">Intake & Program details</div>
+                    <div class="summary-grid">
+                        <div class="summary-item">Target Project: <strong id="sum-project">-</strong></div>
+                        <div class="summary-item">Preferred Layout: <strong id="sum-unit">-</strong></div>
+                        <div class="summary-item">Eligible Income Status: <strong id="sum-eligibility">-</strong></div>
+                    </div>
+                </div>
+
+                <div class="summary-block">
+                    <div class="summary-title">Applicant profile</div>
+                    <div class="summary-grid">
+                        <div class="summary-item">Applicant Name: <strong id="sum-name">-</strong></div>
+                        <div class="summary-item">ID Number: <strong id="sum-id">-</strong></div>
+                        <div class="summary-item">Mobile Number: <strong id="sum-phone">-</strong></div>
+                        <div class="summary-item">Email Address: <strong id="sum-email">-</strong></div>
+                        <div class="summary-item">Marital Status: <strong id="sum-marital">-</strong></div>
+                        <div class="summary-item">Dependents: <strong id="sum-dependents">-</strong></div>
+                    </div>
+                </div>
+
+                <div class="summary-block">
+                    <div class="summary-title">Financial declaration</div>
+                    <div class="summary-grid">
+                        <div class="summary-item">Employment Type: <strong id="sum-employment">-</strong></div>
+                        <div class="summary-item">Employer Name: <strong id="sum-employer">-</strong></div>
+                        <div class="summary-item">Primary Gross Salary: <strong id="sum-gross">-</strong></div>
+                        <div class="summary-item">Co-applicant Gross Salary: <strong id="sum-co-income">-</strong></div>
+                        <div class="summary-item" style="grid-column: span 2;">Combined Gross Salary: <strong id="sum-total-income" style="color: var(--accent-orange); font-size:1.1rem;">-</strong></div>
+                    </div>
+                </div>
+
+                <!-- POPIA & T&C Checklist -->
+                <div style="background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 24px; display: flex; flex-direction: column; gap: 16px;">
+                    <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer;">
+                        <input type="checkbox" id="popia-check" required style="accent-color: var(--primary-teal); width:20px; height:20px; margin-top:2px; flex-shrink:0;">
+                        <div style="font-size: 0.88rem; line-height: 1.5;">
+                            <strong>POPI Act Consent Compliance:</strong> I hereby grant consent to FCI Community Housing Services to process and store my personal information for the express purpose of evaluating my eligibility for subsidized social housing units under the Protection of Personal Information Act, No 4 of 2013.
+                        </div>
+                    </label>
+                    
+                    <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer;">
+                        <input type="checkbox" id="declaration-check" required style="accent-color: var(--primary-teal); width:20px; height:20px; margin-top:2px; flex-shrink:0;">
+                        <div style="font-size: 0.88rem; line-height: 1.5;">
+                            <strong>Truth & Accuracy Declaration:</strong> I solemnly declare that all information supplied in this online form is accurate, complete, and authentic, and that any misrepresentation may result in instant disqualification and forfeiture of subsidized units.
+                        </div>
+                    </label>
+                </div>
+
+                <div class="wizard-actions">
+                    <button type="button" class="btn btn-secondary" onclick="prevStep(5)">Back</button>
+                    <button type="submit" class="btn btn-primary" style="background-color: var(--secondary-green); border-color: var(--secondary-green);" id="btn-submit-app">Submit Official Application Pack</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- ==========================================================================
+       PREMIUM NAVY-TEAL FOOTER
+       ========================================================================== -->
+    <footer class="main-footer" id="main-footer">
+        <div class="container">
+            <div class="footer-top" id="footer-links-grid">
+                <!-- Column 1: Brand Info -->
+                <div class="footer-brand" id="footer-col-brand">
+                    <img loading="lazy" src="assets/images/newLogo.png" alt="FCI Logo" style="height: 55px; width: auto; margin-bottom: 24px; filter: brightness(0) invert(1);" id="footer-logo">
+                    <p>FCI Community Housing Services is a Level 1 BEE Section 21 NGO developing and managing quality, affordable social and rental housing since 2012.</p>
+                    <div class="social-links" id="footer-social-row">
+                        <a href="https://x.com/fcichs" class="social-icon" aria-label="X/Twitter" target="_blank" rel="noopener" id="social-x">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="https://facebook.com/fcichs" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener" id="social-fb">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Column 2: Navigation Links -->
+                <div id="footer-col-nav">
+                    <h3 class="footer-heading">Corporate Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html" id="foot-link-about">About Our Vision</a></li>
+                        <li><a href="developments.html" id="foot-link-devs">Developments Spec</a></li>
+                        <li><a href="projects.html" id="foot-link-projects">Project Pipelines</a></li>
+                        <li><a href="programmes.html" id="foot-link-prog">Social Impact</a></li>
+                        <li><a href="news.html" id="foot-link-news">Latest News</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3: Contact Info -->
+                <div id="footer-col-contact">
+                    <h3 class="footer-heading">Contact Office</h3>
+                    <div class="footer-contact-info">
+                        <div class="footer-contact-item">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            <span>Goodwood Station Site Office, Voortrekker Road, Cape Town, 7460</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                            <span>info@fcichs.co.za</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.15 15.15 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                            <span>+27 21 879 7363</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Column 4: Newsletter -->
+                <div class="footer-newsletter" id="footer-col-news">
+                    <h3 class="footer-heading">Tenant Newsletter</h3>
+                    <p>Subscribe to receive quarterly newsletters regarding active developments and applicant lotteries.</p>
+                    <form class="newsletter-form" id="newsletter-subscription-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+                        <input type="email" class="newsletter-input" placeholder="Your Email Address" aria-label="Email subscription" required id="newsletter-email">
+                        <button type="submit" class="newsletter-btn" id="btn-newsletter-sub">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom" id="footer-legal-bar">
+                <p id="footer-copyright">Copyright &copy; 2026 - FCI Community Housing Services. All rights reserved.</p>
+                <div class="footer-legal-links" id="footer-legal-row">
+                    <a href="downloads.html" id="foot-legal-terms">Accreditation Policies</a>
+                    <a href="contact.html" id="foot-legal-privacy">POPIA Compliant Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================================================
+       SCRIPTS
+       ========================================================================== -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/motion.js"></script>
+    <script>
+        // Active Form Step Logic
+        let currentStepNum = 1;
+        const totalSteps = 5;
+
+        function showStep(stepNum) {
+            // Hide all steps
+            document.querySelectorAll('.wizard-card').forEach(card => card.classList.remove('active'));
+            document.querySelectorAll('.step-node').forEach(node => node.classList.remove('active'));
+            
+            // Show active step
+            document.getElementById(`step-card-${stepNum}`).classList.add('active');
+            
+            // Update Stepper Nodes
+            for (let i = 1; i <= totalSteps; i++) {
+                const node = document.querySelector(`.step-node[data-step="${i}"]`);
+                if (i < stepNum) {
+                    node.classList.add('completed');
+                    node.classList.remove('active');
+                } else if (i === stepNum) {
+                    node.classList.add('active');
+                    node.classList.remove('completed');
+                } else {
+                    node.classList.remove('active', 'completed');
+                }
+            }
+
+            // Update Progress Line width
+            const progressPercent = ((stepNum - 1) / (totalSteps - 1)) * 100;
+            document.getElementById('step-progress-bar').style.width = `${progressPercent}%`;
+            
+            currentStepNum = stepNum;
+            window.scrollTo({ top: 150, behavior: 'smooth' });
+
+            // Compile review if step 5
+            if (stepNum === 5) {
+                compileReviewSummary();
+            }
+        }
+
+        function navigateToStep(stepNum) {
+            // Only allow clicking steps that have been completed or the immediate next
+            if (stepNum < currentStepNum) {
+                showStep(stepNum);
+            } else if (stepNum > currentStepNum) {
+                // Trigger form validation for the current card
+                if (validateStep(currentStepNum)) {
+                    showStep(stepNum);
+                }
+            }
+        }
+
+        function nextStep(currentStep) {
+            if (validateStep(currentStep)) {
+                showStep(currentStep + 1);
+            }
+        }
+
+        function prevStep(currentStep) {
+            showStep(currentStep - 1);
+        }
+
+        function validateStep(stepNum) {
+            const card = document.getElementById(`step-card-${stepNum}`);
+            const inputs = card.querySelectorAll('input[required], select[required], textarea[required]');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.checkValidity()) {
+                    input.reportValidity();
+                    isValid = false;
+                }
+            });
+            
+            return isValid;
+        }
+
+        function toggleIncomeWarning(show) {
+            const warning = document.getElementById('income-warning');
+            if (show) {
+                warning.classList.add('active');
+            } else {
+                warning.classList.remove('active');
+            }
+        }
+
+        function calculateTotalIncome() {
+            const gross = parseFloat(document.getElementById('app-gross').value) || 0;
+            const coGross = parseFloat(document.getElementById('co-income').value) || 0;
+            const total = gross + coGross;
+            
+            document.getElementById('computed-combined-income').textContent = `R${total.toLocaleString('en-ZA', { minimumFractionDigits: 2 })}`;
+            
+            // Check threshold rules dynamically
+            const warning = document.getElementById('income-warning');
+            if (total < 1800 || total > 22500) {
+                warning.querySelector('strong').textContent = "Qualifying Income Warning:";
+                warning.querySelector('div').innerHTML = `<strong style="color: #c62828;">Qualifying Income Alert:</strong> Combined income is **R${total.toLocaleString('en-ZA')}**. This falls outside the subsidized social housing bracket (R1,800 - R22,500 per month). You may not qualify for units.`;
+                warning.classList.add('active');
+                // Also toggle the yes/no radio selection to match
+                document.querySelector('input[name="eligibility-income-range"][value="no"]').checked = true;
+            } else {
+                warning.classList.remove('active');
+                document.querySelector('input[name="eligibility-income-range"][value="yes"]').checked = true;
+            }
+        }
+
+        function handleEmploymentChange() {
+            const empStatus = document.getElementById('app-employment').value;
+            const employerInput = document.getElementById('app-employer');
+            if (empStatus === "Pensioner / Other") {
+                employerInput.value = "Not Applicable / None";
+                employerInput.setAttribute('disabled', 'true');
+            } else {
+                if (employerInput.value === "Not Applicable / None") {
+                    employerInput.value = "";
+                }
+                employerInput.removeAttribute('disabled');
+            }
+        }
+
+        function handleFileSelect(type) {
+            const fileInput = document.getElementById(`file-${type}`);
+            const statusLabel = document.getElementById(`status-${type}`);
+            
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                statusLabel.className = "file-status selected";
+                statusLabel.innerHTML = `
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24" style="color: var(--secondary-green);"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    <span>${file.name} (${(file.size / 1024).toFixed(0)} KB)</span>
+                `;
+            } else {
+                statusLabel.className = "file-status";
+                statusLabel.textContent = "No file selected";
+            }
+        }
+
+        function compileReviewSummary() {
+            const grossVal = parseFloat(document.getElementById('app-gross').value) || 0;
+            const coVal = parseFloat(document.getElementById('co-income').value) || 0;
+            const totalVal = grossVal + coVal;
+
+            document.getElementById('sum-project').textContent = document.getElementById('app-project').value || 'Not selected';
+            document.getElementById('sum-unit').textContent = document.getElementById('app-unit-type').value || 'Not selected';
+            document.getElementById('sum-eligibility').textContent = (totalVal >= 1800 && totalVal <= 22500) ? 'Qualifies (In limits)' : 'Does not qualify (Outside limits)';
+            
+            document.getElementById('sum-name').textContent = document.getElementById('app-fullname').value || '-';
+            document.getElementById('sum-id').textContent = document.getElementById('app-idnumber').value || '-';
+            document.getElementById('sum-phone').textContent = document.getElementById('app-phone').value || '-';
+            document.getElementById('sum-email').textContent = document.getElementById('app-email').value || '-';
+            document.getElementById('sum-marital').textContent = document.getElementById('app-marital').value || '-';
+            document.getElementById('sum-dependents').textContent = document.getElementById('app-dependents').value || '0';
+            
+            document.getElementById('sum-employment').textContent = document.getElementById('app-employment').value || '-';
+            document.getElementById('sum-employer').textContent = document.getElementById('app-employer').value || '-';
+            document.getElementById('sum-gross').textContent = `R${grossVal.toLocaleString('en-ZA', { minimumFractionDigits: 2 })}`;
+            document.getElementById('sum-co-income').textContent = `R${coVal.toLocaleString('en-ZA', { minimumFractionDigits: 2 })}`;
+            document.getElementById('sum-total-income').textContent = `R${totalVal.toLocaleString('en-ZA', { minimumFractionDigits: 2 })}`;
+        }
+
+        function handleFormSubmission(event) {
+            event.preventDefault();
+            
+            // Collect Form Metadata
+            const name = document.getElementById('app-fullname').value;
+            const email = document.getElementById('app-email').value;
+            const idNumber = document.getElementById('app-idnumber').value;
+            const phone = document.getElementById('app-phone').value;
+            const project = document.getElementById('app-project').value;
+            const unit = document.getElementById('app-unit-type').value;
+            const combinedIncome = document.getElementById('sum-total-income').textContent;
+            
+            const idFile = document.getElementById('file-id').files[0]?.name || 'Not Uploaded';
+            const bankFile = document.getElementById('file-statements').files[0]?.name || 'Not Uploaded';
+            const payFile = document.getElementById('file-payslips').files[0]?.name || 'Not Uploaded';
+            const addressFile = document.getElementById('file-address').files[0]?.name || 'Not Uploaded';
+            
+            // Build pre-filled body text for mailto
+            const mailBody = `FCI SOCIAL HOUSING APPLICATION FORM - SUBMISSION RECEIPT\n` +
+                             `============================================================\n` +
+                             `Date Submitted: ${new Date().toLocaleDateString()}\n\n` +
+                             `1. INTAKE & ELIGIBILITY DETAILS:\n` +
+                             `- Selected Project: ${project}\n` +
+                             `- Preferred Layout: ${unit}\n` +
+                             `- Combined Gross Salary: ${combinedIncome}\n\n` +
+                             `2. APPLICANT DETAILS:\n` +
+                             `- Full Name: ${name}\n` +
+                             `- SA ID Number: ${idNumber}\n` +
+                             `- Contact Number: ${phone}\n` +
+                             `- Email Address: ${email}\n` +
+                             `- Residence Address: ${document.getElementById('app-address').value}\n` +
+                             `- Marital Status: ${document.getElementById('app-marital').value}\n` +
+                             `- Dependents: ${document.getElementById('app-dependents').value}\n\n` +
+                             `3. EMPLOYMENT DETAILS:\n` +
+                             `- Employment Status: ${document.getElementById('app-employment').value}\n` +
+                             `- Employer Name: ${document.getElementById('app-employer').value}\n` +
+                             `- Primary Salary: R${(parseFloat(document.getElementById('app-gross').value) || 0).toLocaleString('en-ZA')}\n` +
+                             `- Spouse/Co-applicant Salary: R${(parseFloat(document.getElementById('co-income').value) || 0).toLocaleString('en-ZA')}\n\n` +
+                             `4. UPLOADED CERTIFIED FILE METADATA:\n` +
+                             `- Certified ID copy: ${idFile}\n` +
+                             `- 3 Months Bank Statements: ${bankFile}\n` +
+                             `- 3 Months Recent Payslips: ${payFile}\n` +
+                             `- Proof of Residential Address: ${addressFile}\n\n` +
+                             `============================================================\n` +
+                             `Consent: POPIA compliance and verification terms have been accepted.\n`;
+            
+            // Create premium glassmorphic success overlay
+            const popup = document.createElement('div');
+            popup.style.position = 'fixed';
+            popup.style.top = '50%';
+            popup.style.left = '50%';
+            popup.style.transform = 'translate(-50%, -50%)';
+            popup.style.backgroundColor = '#FFFFFF';
+            popup.style.border = '1px solid rgba(2, 59, 60, 0.15)';
+            popup.style.borderRadius = '16px';
+            popup.style.padding = '40px';
+            popup.style.boxShadow = '0 30px 60px rgba(1, 31, 32, 0.35)';
+            popup.style.zIndex = '9999';
+            popup.style.maxWidth = '550px';
+            popup.style.width = '90%';
+            popup.style.textAlign = 'center';
+            popup.style.fontFamily = "'Inter', sans-serif";
+            
+            popup.innerHTML = `
+                <div style="width: 70px; height: 70px; border-radius: 9999px; background-color: rgba(85,139,47,0.15); color: #558B2F; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+                    <svg width="36" height="36" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                </div>
+                <h3 style="color: #0A2526; font-family: 'Plus Jakarta Sans', sans-serif; margin-bottom: 12px; font-weight: 800; font-size: 1.4rem;">Application Compiled</h3>
+                <p style="color: #4A6061; font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px;">
+                    Thank you <strong>${name}</strong>. Your online application pack has been compiled. To deliver the certified documents directly to the housing department, please click the button below to send the pre-filled email.
+                </p>
+                <div style="display:flex; flex-direction:column; gap:12px; align-items:center; width:100%;">
+                    <a href="mailto:info@dcichs.co.za?subject=2024 Tenant Application - ${name}&body=${encodeURIComponent(mailBody)}" 
+                       style="background-color: var(--secondary-green); color: #FFFFFF; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 0.95rem; padding: 14px 28px; text-decoration:none; border: none; border-radius: 9999px; cursor: pointer; transition: all 0.3s; width:100%; display:inline-block;"
+                       onclick="closeSuccessPopup()">
+                        Send Email to info@dcichs.co.za
+                    </a>
+                    <button id="close-success-popup" style="background-color: transparent; border:none; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; cursor: pointer; padding: 6px;" onclick="closeSuccessPopup()">Cancel</button>
+                </div>
+            `;
+            
+            // Dim overlay
+            const dimOverlay = document.createElement('div');
+            dimOverlay.id = 'dim-overlay-app';
+            dimOverlay.style.position = 'fixed';
+            dimOverlay.style.top = '0';
+            dimOverlay.style.left = '0';
+            dimOverlay.style.width = '100%';
+            dimOverlay.style.height = '100%';
+            dimOverlay.style.backgroundColor = 'rgba(1, 31, 32, 0.6)';
+            dimOverlay.style.backdropFilter = 'blur(5px)';
+            dimOverlay.style.zIndex = '9998';
+            
+            document.body.appendChild(dimOverlay);
+            document.body.appendChild(popup);
+            
+            window.closeSuccessPopup = function() {
+                dimOverlay.remove();
+                popup.remove();
+                document.getElementById('online-application-form').reset();
+                showStep(1);
+            };
+        }
+    </script>
+</body>
+</html>
