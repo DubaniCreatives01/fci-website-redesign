@@ -1625,4 +1625,140 @@ section {
     }
 }
 
+/* ==========================================================================
+   GLOBAL FLOATING QUICK-CONTACT WIDGETS
+   ========================================================================== */
+
+.floating-contact-bar {
+    position: fixed;
+    right: 24px;
+    bottom: 40px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    pointer-events: auto;
+}
+
+.floating-contact-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    color: var(--text-white);
+    box-shadow: 0 10px 25px rgba(1, 31, 32, 0.3);
+    position: relative;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+}
+
+.floating-contact-btn svg {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s;
+}
+
+.floating-contact-btn:hover svg {
+    transform: scale(1.15) rotate(5deg);
+}
+
+/* WhatsApp Button */
+.floating-whatsapp {
+    background-color: #25D366; /* Official WhatsApp Green */
+    animation: pulse-whatsapp 2s infinite;
+}
+
+.floating-whatsapp:hover {
+    background-color: #20ba5a;
+    box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
+    transform: translateY(-4px);
+}
+
+@keyframes pulse-whatsapp {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* Email Button */
+.floating-email {
+    background-color: var(--accent-orange);
+    animation: pulse-email 2s infinite;
+    animation-delay: 1s;
+}
+
+.floating-email:hover {
+    background-color: #e08600;
+    box-shadow: 0 15px 30px rgba(255, 153, 0, 0.4);
+    transform: translateY(-4px);
+}
+
+@keyframes pulse-email {
+    0% { box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 153, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 153, 0, 0); }
+}
+
+/* Slide-out Tooltip Labels */
+.contact-btn-label {
+    position: absolute;
+    right: 70px;
+    background-color: rgba(1, 31, 32, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-white);
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(15px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    box-shadow: var(--shadow-medium);
+}
+
+.contact-btn-label::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -6px;
+    transform: translateY(-50%) rotate(45deg);
+    width: 10px;
+    height: 10px;
+    background-color: rgba(1, 31, 32, 0.95);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.floating-contact-btn:hover .contact-btn-label {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+/* Responsiveness: Move floating widgets to prevent overlap with footer legal bars on narrow screens */
+@media (max-width: 768px) {
+    .floating-contact-bar {
+        right: 16px;
+        bottom: 24px;
+        gap: 12px;
+    }
+    .floating-contact-btn {
+        width: 48px;
+        height: 48px;
+    }
+    .contact-btn-label {
+        display: none; /* Hide labels on mobile to avoid overlapping */
+    }
+}
+
 
