@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCI Community Housing Services - Gearing for Sustainable Growth</title>
+    <meta name="description" content="FCI Community Housing Services is a premium Section 21 non-profit organization established in 2012, developing and managing quality, affordable social and rental housing in South Africa.">
+    <link rel="icon" type="image/jpeg" href="assets/images/favicon.jpg">
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+
+    <!-- ==========================================================================
+       TOP INFO BAR
+       ========================================================================== -->
+    <div class="tophead" id="tophead-bar">
+        <div class="container">
+            <div class="tophead-info">
+                <a href="tel:+27218797363" id="tophead-phone">
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.15 15.15 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    <span>+27 21 879 7363</span>
+                </a>
+                <a href="mailto:info@fcichs.co.za" id="tophead-email">
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <span>info@fcichs.co.za</span>
+                </a>
+            </div>
+            <div>
+                <span>BEE Level 1 Contributor</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       HEADER STICKY NAV
+       ========================================================================== -->
+    <header class="main-header" id="main-header">
+        <div class="container">
+            <a href="index.html" class="logo" id="logo-link">
+                <img src="assets/images/newLogo-300x129.png" alt="FCI Community Housing Services Logo" id="logo-img">
+            </a>
+            
+            <button class="hamburger" id="menu-hamburger" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link active" id="nav-home">Home</a></li>
+                <li><a href="about.html" class="nav-link" id="nav-about">About Us</a></li>
+                <li><a href="developments.html" class="nav-link" id="nav-developments">Developments</a></li>
+                <li><a href="projects.html" class="nav-link" id="nav-projects">Projects</a></li>
+                <li><a href="programmes.html" class="nav-link" id="nav-programmes">Programmes</a></li>
+                <li><a href="news.html" class="nav-link" id="nav-news">News</a></li>
+                <li><a href="downloads.html" class="nav-link" id="nav-downloads">Downloads</a></li>
+                <li><a href="contact.html" class="nav-link" id="nav-contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ==========================================================================
+       CINEMA VIDEO HERO
+       ========================================================================== -->
+    <section class="hero" id="home-hero">
+        <video class="hero-video" autoplay loop muted playsinline id="hero-bg-video">
+            <source src="assets/videos/First-Building-Mountain-Reveal-1.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        
+        <!-- Glassmorphic Live Weather & Time Widget -->
+        <div class="glass-widget reveal" id="weather-time-widget">
+            <div class="widget-header">
+                <span class="widget-location">Goodwood, CT</span>
+                <span class="widget-status-dot"></span>
+            </div>
+            <div class="widget-weather">
+                <div class="weather-info">
+                    <div class="weather-temp" id="widget-temp">21°C</div>
+                    <div class="weather-condition" id="widget-cond">Partly Cloudy</div>
+                </div>
+                <div class="weather-icon-wrapper">
+                    <svg class="weather-icon-svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+                        <path d="M17 18.5a4 4 0 0 0-4-4h-2.5A4.5 4.5 0 0 0 6 15a4 4 0 0 0 4 4h7z" fill="currentColor" fill-opacity="0.2"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="widget-divider"></div>
+            <div class="widget-time-date">
+                <div class="widget-time" id="widget-time-display">15:46:19</div>
+                <div class="widget-date" id="widget-date-display">Friday, 29 May 2026</div>
+            </div>
+            
+            <div class="widget-forecast" id="widget-forecast-days">
+                <div class="forecast-day">
+                    <span class="day-name" id="forecast-day-1">Sat</span>
+                    <svg class="forecast-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <span class="day-temp" id="forecast-temp-1">22°C</span>
+                </div>
+                <div class="forecast-day">
+                    <span class="day-name" id="forecast-day-2">Sun</span>
+                    <svg class="forecast-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+                        <path d="M17 18.5a4 4 0 0 0-4-4h-2.5A4.5 4.5 0 0 0 6 15a4 4 0 0 0 4 4h7z" fill="currentColor" fill-opacity="0.2"></path>
+                    </svg>
+                    <span class="day-temp" id="forecast-temp-2">19°C</span>
+                </div>
+                <div class="forecast-day">
+                    <span class="day-name" id="forecast-day-3">Mon</span>
+                    <svg class="forecast-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 18.5a4 4 0 0 0-4-4h-2.5A4.5 4.5 0 0 0 6 15a4 4 0 0 0 4 4h7z" fill="currentColor" fill-opacity="0.2"></path>
+                    </svg>
+                    <span class="day-temp" id="forecast-temp-3">21°C</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-tagline" id="hero-tag">Gearing for Sustainable Growth</div>
+                <h1 id="hero-title">Building Sustainable Communities For The Future</h1>
+                <p id="hero-desc">FCI Community Housing Services contributes to the restructuring of South African cities by providing well-located, affordable rental housing and dedicated community development services.</p>
+                <div class="hero-actions" id="hero-btns">
+                    <a href="downloads.html" class="btn btn-primary" id="btn-hero-apply">Apply For Housing</a>
+                    <a href="developments.html" class="btn btn-white" id="btn-hero-view">Explore Projects</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator" id="hero-scroll-indicator">
+            <span>Scroll Down</span>
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       IMPACT STATISTICS ROW (FLOAT)
+       ========================================================================== -->
+    <div class="container" id="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item" id="stat-item-years">
+                <div class="stat-num" data-target="14" data-suffix="+" id="stat-val-years">0+</div>
+                <div class="stat-label">Years of Service</div>
+            </div>
+            <div class="stat-item" id="stat-item-bee">
+                <div class="stat-num" data-target="100" data-suffix="%" id="stat-val-bee">0%</div>
+                <div class="stat-label">Black Owned</div>
+            </div>
+            <div class="stat-item" id="stat-item-units">
+                <div class="stat-num" data-target="1000" data-suffix="+" id="stat-val-units">0+</div>
+                <div class="stat-label">Units Developed</div>
+            </div>
+            <div class="stat-item" id="stat-item-acc">
+                <div class="stat-num" data-target="1" data-prefix="Level " id="stat-val-acc">Level 0</div>
+                <div class="stat-label">BEE Contributor</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       ABOUT FCI (EDITORIAL SPLIT SCREEN)
+       ========================================================================== -->
+    <section id="about-teaser">
+        <div class="container">
+            <div class="grid grid-2 reveal" id="about-teaser-grid">
+                <div class="card-img-wrapper" style="border-radius: var(--radius-md); box-shadow: var(--shadow-medium); aspect-ratio: 4/3;" id="about-teaser-img-card">
+                    <img src="assets/images/Main-Entrance.jpg" alt="FCI Housing Facility Main Entrance" id="about-teaser-img">
+                </div>
+                <div style="display: flex; flex-direction: column; justify-content: center;" id="about-teaser-text-card">
+                    <h2 style="margin-bottom: 24px;" id="about-teaser-title">Transforming Urban Landscapes, Empowering Lives</h2>
+                    <p style="margin-bottom: 20px; font-size: 1.1rem; font-weight: 500; color: var(--primary-teal);" id="about-teaser-highlight">
+                        FCI Community Housing Services was established in 2012 to develop and manage quality, affordable social rental housing across South Africa.
+                    </p>
+                    <p style="margin-bottom: 30px;" id="about-teaser-description">
+                        Particularly focused on peri-urban and rural areas battling with severe housing backlogs, we act as a highly accredited, specialized vehicle leveraging public and private partnerships to access government subsidies. Our developments reconnect low-to-medium income earners with transport nodes, economic opportunities, and social amenities.
+                    </p>
+                    <div>
+                        <a href="about.html" class="btn btn-secondary" id="btn-about-teaser-read">Read Our History</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       CORE SERVICES GRID
+       ========================================================================== -->
+    <section class="bg-light" id="services-teaser">
+        <div class="container">
+            <div style="text-align: center; max-width: 700px; margin: 0 auto 60px;" class="reveal" id="services-teaser-intro">
+                <h2 style="margin-bottom: 20px;" id="services-teaser-title">Our Core Specializations</h2>
+                <p id="services-teaser-desc">Providing fully integrated housing solutions, operational property management, and sustainable gap-market developments.</p>
+            </div>
+            
+            <div class="grid grid-3 reveal" id="services-teaser-grid">
+                <!-- Service 1 -->
+                <div class="card" id="service-card-rental">
+                    <div class="card-img-wrapper">
+                        <img src="assets/images/Main-Entrance-Inside.jpg" alt="Affordable Rental Complexes">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Affordable Rental Housing</h3>
+                        <p class="card-desc">Developing and owning high-density, beautifully designed, and sustainable rental units for households earning between R1,800 and R22,000.</p>
+                        <a href="about.html#services" class="card-link">Learn More <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="card" id="service-card-gap">
+                    <div class="card-img-wrapper">
+                        <img src="assets/images/serv1-scaled.jpg" alt="Gap Housing Accommodation">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Gap Housing Accommodation</h3>
+                        <p class="card-desc">Providing direct rental opportunities for citizens who fall within the gap market, ineligible for BNG subsidies yet excluded from conventional bank funding.</p>
+                        <a href="about.html#services" class="card-link">Learn More <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="card" id="service-card-management">
+                    <div class="card-img-wrapper">
+                        <img src="assets/images/property.jpg" alt="Property Management Operations">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Property Management Services</h3>
+                        <p class="card-desc">Delivering community operations, routine maintenance oversight, and robust, sustainable turn-around administration systems.</p>
+                        <a href="about.html#services" class="card-link">Learn More <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       FEATURED DEVELOPMENT (GOODWOOD STATION)
+       ========================================================================== -->
+    <section id="featured-development">
+        <div class="container">
+            <div class="grid grid-2 reveal" id="featured-dev-grid">
+                <div style="display: flex; flex-direction: column; justify-content: center;" id="featured-dev-info">
+                    <div class="hero-tagline" style="color: var(--secondary-green); margin-bottom: 16px;">Flagship Re-development</div>
+                    <h2 style="margin-bottom: 24px;" id="featured-dev-title">Goodwood Station Social Housing Project</h2>
+                    <p style="margin-bottom: 20px; font-weight: 500; color: var(--text-primary);" id="featured-dev-lead">
+                        Providing rentals to more than 1,000 low-to-medium income families.
+                    </p>
+                    <p style="margin-bottom: 30px;" id="featured-dev-desc">
+                        Partnering with PRASA and the City of Cape Town, FCI secured exclusive development rights around Goodwood Station to construct a massive mixed-use transit-oriented community hub. This project enables residents to live comfortably close to rail corridors, social schools, and workplaces.
+                    </p>
+                    <div>
+                        <a href="developments.html" class="btn btn-primary" id="btn-featured-dev-view">View Unit Specifications</a>
+                    </div>
+                </div>
+                
+                <div style="position: relative;" id="featured-dev-media">
+                    <div class="card-img-wrapper" style="border-radius: var(--radius-md); aspect-ratio: 16/10; box-shadow: var(--shadow-medium);" id="featured-dev-img-card">
+                        <img src="assets/images/projects1.jpg" alt="Goodwood Station Development Complex">
+                    </div>
+                    <!-- Play Video Mockup Overlay -->
+                    <a href="assets/videos/First-Building-Mountain-Reveal-1.mp4" class="lightbox-trigger" data-type="video" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: var(--radius-pill); background-color: var(--accent-orange); color: var(--text-white); box-shadow: 0 4px 20px rgba(255,153,0,0.4); border: 2px solid white;" aria-label="Play Project Drone Video" id="btn-featured-dev-play">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       TRUST ACCREDITATIONS & CREDENTIALS
+       ========================================================================== */ -->
+    <section class="bg-light" id="accreditations">
+        <div class="container">
+            <div class="grid grid-2 reveal" id="accreditations-grid">
+                <div>
+                    <h2 style="margin-bottom: 24px;" id="accreditations-title">Institutional Accreditations</h2>
+                    <p style="margin-bottom: 40px;" id="accreditations-desc">
+                        FCI Community Housing Services operates with absolute regulatory oversight and transparency, maintaining deep compliance and top-tier standing with government housing bodies.
+                    </p>
+                    
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap;" id="accreditations-badges">
+                        <img src="assets/images/SHRA_Accreditation.png" alt="SHRA Accredited" style="height: 65px; width: auto;" class="partner-logo">
+                        <img src="assets/images/BEE_status.png" alt="BEE Level 1 Contributor" style="height: 65px; width: auto;" class="partner-logo">
+                        <img src="assets/images/CIDB_Registered.png" alt="CIDB Registered" style="height: 65px; width: auto;" class="partner-logo">
+                        <img src="assets/images/NHBRC.jpg" alt="NHBRC Builder" style="height: 65px; width: auto;" class="partner-logo">
+                        <img src="assets/images/NASHO_Affiliation.png" alt="NASHO Member" style="height: 65px; width: auto;" class="partner-logo">
+                    </div>
+                </div>
+                
+                <div class="accordion" id="why-choose-fci-accordion">
+                    <!-- Item 1 -->
+                    <div class="accordion-item active" id="acc-item-focus">
+                        <div class="accordion-header">
+                            <span>01. Customer & Community Focus</span>
+                            <span class="accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content" style="max-height: 200px;">
+                            We place the satisfaction and safety of our qualifying tenants first. Every residential complex features robust facility management and clean, safe, kid-friendly recreation sites.
+                        </div>
+                    </div>
+                    
+                    <!-- Item 2 -->
+                    <div class="accordion-item" id="acc-item-professional">
+                        <div class="accordion-header">
+                            <span>02. Professional Excellence</span>
+                            <span class="accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            Professional integrity is the cornerstone of FCI's corporate culture. We manage public grants, private funds, and operational rentals with rigorous institutional accountability.
+                        </div>
+                    </div>
+                    
+                    <!-- Item 3 -->
+                    <div class="accordion-item" id="acc-item-innovative">
+                        <div class="accordion-header">
+                            <span>03. Socially Innovative Solutions</span>
+                            <span class="accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            From solar-supplemented community frameworks to transit-oriented high-density mixed developments, we find modern, highly efficient solutions to housing backlogs.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       COMMUNITY IMPACT VIDEO POPUP / DRONE GRID
+       ========================================================================== -->
+    <section id="community-impact-media">
+        <div class="container">
+            <div style="text-align: center; max-width: 700px; margin: 0 auto 60px;" class="reveal" id="community-impact-intro">
+                <div class="hero-tagline" style="color: var(--primary-teal);">Community Impact</div>
+                <h2 style="margin-bottom: 20px;" id="community-impact-title">A Living Proof of Upliftment</h2>
+                <p id="community-impact-desc">Watch exclusive media walkthroughs and the historic 2023 Goodwood Social Housing grand opening ceremony.</p>
+            </div>
+            
+            <div class="grid grid-3 reveal" id="community-impact-video-grid">
+                <!-- Video 1 -->
+                <div class="card" id="media-card-grand-opening">
+                    <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
+                        <img src="assets/images/projects100.jpg" alt="Grand Opening Goodwood station">
+                        <a href="assets/videos/openning-1.mp4" class="lightbox-trigger" data-type="video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: rgba(2, 59, 60, 0.4);" aria-label="Play Grand Opening Video" id="btn-play-grand-opening">
+                            <span style="display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; border-radius: var(--radius-pill); background-color: var(--accent-orange); color: white; box-shadow: var(--shadow-medium); border: 2px solid white;">
+                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="card-content" style="padding: 16px;">
+                        <h4 style="font-size: 1.05rem; margin-bottom: 4px;">Grand Opening Ceremony</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Goodwood Mega-Project Launch 2023</p>
+                    </div>
+                </div>
+                
+                <!-- Video 2 -->
+                <div class="card" id="media-card-presidential">
+                    <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
+                        <img src="assets/images/Main-Entrance-Inside.jpg" alt="Presidential Walkthrough">
+                        <a href="assets/videos/president_cropped.mp4" class="lightbox-trigger" data-type="video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: rgba(2, 59, 60, 0.4);" aria-label="Play Presidential Video" id="btn-play-presidential">
+                            <span style="display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; border-radius: var(--radius-pill); background-color: var(--accent-orange); color: white; box-shadow: var(--shadow-medium); border: 2px solid white;">
+                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="card-content" style="padding: 16px;">
+                        <h4 style="font-size: 1.05rem; margin-bottom: 4px;">Presidential Unit Inspection</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">National Housing Oversight Review</p>
+                    </div>
+                </div>
+                
+                <!-- Video 3 -->
+                <div class="card" id="media-card-interior-reveal">
+                    <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
+                        <img src="assets/images/projects101.jpg" alt="Interior walk-through">
+                        <a href="assets/videos/Unit-Walk-02.mp4" class="lightbox-trigger" data-type="video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: rgba(2, 59, 60, 0.4);" aria-label="Play Unit Walkthrough" id="btn-play-interior-walk">
+                            <span style="display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; border-radius: var(--radius-pill); background-color: var(--accent-orange); color: white; box-shadow: var(--shadow-medium); border: 2px solid white;">
+                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="card-content" style="padding: 16px;">
+                        <h4 style="font-size: 1.05rem; margin-bottom: 4px;">Interior Walkthrough Reveal</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Bachelor & 2 Bedroom Specs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       LATEST NEWS TICKER SECTION
+       ========================================================================== -->
+    <section class="bg-light" id="news-teaser">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px;" class="reveal" id="news-teaser-header">
+                <div>
+                    <h2 id="news-teaser-title">Latest Announcements</h2>
+                    <p style="margin-top: 8px;" id="news-teaser-desc">Stay informed with updates regarding tenant selections, student programs, and city partnerships.</p>
+                </div>
+                <div>
+                    <a href="news.html" class="btn btn-secondary" id="btn-news-teaser-all">View All News</a>
+                </div>
+            </div>
+            
+            <div class="grid grid-3 reveal" id="news-teaser-grid">
+                <!-- News 1 -->
+                <div class="card" id="news-card-goodwood">
+                    <div class="card-img-wrapper">
+                        <img src="assets/images/Main-Entrance.jpg" alt="Tenanting starts at Goodwood">
+                    </div>
+                    <div class="card-content">
+                        <div style="font-size: 0.8rem; color: var(--accent-orange); font-weight: 700; margin-bottom: 8px;">18 SEPTEMBER 2023</div>
+                        <h3 class="card-title" style="font-size: 1.25rem;">Tenanting Set to Begin at Goodwood Project</h3>
+                        <p class="card-desc">Cape Town Mayor Geordin Hill-Lewis inspected construction progress to announce November tenancies for over 1,000 residents and families.</p>
+                        <a href="news.html#news-article-goodwood" class="card-link">Read Full Article <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
+                    </div>
+                </div>
+                
+                <!-- News 2 -->
+                <div class="card" id="news-card-student">
+                    <div class="card-img-wrapper">
+                        <img src="assets/images/serv1-scaled.jpg" alt="PRASA student accommodation">
+                    </div>
+                    <div class="card-content">
+                        <div style="font-size: 0.8rem; color: var(--accent-orange); font-weight: 700; margin-bottom: 8px;">22 JANUARY 2024</div>
+                        <h3 class="card-title" style="font-size: 1.25rem;">PRASA to House 3,200 NSFAS Students</h3>
+                        <p class="card-desc">Partnering with regional property agencies, PRASA executes a massive project providing high-density housing near Cape Town Station.</p>
+                        <a href="news.html#news-article-prasa" class="card-link">Read Full Article <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
+                    </div>
+                </div>
+                
+                <!-- News 3 -->
+                <div class="card" id="news-card-restructuring">
+                    <div class="card-img-wrapper">
+                        <img src="assets/images/property.jpg" alt="Sustainable City Restructuring">
+                    </div>
+                    <div class="card-content">
+                        <div style="font-size: 0.8rem; color: var(--accent-orange); font-weight: 700; margin-bottom: 8px;">06 JUNE 2024</div>
+                        <h3 class="card-title" style="font-size: 1.25rem;">Re-structuring South African Cities</h3>
+                        <p class="card-desc">FCI leads debate on smart municipal developments, emphasizing long-term social rental frameworks to restore transport integration.</p>
+                        <a href="news.html#news-article-discussion" class="card-link">Read Full Article <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       PARTNERS SLIDER
+       ========================================================================== -->
+    <div class="partners-section" id="partners-logos-container">
+        <div class="container">
+            <div class="partners-flex" id="partners-flex-row">
+                <img src="assets/images/PRASA_logo.png" alt="Passenger Rail Agency of South Africa Logo" class="partner-logo" id="partner-prasa">
+                <img src="assets/images/CityofCapeTown_logo.png" alt="City of Cape Town Logo" class="partner-logo" id="partner-capetown">
+                <img src="assets/images/westerncape_departmentofhumansettlements.jpg" alt="Western Cape Dept of Human Settlements Logo" class="partner-logo" id="partner-wcape">
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       CALL TO ACTION BANNER (PORTAL ACCESS)
+       ========================================================================== -->
+    <section class="bg-dark" style="background-image: linear-gradient(135deg, var(--primary-teal-dark) 0%, rgba(2, 59, 60, 0.9) 100%); text-align: center;" id="home-cta">
+        <div class="container">
+            <div style="max-width: 800px; margin: 0 auto;" class="reveal" id="home-cta-content">
+                <h2 style="color: var(--text-white); margin-bottom: 20px;" id="home-cta-title">Apply for Goodwood Social Housing Opportunities</h2>
+                <p style="color: rgba(255,255,255,0.8); margin-bottom: 40px; font-size: 1.15rem;" id="home-cta-desc">
+                    FCI Community Housing Services makes it seamless to apply for housing, enquire about partnership integration, or participate in our student programmes.
+                </p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;" id="home-cta-btns">
+                    <a href="downloads.html" class="btn btn-primary" id="btn-home-cta-apply">Download Application Pack</a>
+                    <a href="contact.html" class="btn btn-white" id="btn-home-cta-inquire">Contact Department Admin</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       PREMIUM NAVY-TEAL FOOTER
+       ========================================================================== -->
+    <footer class="main-footer" id="main-footer">
+        <div class="container">
+            <div class="footer-top" id="footer-links-grid">
+                <!-- Column 1: Brand Info -->
+                <div class="footer-brand" id="footer-col-brand">
+                    <img src="assets/images/newLogo.png" alt="FCI Logo" style="height: 55px; width: auto; margin-bottom: 24px; filter: brightness(0) invert(1);" id="footer-logo">
+                    <p>FCI Community Housing Services is a Level 1 BEE Section 21 NGO developing and managing quality, affordable social and rental housing since 2012.</p>
+                    <div class="social-links" id="footer-social-row">
+                        <a href="https://x.com/fcichs" class="social-icon" aria-label="X/Twitter" target="_blank" rel="noopener" id="social-x">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="https://facebook.com/fcichs" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener" id="social-fb">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Column 2: Navigation Links -->
+                <div id="footer-col-nav">
+                    <h3 class="footer-heading">Corporate Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html" id="foot-link-about">About Our Vision</a></li>
+                        <li><a href="developments.html" id="foot-link-devs">Developments Spec</a></li>
+                        <li><a href="projects.html" id="foot-link-projects">Project Pipelines</a></li>
+                        <li><a href="programmes.html" id="foot-link-prog">Social Impact</a></li>
+                        <li><a href="news.html" id="foot-link-news">Latest News</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3: Contact Info -->
+                <div id="footer-col-contact">
+                    <h3 class="footer-heading">Contact Office</h3>
+                    <div class="footer-contact-info">
+                        <div class="footer-contact-item">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            <span>Goodwood Station Site Office, Voortrekker Road, Cape Town, 7460</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                            <span>info@fcichs.co.za</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.15 15.15 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                            <span>+27 21 879 7363</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Column 4: Newsletter -->
+                <div class="footer-newsletter" id="footer-col-news">
+                    <h3 class="footer-heading">Tenant Newsletter</h3>
+                    <p>Subscribe to receive quarterly newsletters regarding active developments and applicant lotteries.</p>
+                    <form class="newsletter-form" id="newsletter-subscription-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+                        <input type="email" class="newsletter-input" placeholder="Your Email Address" aria-label="Email subscription" required id="newsletter-email">
+                        <button type="submit" class="newsletter-btn" id="btn-newsletter-sub">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom" id="footer-legal-bar">
+                <p id="footer-copyright">Copyright &copy; 2026 - FCI Community Housing Services. All rights reserved.</p>
+                <div class="footer-legal-links" id="footer-legal-row">
+                    <a href="downloads.html" id="foot-legal-terms">Accreditation Policies</a>
+                    <a href="contact.html" id="foot-legal-privacy">POPIA Compliant Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================================================
+       SCRIPTS
+       ========================================================================== -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/motion.js"></script>
+</body>
+</html>

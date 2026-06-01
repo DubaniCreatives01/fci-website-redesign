@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - FCI Community Housing Services</title>
+    <meta name="description" content="Get in touch with FCI Community Housing Services for housing applications, partnership opportunities, and general enquiries.">
+    <link rel="icon" type="image/jpeg" href="assets/images/favicon.jpg">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        /* Custom map design styles */
+        .mock-map-container {
+            width: 100%;
+            height: 400px;
+            background-color: var(--primary-teal-dark);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+        }
+        .map-grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .map-line {
+            stroke: rgba(255, 153, 0, 0.15);
+            stroke-width: 2;
+            fill: none;
+        }
+        .map-line-main {
+            stroke: rgba(255, 153, 0, 0.35);
+            stroke-dasharray: 6 4;
+        }
+        .map-pulse {
+            position: absolute;
+            top: 48%;
+            left: 52%;
+            transform: translate(-50%, -50%);
+            width: 16px;
+            height: 16px;
+            background-color: var(--accent-orange);
+            border-radius: var(--radius-pill);
+            box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.7);
+            animation: pulse-orange 2s infinite;
+        }
+        @keyframes pulse-orange {
+            0% {
+                transform: translate(-50%, -50%) scale(0.95);
+                box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.7);
+            }
+            70% {
+                transform: translate(-50%, -50%) scale(1);
+                box-shadow: 0 0 0 15px rgba(255, 153, 0, 0);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(0.95);
+                box-shadow: 0 0 0 0 rgba(255, 153, 0, 0);
+            }
+        }
+        .map-glass-card {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            background-color: rgba(1, 31, 32, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color-dark);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            color: var(--text-white);
+            max-width: 280px;
+            box-shadow: var(--shadow-premium);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================================================
+       TOP INFO BAR
+       ========================================================================== -->
+    <div class="tophead" id="tophead-bar">
+        <div class="container">
+            <div class="tophead-info">
+                <a href="tel:+27218797363" id="tophead-phone">
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.15 15.15 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    <span>+27 21 879 7363</span>
+                </a>
+                <a href="mailto:info@fcichs.co.za" id="tophead-email">
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <span>info@fcichs.co.za</span>
+                </a>
+            </div>
+            <div>
+                <span>BEE Level 1 Contributor</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       HEADER STICKY NAV
+       ========================================================================== -->
+    <header class="main-header" id="main-header">
+        <div class="container">
+            <a href="index.html" class="logo" id="logo-link">
+                <img src="assets/images/newLogo-300x129.png" alt="FCI Community Housing Services Logo" id="logo-img">
+            </a>
+            
+            <button class="hamburger" id="menu-hamburger" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link" id="nav-home">Home</a></li>
+                <li><a href="about.html" class="nav-link" id="nav-about">About Us</a></li>
+                <li><a href="developments.html" class="nav-link" id="nav-developments">Developments</a></li>
+                <li><a href="projects.html" class="nav-link" id="nav-projects">Projects</a></li>
+                <li><a href="programmes.html" class="nav-link" id="nav-programmes">Programmes</a></li>
+                <li><a href="news.html" class="nav-link" id="nav-news">News</a></li>
+                <li><a href="downloads.html" class="nav-link" id="nav-downloads">Downloads</a></li>
+                <li><a href="contact.html" class="nav-link active" id="nav-contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ==========================================================================
+       PAGE BANNER
+       ========================================================================== -->
+    <section class="page-banner" id="contact-banner">
+        <div class="container">
+            <h1 class="page-banner-title" id="contact-banner-title">Contact Our Office</h1>
+            <div class="breadcrumbs" id="contact-breadcrumbs">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <span>Contact</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       CONTACT NARRATIVE, HOURS & CHANNELS
+       ========================================================================== -->
+    <section id="contact-info-sec">
+        <div class="container">
+            <div class="grid grid-2 reveal" id="contact-main-grid">
+                
+                <!-- Left: Info Cards & Mock Map -->
+                <div style="display: flex; flex-direction: column; gap: 32px;" id="contact-left-card">
+                    <div>
+                        <div class="hero-tagline" style="color: var(--secondary-green); margin-bottom: 16px;">Office Coordinates</div>
+                        <h2 style="margin-bottom: 20px;" id="contact-coord-title">FCI Goodwood Site Office</h2>
+                        <p style="margin-bottom: 24px;" id="contact-coord-desc">Our dedicated project management and housing application office is situated directly at the Goodwood Station re-development site.</p>
+                        
+                        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 32px;" id="contact-details-grid">
+                            <div style="background-color: var(--bg-secondary); padding: 20px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);" id="detail-hours">
+                                <h4 style="color: var(--primary-teal); margin-bottom: 8px;">Business Hours</h4>
+                                <p style="font-size: 0.9rem; line-height: 1.5;">Monday - Thursday:<br><strong>08:30 - 17:00</strong><br>Friday:<br><strong>08:30 - 16:00</strong></p>
+                            </div>
+                            <div style="background-color: var(--bg-secondary); padding: 20px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);" id="detail-departments">
+                                <h4 style="color: var(--primary-teal); margin-bottom: 8px;">Divisions</h4>
+                                <p style="font-size: 0.85rem; line-height: 1.5;">Applications:<br><strong>applications@fcichs.co.za</strong><br>Partnerships:<br><strong>development@fcichs.co.za</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- PREMIUM CSS VECTOR MOCK MAP -->
+                    <div class="mock-map-container" id="mock-map-visual">
+                        <div class="map-grid-overlay"></div>
+                        <svg style="width: 100%; height: 100%; position: absolute; top:0; left:0;">
+                            <!-- Mock roads and rail lines -->
+                            <path d="M-50 150 L500 250" class="map-line map-line-main" />
+                            <path d="M200 -50 L280 450" class="map-line" />
+                            <path d="M50 80 C 150 120, 250 200, 450 180" class="map-line" />
+                            <!-- Location circle map overlay -->
+                            <circle cx="230" cy="190" r="40" fill="none" stroke="rgba(255, 153, 0, 0.2)" stroke-width="1" />
+                        </svg>
+                        <div class="map-pulse" id="map-pin-pulse"></div>
+                        <div class="map-glass-card" id="map-label-card">
+                            <h4 style="color: var(--text-white); font-size: 0.95rem; margin-bottom: 4px;">Goodwood Station Complex</h4>
+                            <p style="font-size: 0.75rem; color: rgba(255,255,255,0.7); line-height: 1.4;">Voortrekker Road, Goodwood, Cape Town, 7460</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right: Interactive Validation Form -->
+                <div style="background-color: var(--bg-primary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 48px; box-shadow: var(--shadow-medium);" id="contact-form-wrapper">
+                    <h3 style="margin-bottom: 12px;" id="form-header-title">Send An Inquiry</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 32px; font-size: 0.95rem;" id="form-header-desc">Fill in the fields below and our housing department administrators will get in touch with you as soon as possible.</p>
+                    
+                    <form id="contact-inquiry-form" onsubmit="submitForm(event)">
+                        <!-- Field 1: Name -->
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="form-name" required placeholder=" ">
+                            <label class="form-label" for="form-name">Full Name</label>
+                        </div>
+                        
+                        <!-- Field 2: Email -->
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="form-email" required placeholder=" ">
+                            <label class="form-label" for="form-email">Email Address</label>
+                        </div>
+                        
+                        <!-- Field 3: Phone -->
+                        <div class="form-group">
+                            <input type="tel" class="form-control" id="form-phone" required placeholder=" ">
+                            <label class="form-label" for="form-phone">Contact Number</label>
+                        </div>
+                        
+                        <!-- Field 4: Dropdown -->
+                        <div class="form-group">
+                            <select class="form-control" id="form-inquiry-type" required style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill=%22%23023B3C%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>'); background-repeat: no-repeat; background-position: right 16px center;">
+                                <option value="" disabled selected hidden>Inquiry Division</option>
+                                <option value="applications">Housing Applications (Rental & Gap)</option>
+                                <option value="partnerships">Municipal Partnerships & Redevelopment</option>
+                                <option value="general">General Office Inquiries</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Field 5: Message -->
+                        <div class="form-group">
+                            <textarea class="form-control" id="form-message" required rows="4" placeholder=" "></textarea>
+                            <label class="form-label" for="form-message">Your Message</label>
+                        </div>
+                        
+                        <div style="margin-top: 32px;" id="form-submit-row">
+                            <button type="submit" class="btn btn-primary" style="width: 100%;" id="btn-submit-form">Send Inquiry Message</button>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       PREMIUM NAVY-TEAL FOOTER
+       ========================================================================== -->
+    <footer class="main-footer" id="main-footer">
+        <div class="container">
+            <div class="footer-top" id="footer-links-grid">
+                <!-- Column 1: Brand Info -->
+                <div class="footer-brand" id="footer-col-brand">
+                    <img src="assets/images/newLogo.png" alt="FCI Logo" style="height: 55px; width: auto; margin-bottom: 24px; filter: brightness(0) invert(1);" id="footer-logo">
+                    <p>FCI Community Housing Services is a Level 1 BEE Section 21 NGO developing and managing quality, affordable social and rental housing since 2012.</p>
+                    <div class="social-links" id="footer-social-row">
+                        <a href="https://x.com/fcichs" class="social-icon" aria-label="X/Twitter" target="_blank" rel="noopener" id="social-x">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="https://facebook.com/fcichs" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener" id="social-fb">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Column 2: Navigation Links -->
+                <div id="footer-col-nav">
+                    <h3 class="footer-heading">Corporate Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html" id="foot-link-about">About Our Vision</a></li>
+                        <li><a href="developments.html" id="foot-link-devs">Developments Spec</a></li>
+                        <li><a href="projects.html" id="foot-link-projects">Project Pipelines</a></li>
+                        <li><a href="programmes.html" id="foot-link-prog">Social Impact</a></li>
+                        <li><a href="news.html" id="foot-link-news">Latest News</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3: Contact Info -->
+                <div id="footer-col-contact">
+                    <h3 class="footer-heading">Contact Office</h3>
+                    <div class="footer-contact-info">
+                        <div class="footer-contact-item">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            <span>Goodwood Station Site Office, Voortrekker Road, Cape Town, 7460</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                            <span>info@fcichs.co.za</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.15 15.15 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                            <span>+27 21 879 7363</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Column 4: Newsletter -->
+                <div class="footer-newsletter" id="footer-col-news">
+                    <h3 class="footer-heading">Tenant Newsletter</h3>
+                    <p>Subscribe to receive quarterly newsletters regarding active developments and applicant lotteries.</p>
+                    <form class="newsletter-form" id="newsletter-subscription-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+                        <input type="email" class="newsletter-input" placeholder="Your Email Address" aria-label="Email subscription" required id="newsletter-email">
+                        <button type="submit" class="newsletter-btn" id="btn-newsletter-sub">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom" id="footer-legal-bar">
+                <p id="footer-copyright">Copyright &copy; 2026 - FCI Community Housing Services. All rights reserved.</p>
+                <div class="footer-legal-links" id="footer-legal-row">
+                    <a href="downloads.html" id="foot-legal-terms">Accreditation Policies</a>
+                    <a href="contact.html" id="foot-legal-privacy">POPIA Compliant Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================================================
+       SCRIPTS
+       ========================================================================== -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/motion.js"></script>
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('form-name').value;
+            const email = document.getElementById('form-email').value;
+            const phone = document.getElementById('form-phone').value;
+            const division = document.getElementById('form-inquiry-type').value;
+            const message = document.getElementById('form-message').value;
+            
+            if (name && email && phone && division && message) {
+                // Construct a premium dialog layout trigger
+                const popup = document.createElement('div');
+                popup.style.position = 'fixed';
+                popup.style.top = '50%';
+                popup.style.left = '50%';
+                popup.style.transform = 'translate(-50%, -50%)';
+                popup.style.backgroundColor = '#FFFFFF';
+                popup.style.border = '1px solid rgba(2, 59, 60, 0.15)';
+                popup.style.borderRadius = '16px';
+                popup.style.padding = '40px';
+                popup.style.boxShadow = '0 24px 50px rgba(2, 59, 60, 0.25)';
+                popup.style.zIndex = '9999';
+                popup.style.maxWidth = '400px';
+                popup.style.textAlign = 'center';
+                popup.style.fontFamily = "'Inter', sans-serif";
+                
+                popup.innerHTML = `
+                    <div style="width: 60px; height: 60px; border-radius: 9999px; background-color: rgba(85,139,47,0.15); color: #558B2F; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+                        <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    </div>
+                    <h3 style="color: #0A2526; font-family: 'Plus Jakarta Sans', sans-serif; margin-bottom: 12px; font-weight: 700;">Inquiry Sent Successfully</h3>
+                    <p style="color: #4A6061; font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px;">
+                        Thank you <strong>${name}</strong>. Your message has been delivered directly to our <strong>${division}</strong> department. An administrator will respond via <strong>${email}</strong> shortly.
+                    </p>
+                    <button id="close-success-popup" style="background-color: #023B3C; color: #FFFFFF; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 0.9rem; padding: 12px 24px; border: none; border-radius: 9999px; cursor: pointer; transition: all 0.3s;">Close Window</button>
+                `;
+                
+                // Dim overlay
+                const dimOverlay = document.createElement('div');
+                dimOverlay.style.position = 'fixed';
+                dimOverlay.style.top = '0';
+                dimOverlay.style.left = '0';
+                dimOverlay.style.width = '100%';
+                dimOverlay.style.height = '100%';
+                dimOverlay.style.backgroundColor = 'rgba(1, 31, 32, 0.6)';
+                dimOverlay.style.backdropFilter = 'blur(5px)';
+                dimOverlay.style.zIndex = '9998';
+                
+                document.body.appendChild(dimOverlay);
+                document.body.appendChild(popup);
+                
+                document.getElementById('close-success-popup').addEventListener('click', () => {
+                    dimOverlay.remove();
+                    popup.remove();
+                    document.getElementById('contact-inquiry-form').reset();
+                });
+            }
+        }
+    </script>
+</body>
+</html>
