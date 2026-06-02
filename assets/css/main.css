@@ -1863,12 +1863,13 @@ section {
 
 .hero-award-widget-wrapper {
     position: absolute;
-    right: calc((100% - 1200px) / 2 - 120px); /* Shifted 100px further right to sit side-by-side with the ribbon with clear breathing room */
+    right: max(16px, calc((100% - 1200px) / 2 - 340px)); /* Shifted dramatically right to sit side-by-side with the ribbon with clear breathing room */
     top: 150px; /* Aligned vertically right below the hanging ribbon */
     z-index: 10;
     pointer-events: auto;
     animation: float-spotlight 8s ease-in-out infinite; /* imperceptible slow luxury vertical float */
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: 2px solid red; /* TEMPORARY OUTLINE FOR VISUAL POSITIONING CONFIRMATION */
 }
 
 .glass-award-widget {
