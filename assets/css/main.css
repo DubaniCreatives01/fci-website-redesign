@@ -1869,7 +1869,6 @@ section {
     pointer-events: auto;
     animation: float-spotlight 8s ease-in-out infinite; /* imperceptible slow luxury vertical float */
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    outline: 2px solid red; /* TEMPORARY OUTLINE FOR VISUAL POSITIONING CONFIRMATION */
 }
 
 .glass-award-widget {
