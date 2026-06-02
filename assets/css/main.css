@@ -1765,70 +1765,92 @@ section {
    RESIDE AWARDS 2026 GOLD AWARD BADGE & HERO SPLIT LAYOUT
    ========================================================================== */
 
-/* Premium floating award badge positioning on desktop */
-.hero-badge-wrapper {
+/* Premium Header-Suspended Hanging Award Tag styling */
+.main-header .container {
+    position: relative; /* Guarantee anchor context for hanging tag */
+}
+
+.header-award-tag-wrapper {
     position: absolute;
-    right: 48px;
-    top: -80px; /* Overlap header sticky nav which is 80px high */
-    z-index: 101; /* Layer above the header (which is z-index 100) */
+    right: 0;
+    top: 0;
+    z-index: 102; /* Float gracefully above navigation items and boundaries */
     display: flex;
     justify-content: center;
-    align-items: center;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    align-items: flex-start;
+    pointer-events: auto;
 }
 
-.hero-award-badge {
+.header-award-tag {
+    display: block;
     position: relative;
-    display: block;
     cursor: pointer;
+    transform-origin: top center;
+    animation: slow-sway 7s ease-in-out infinite; /* Slower, highly elegant sway */
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.award-badge-img {
+.award-tag-img {
     display: block;
-    width: 85px; /* Extremely premium elegant narrow ribbon width to match the mockup */
+    width: 100px; /* Desktop: 90-120px */
     height: auto;
     object-fit: contain;
-    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4));
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Subtle hover animation */
-.hero-award-badge:hover {
-    transform: translateY(2px) scale(1.05); /* Slight bounce and scale */
+/* Elegant sway keyframe animation */
+@keyframes slow-sway {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(1deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-1deg); }
+    100% { transform: rotate(0deg); }
 }
 
-.hero-award-badge:hover .award-badge-img {
-    filter: drop-shadow(0 20px 40px rgba(255, 153, 0, 0.35)); /* Enhanced glowing golden shadow on hover */
+/* Subtle corporate hover animation */
+.header-award-tag:hover {
+    transform: scale(1.03); /* Extremely soft, premium scale tag indicator */
 }
 
-/* Tablet view styling for award badge */
+.header-award-tag:hover .award-tag-img {
+    filter: drop-shadow(0 12px 24px rgba(255, 153, 0, 0.35)); /* Sleek gold glow */
+}
+
+/* Desktop layout spacing: adjust nav-menu to accommodate the tag on the right */
+@media (min-width: 992px) {
+    .nav-menu {
+        padding-right: 120px; /* Pushes the menu to the left to allocate dedicated gap */
+    }
+}
+
+/* Tablet view adjustment */
 @media (max-width: 1199px) {
-    .hero-badge-wrapper {
-        right: 24px;
-        top: -80px;
+    .nav-menu {
+        padding-right: 100px;
     }
-    .award-badge-img {
-        width: 75px; /* Slightly smaller on medium screens */
+    .award-tag-img {
+        width: 80px; /* Tablet: 70-90px width */
     }
 }
 
-/* Mobile responsive styling for award badge */
+/* Mobile responsive layout adjustment */
 @media (max-width: 991px) {
-    .hero-badge-wrapper {
-        position: relative;
+    .header-award-tag-wrapper {
         right: auto;
-        top: auto;
-        margin: 32px auto 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 3;
+        left: 24px; /* Symmetrical balance against the right hamburger button */
+        top: 50%;
+        transform: translateY(-50%);
+        bottom: auto;
     }
-    .award-badge-img {
-        width: 85px; /* Center-aligned narrow ribbon on mobile below content */
-        margin: 0 auto;
-        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+    
+    .header-award-tag {
+        animation: none; /* Disable sway on mobile to prevent overlapping */
+    }
+    
+    .award-tag-img {
+        width: 55px; /* Mobile: compact 50-70px width beside the centered logo */
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
     }
 }
 
