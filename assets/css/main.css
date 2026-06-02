@@ -1792,7 +1792,7 @@ section {
 
 .award-tag-img {
     display: block;
-    width: 100px; /* Desktop: 90-120px */
+    width: 140px; /* Desktop: increased by 40% from 100px */
     height: auto;
     object-fit: contain;
     filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
@@ -1820,17 +1820,17 @@ section {
 /* Desktop layout spacing: adjust nav-menu to accommodate the tag on the right */
 @media (min-width: 992px) {
     .nav-menu {
-        padding-right: 120px; /* Pushes the menu to the left to allocate dedicated gap */
+        padding-right: 165px; /* Pushes the menu to the left to allocate dedicated gap */
     }
 }
 
 /* Tablet view adjustment */
 @media (max-width: 1199px) {
     .nav-menu {
-        padding-right: 100px;
+        padding-right: 135px;
     }
     .award-tag-img {
-        width: 80px; /* Tablet: 70-90px width */
+        width: 110px; /* Tablet: increased by 40% from 80px */
     }
 }
 
@@ -1849,7 +1849,7 @@ section {
     }
     
     .award-tag-img {
-        width: 55px; /* Mobile: compact 50-70px width beside the centered logo */
+        width: 75px; /* Mobile: increased by 40% from 55px */
         filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
     }
 }
