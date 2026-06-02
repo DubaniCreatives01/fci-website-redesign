@@ -24,13 +24,25 @@ document.addEventListener('DOMContentLoaded', () => {
             navMenu.classList.toggle('open');
         });
         
-        // Close menu on overlay link clicks
-        document.querySelectorAll('.nav-link').forEach(link => {
+        // Close menu on overlay link clicks (except dropdown toggle)
+        document.querySelectorAll('.nav-link:not(.dropdown-toggle)').forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('open');
             });
         });
+
+        // Mobile dropdown click toggle
+        const dropdownToggle = document.querySelector('.dropdown-toggle');
+        if (dropdownToggle) {
+            dropdownToggle.addEventListener('click', (e) => {
+                if (window.innerWidth <= 991) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dropdownToggle.parentElement.classList.toggle('active-mobile');
+                }
+            });
+        }
     }
 
     // ==========================================================================

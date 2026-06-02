@@ -58,15 +58,22 @@
                 <span></span>
             </button>
             
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="/" class="nav-link" id="nav-home">Home</a></li>
-                <li><a href="/about" class="nav-link" id="nav-about">About Us</a></li>
-                <li><a href="/developments" class="nav-link" id="nav-developments">Developments</a></li>
-                <li><a href="/projects" class="nav-link" id="nav-projects">Projects</a></li>
-                <li><a href="/programmes" class="nav-link" id="nav-programmes">Programmes</a></li>
+                        <ul class="nav-menu" id="nav-menu">
+                <li><a href="/" class="nav-link " id="nav-home">Home</a></li>
+                <li><a href="/about" class="nav-link " id="nav-about">About Us</a></li>
+                <li class="dropdown-item">
+                    <a href="#" class="nav-link dropdown-toggle " id="nav-awards">Awards <span class="arrow">▼</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/ipma-global-awards-2025" id="nav-dropdown-ipma" class="">IPMA Global Awards 2025</a></li>
+                        <li><a href="/reside-awards-2026" id="nav-dropdown-reside" class="">Reside Awards 2026</a></li>
+                    </ul>
+                </li>
+                <li><a href="/developments" class="nav-link " id="nav-developments">Developments</a></li>
+                <li><a href="/projects" class="nav-link " id="nav-projects">Projects</a></li>
+                <li><a href="/programmes" class="nav-link " id="nav-programmes">Programmes</a></li>
                 <li><a href="/news" class="nav-link active" id="nav-news">News</a></li>
-                <li><a href="/downloads" class="nav-link" id="nav-downloads">Downloads</a></li>
-                <li><a href="/contact" class="nav-link" id="nav-contact">Contact</a></li>
+                <li><a href="/downloads" class="nav-link " id="nav-downloads">Downloads</a></li>
+                <li><a href="/contact" class="nav-link " id="nav-contact">Contact</a></li>
             </ul>
             
 
@@ -94,7 +101,119 @@
         <div class="container" style="max-width: 900px;">
             <div class="reveal" style="display: flex; flex-direction: column; gap: 80px;" id="news-feed-articles">
                 
-                <!-- Article 1: Goodwood Mega Project Tenanting -->
+                <!-- Article 1: Global IPMA Award -->
+                <article class="news-article-card" id="news-article-global-ipma" style="border-bottom: 1px solid var(--border-color); padding-bottom: 60px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-orange); font-weight: 700; margin-bottom: 12px; letter-spacing: 0.05em; text-transform: uppercase;">Awards & Recognition • 02 October 2025</div>
+                    <h2 style="margin-bottom: 24px; font-size: 2.2rem; color: var(--text-primary);" id="art-title-global-ipma">Goodwood Social Housing Project Wins Global IPMA Award in Berlin</h2>
+                    
+                    <div class="card-img-wrapper" style="border-radius: var(--radius-md); box-shadow: var(--shadow-medium); aspect-ratio: 16/9; margin-bottom: 32px;" id="art-img-global-ipma">
+                        <img loading="lazy" src="assets/images/awards/imgi_3_5f298ccac44d1271d6508f75ca095fffefc18ece=w700.jpeg" alt="FCI CEO Mr. Calana presenting the IPMA Silver Award trophy in Berlin">
+                    </div>
+                    
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; font-weight: 500; color: var(--primary-teal);" id="art-lead-global-ipma">
+                        The Goodwood Station Social Housing Project has received prestigious international recognition, winning the Silver Award for Social Project of the Year at the 2025 IPMA Global Project Excellence Awards in Berlin, Germany.
+                    </p>
+                    <p style="margin-bottom: 20px; font-size: 1.05rem;" id="art-p1-global-ipma">
+                        FCI Community Housing Services was recognized on the world stage from among entries representing over 70 competing nations. The award, presented at the IPMA Global Awards Gala in Berlin, marks a historic milestone for South African social housing developments.
+                    </p>
+                    <p style="margin-bottom: 32px; font-size: 1.05rem;" id="art-p2-global-ipma">
+                        The evaluation panel commended the project's transit-oriented layout, massive community integration, and sustainable engineering. This international accolade confirms FCI's commitment to delivering housing infrastructure that stands alongside global best practices.
+                    </p>
+                    <div>
+                        <a href="/ipma-global-awards-2025" class="btn btn-secondary" id="btn-art-ipma-more">View IPMA Award Details</a>
+                    </div>
+                </article>
+
+                <!-- Article 2: Resident Perspectives On Social Housing -->
+                <article class="news-article-card" id="news-article-resident-grievances" style="border-bottom: 1px solid var(--border-color); padding-bottom: 60px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-orange); font-weight: 700; margin-bottom: 12px; letter-spacing: 0.05em; text-transform: uppercase;">Community Stories • 06 November 2024</div>
+                    <h2 style="margin-bottom: 24px; font-size: 2.2rem; color: var(--text-primary);" id="art-title-resident-grievances">Dialogue Continues Over Policies and Surcharges at Goodwood Station Complex</h2>
+                    
+                    <div class="card-img-wrapper" style="border-radius: var(--radius-md); box-shadow: var(--shadow-medium); aspect-ratio: 16/9; margin-bottom: 32px;" id="art-img-resident-grievances">
+                        <img loading="lazy" src="assets/images/Main-Entrance-Inside.jpg" alt="Goodwood Station Courtyard and Community Areas">
+                    </div>
+                    
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; font-weight: 500; color: var(--primary-teal);" id="art-lead-resident-grievances">
+                        FCI Community Housing Services management is engaging in open dialogue with residents of the 1,055-unit Goodwood Station complex following a grievance letter raising concerns regarding visitor policies and municipal utility charges.
+                    </p>
+                    <p style="margin-bottom: 20px; font-size: 1.05rem;" id="art-p1-resident-grievances">
+                        The formal grievance letter, representing views of some of the complex's 3,000 residents, highlighted concerns regarding rules that limit sleepovers to five nights per month and restrict adding occupants to leases post-signing, alongside utility fees like the R250 refuse/sewerage charge and street-parking security.
+                    </p>
+                    <p style="margin-bottom: 20px; font-size: 1.05rem;" id="art-p2-resident-grievances">
+                        In response, FCI management clarified that utility surcharges strictly conform to the City of Cape Town’s social housing tariff structures, and that rules are designed to protect the interests and security of all tenants. Dialogue remains active as both parties work toward mutually beneficial solutions.
+                    </p>
+                    <div>
+                        <a href="https://novanews.co.za/tygerburger/its-like-a-prison-goodwood-social-housing-project-residents-voice-frustrations-20241106-2/" class="btn btn-secondary" target="_blank" rel="noopener" id="btn-art-grievance-more">Read Full Tygerburger Article</a>
+                    </div>
+                </article>
+
+                <!-- Article 3: Goodwood Housing Project Feature -->
+                <article class="news-article-card" id="news-article-opening-ceremony" style="border-bottom: 1px solid var(--border-color); padding-bottom: 60px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-orange); font-weight: 700; margin-bottom: 12px; letter-spacing: 0.05em; text-transform: uppercase;">Project News • 03 August 2024</div>
+                    <h2 style="margin-bottom: 24px; font-size: 2.2rem; color: var(--text-primary);" id="art-title-opening-ceremony">Launch of R575m Goodwood Station Social Housing Project Welcomes First Phase</h2>
+                    
+                    <div class="card-img-wrapper" style="border-radius: var(--radius-md); box-shadow: var(--shadow-medium); aspect-ratio: 16/9; margin-bottom: 32px;" id="art-img-opening-ceremony">
+                        <img loading="lazy" src="assets/images/property.jpg" alt="Opening ceremony of Goodwood social housing complex">
+                    </div>
+                    
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; font-weight: 500; color: var(--primary-teal);" id="art-lead-opening-ceremony">
+                        The first phase of the R575 million Goodwood Station Social Housing Project was officially opened by National Human Settlements Minister Mmamoloko Kubayi and Cape Town Mayor Geordin Hill-Lewis, releasing 330 units.
+                    </p>
+                    <p style="margin-bottom: 20px; font-size: 1.05rem;" id="art-p1-opening-ceremony">
+                        The transit-oriented rental development caters to families with a combined monthly income below R22,500. Mayor Hill-Lewis commended the project as a wonderful model for providing high-density, affordable rental options near commuter rail corridors.
+                    </p>
+                    <p style="margin-bottom: 32px; font-size: 1.05rem;" id="art-p2-opening-ceremony">
+                        "There are millions of people in South Africa who have work but cannot afford open-market rents," said Hill-Lewis. "This project offers a life-improving opportunity." The launch marks the activation of the first phase of this 1,055-unit development.
+                    </p>
+                    <div>
+                        <a href="https://news365.co.za/housing-project-2/" class="btn btn-secondary" target="_blank" rel="noopener" id="btn-art-opening-more">Read Full News365 Feature</a>
+                    </div>
+                </article>
+
+                <!-- Article 4: Resident Success Story -->
+                <article class="news-article-card" id="news-article-shack-to-housing" style="border-bottom: 1px solid var(--border-color); padding-bottom: 60px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-orange); font-weight: 700; margin-bottom: 12px; letter-spacing: 0.05em; text-transform: uppercase;">Resident Success Stories • 01 August 2024</div>
+                    <h2 style="margin-bottom: 24px; font-size: 2.2rem; color: var(--text-primary);" id="art-title-shack-to-housing">Cape Town Man Moves from Shack to Goodwood Social Housing</h2>
+                    
+                    <div class="card-img-wrapper" style="border-radius: var(--radius-md); box-shadow: var(--shadow-medium); aspect-ratio: 16/9; margin-bottom: 32px;" id="art-img-shack-to-housing">
+                        <img loading="lazy" src="assets/images/awards/cf088188-e170-4ec6-b2d8-546116e1fcbe.jpg" alt="Happy residents at Goodwood Station development">
+                    </div>
+                    
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; font-weight: 500; color: var(--primary-teal);" id="art-lead-shack-to-housing">
+                        A Cape Town resident is celebrating a massive life transition as he moves from an informal settlement shack into a modern, secure apartment at the Goodwood Station Social Housing Project.
+                    </p>
+                    <p style="margin-bottom: 20px; font-size: 1.05rem;" id="art-p1-shack-to-housing">
+                        On Thursday, 1 August 2024, Cape Town Mayor Geordin Hill-Lewis and Councillor Carl Pophaim welcomed the first 160 families taking occupancy of their new homes during the month of August, marking a life-changing milestone for residents.
+                    </p>
+                    <p style="margin-bottom: 32px; font-size: 1.05rem;" id="art-p2-shack-to-housing">
+                        The City of Cape Town supported the project with grant funding, land for parking, and rates discounts to enable a viable, high-quality development, demonstrating successful collaboration between government, SHRA, and FCI.
+                    </p>
+                    <div>
+                        <a href="https://www.goodthingsguy.com/man-moves-from-shack-to-housing-project/" class="btn btn-secondary" target="_blank" rel="noopener" id="btn-art-success-more">Read Good Things Guy Article</a>
+                    </div>
+                </article>
+
+                <!-- Article 5: PRASA Student Housing Partnership -->
+                <article class="news-article-card" id="news-article-prasa" style="border-bottom: 1px solid var(--border-color); padding-bottom: 60px;">
+                    <div style="font-size: 0.85rem; color: var(--accent-orange); font-weight: 700; margin-bottom: 12px; letter-spacing: 0.05em; text-transform: uppercase;">Announcements • 22 January 2024</div>
+                    <h2 style="margin-bottom: 24px; font-size: 2.2rem; color: var(--text-primary);" id="art-title-prasa">Prasa on Track to Provide Accommodation to 3,200 NSFAS Students in Cape Town</h2>
+                    
+                    <div class="card-img-wrapper" style="border-radius: var(--radius-md); box-shadow: var(--shadow-medium); aspect-ratio: 16/9; margin-bottom: 32px;" id="art-img-prasa">
+                        <img loading="lazy" src="assets/images/serv1-scaled.jpg" alt="Cape Town Station Housing Facilities">
+                    </div>
+                    
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; font-weight: 500; color: var(--primary-teal);" id="art-lead-prasa">
+                        The Passenger Rail Agency of South Africa (PRASA) has partnered with a regional property developer to lease and manage state-of-the-art accommodation for more than 3,200 students.
+                    </p>
+                    <p style="margin-bottom: 20px; font-size: 1.05rem;" id="art-p1-prasa">
+                        Students eligible for National Student Financial Aid Scheme (NSFAS) funding will be eligible to relocate directly into the newly constructed residential complex near Cape Town Station in February 2024.
+                    </p>
+                    <p style="margin-bottom: 32px; font-size: 1.05rem;" id="art-p2-prasa">
+                        This massive development combines smart city initiatives, sustainable energy integrations, and safe, affordable housing structures. Proximity to primary commuter hubs ensures that students face zero-friction transits to universities across the Cape Town metropolitan area.
+                    </p>
+                </article>
+
+                <!-- Article 6: Goodwood Mega Project Tenanting -->
                 <article class="news-article-card" id="news-article-goodwood" style="border-bottom: 1px solid var(--border-color); padding-bottom: 60px;">
                     <div style="font-size: 0.85rem; color: var(--accent-orange); font-weight: 700; margin-bottom: 12px; letter-spacing: 0.05em; text-transform: uppercase;">Press Release • 18 September 2023</div>
                     <h2 style="margin-bottom: 24px; font-size: 2.2rem; color: var(--text-primary);" id="art-title-goodwood">Tenanting Set to Begin at Goodwood Mega Social Housing Project</h2>
@@ -117,27 +236,7 @@
                     </div>
                 </article>
 
-                <!-- Article 2: PRASA Student Housing Partnership -->
-                <article class="news-article-card" id="news-article-prasa" style="border-bottom: 1px solid var(--border-color); padding-bottom: 60px;">
-                    <div style="font-size: 0.85rem; color: var(--accent-orange); font-weight: 700; margin-bottom: 12px; letter-spacing: 0.05em; text-transform: uppercase;">Announcements • 22 January 2024</div>
-                    <h2 style="margin-bottom: 24px; font-size: 2.2rem; color: var(--text-primary);" id="art-title-prasa">Prasa on Track to Provide Accommodation to 3,200 NSFAS Students in Cape Town</h2>
-                    
-                    <div class="card-img-wrapper" style="border-radius: var(--radius-md); box-shadow: var(--shadow-medium); aspect-ratio: 16/9; margin-bottom: 32px;" id="art-img-prasa">
-                        <img loading="lazy" src="assets/images/serv1-scaled.jpg" alt="Cape Town Station Housing Facilities">
-                    </div>
-                    
-                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; font-weight: 500; color: var(--primary-teal);" id="art-lead-prasa">
-                        The Passenger Rail Agency of South Africa (PRASA) has partnered with a regional property developer to lease and manage state-of-the-art accommodation for more than 3,200 students.
-                    </p>
-                    <p style="margin-bottom: 20px; font-size: 1.05rem;" id="art-p1-prasa">
-                        Students eligible for National Student Financial Aid Scheme (NSFAS) funding will be eligible to relocate directly into the newly constructed residential complex near Cape Town Station in February 2024.
-                    </p>
-                    <p style="margin-bottom: 32px; font-size: 1.05rem;" id="art-p2-prasa">
-                        This massive development combines smart city initiatives, sustainable energy integrations, and safe, affordable housing structures. Proximity to primary commuter hubs ensures that students face zero-friction transits to universities across the Cape Town metropolitan area.
-                    </p>
-                </article>
-
-                <!-- Article 3: Goodwood Progress Inspection -->
+                <!-- Article 7: Goodwood Progress Inspection -->
                 <article class="news-article-card" id="news-article-discussion" style="padding-bottom: 40px;">
                     <div style="font-size: 0.85rem; color: var(--accent-orange); font-weight: 700; margin-bottom: 12px; letter-spacing: 0.05em; text-transform: uppercase;">Public Reviews • 19 September 2023</div>
                     <h2 style="margin-bottom: 24px; font-size: 2.2rem; color: var(--text-primary);" id="art-title-discussion">Mayor Geordin Hill-Lewis Confirms Goodwood Project Success</h2>

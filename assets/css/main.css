@@ -2031,6 +2031,9 @@ section {
 /* ==========================================================================
    MOBILE BREAKPOINT: HIDE ALL FLOATING & HANGING AWARD ELEMENTS ON MOBILE
    ========================================================================== */
+/* ==========================================================================
+   MOBILE BREAKPOINT: HIDE ALL FLOATING & HANGING AWARD ELEMENTS ON MOBILE
+   ========================================================================== */
 @media (max-width: 768px) {
     .hero-award-tag-wrapper,
     .hero-award-tag,
@@ -2046,6 +2049,155 @@ section {
         display: none !important;
     }
 }
+
+/* ==========================================================================
+   AWARDS NAVIGATION DROPDOWN STYLING
+   ========================================================================== */
+.nav-menu li.dropdown-item {
+    position: relative;
+}
+
+.nav-menu li.dropdown-item .arrow {
+    font-size: 0.55rem;
+    margin-left: 5px;
+    vertical-align: middle;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background-color: rgba(1, 31, 32, 0.98); /* Matches sticky nav backdrop */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 153, 0, 0.25);
+    border-top: 2px solid var(--accent-orange);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    padding: 12px 0;
+    min-width: 230px;
+    list-style: none;
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+}
+
+.dropdown-menu li {
+    display: block;
+    width: 100%;
+}
+
+.dropdown-menu li:not(:last-child)::after {
+    display: none !important; /* No line dividers in dropdown */
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 10px 20px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    transition: var(--transition-fast);
+    white-space: nowrap;
+    text-align: left;
+}
+
+.dropdown-menu li a:hover,
+.dropdown-menu li a.active-sub {
+    background-color: rgba(255, 153, 0, 0.1);
+    color: var(--accent-orange);
+}
+
+.nav-menu li.dropdown-item:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.nav-menu li.dropdown-item:hover .arrow {
+    transform: rotate(180deg);
+}
+
+/* Mobile Dropdown Accordeon drawer styles */
+@media (max-width: 991px) {
+    .dropdown-menu {
+        position: static;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        background-color: rgba(255, 255, 255, 0.03);
+        border: none;
+        border-left: 2px solid var(--accent-orange);
+        box-shadow: none;
+        min-width: auto;
+        width: 100%;
+        padding: 0 0 0 16px;
+        margin-top: 8px;
+        display: none;
+        transition: none;
+    }
+    
+    .nav-menu li.dropdown-item.active-mobile .dropdown-menu {
+        display: block;
+    }
+    
+    .nav-menu li.dropdown-item.active-mobile .arrow {
+        transform: rotate(180deg);
+    }
+    
+    .dropdown-menu li a {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+}
+
+/* ==========================================================================
+   TIKTOK EMBED & VIDEO GRID STYLING
+   ========================================================================== */
+.community-voices-section {
+    padding: 80px 0;
+    background: var(--bg-secondary);
+}
+
+.video-embed-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+    justify-content: center;
+    justify-items: center;
+    margin-top: 40px;
+}
+
+.tiktok-container {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(2, 59, 60, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    box-shadow: var(--shadow-medium);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+    min-height: 580px; /* Aligns with standard tiktok embed height */
+}
+
+.tiktok-container:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-premium);
+    border-color: rgba(255, 153, 0, 0.25);
+    background: rgba(2, 59, 60, 0.05);
+}
+
 
 
 
