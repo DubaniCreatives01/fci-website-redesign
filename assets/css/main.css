@@ -1819,16 +1819,16 @@ section {
     filter: drop-shadow(0 12px 24px rgba(255, 153, 0, 0.35)); /* Sleek gold glow */
 }
 
-/* Desktop layout spacing: adjust nav-menu to accommodate the tag on the right */
+/* Desktop layout spacing: adjust nav-menu to accommodate the tag on the right on homepage only */
 @media (min-width: 992px) {
-    .nav-menu {
+    .home-page .nav-menu {
         padding-right: 165px; /* Pushes the menu to the left to allocate dedicated gap */
     }
 }
 
 /* Tablet view adjustment */
 @media (max-width: 1199px) {
-    .nav-menu {
+    .home-page .nav-menu {
         padding-right: 135px;
     }
     .award-tag-img {
