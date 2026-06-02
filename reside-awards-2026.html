@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reside Awards 2026 Gold Winner - FCI Community Housing Services</title>
-    <meta name="description" content="Read about the Reside Awards 2026 Gold Award won by FCI Community Housing Services for the Goodwood Station Social Housing Development.">
+    <title>Reside Awards 2026 Gold Showcase - FCI Community Housing Services</title>
+    <meta name="description" content="Discover the award-winning Goodwood Station Social Housing Development, proud recipient of the Reside Awards 2026 Gold Award for excellence, sustainability, and community impact.">
     <link rel="icon" type="image/jpeg" href="assets/images/favicon.jpg">
     <link rel="stylesheet" href="assets/css/main.css">
     
@@ -31,6 +31,459 @@
       }
     }
     </script>
+
+    <!-- Page Specific Premium Showcase Styling -->
+    <style>
+        :root {
+            --gold-primary: #D4AF37;
+            --gold-light: #F5D76E;
+            --gold-dark: #AA7C11;
+            --gold-glass: rgba(212, 175, 55, 0.1);
+            --gold-border: rgba(255, 215, 100, 0.3);
+        }
+
+        /* Metallic Gold Shimmer Title Effect */
+        .gold-shimmer-text {
+            background: linear-gradient(135deg, #FFF 25%, #F5D76E 50%, #FFF 75%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShimmer 6s linear infinite;
+        }
+
+        @keyframes textShimmer {
+            0% { background-position: 0% 50%; }
+            100% { background-position: -200% 50%; }
+        }
+
+        /* Hero Banner Container Styles */
+        .showcase-hero {
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-white);
+            background: url('assets/images/awards/3f2c2727-4e72-46d6-b046-0cfa728658a7.jpg') no-repeat center center/cover;
+            background-attachment: fixed;
+            overflow: hidden;
+            padding: 100px 0;
+            text-align: left;
+        }
+
+        .showcase-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(1, 31, 32, 0.92) 0%,
+                rgba(1, 31, 32, 0.75) 60%,
+                rgba(1, 31, 32, 0.95) 100%
+            );
+            z-index: 1;
+        }
+
+        .showcase-hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        /* Shimmering Overlay Effect */
+        .showcase-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.05) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: skewX(-25deg);
+            animation: heroShimmer 10s ease-in-out infinite;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        @keyframes heroShimmer {
+            0% { left: -100%; }
+            12% { left: 150%; }
+            100% { left: 150%; }
+        }
+
+        /* Gold Glass Highlight Cards */
+        .gold-glass-card {
+            background: rgba(212, 175, 55, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 100, 0.25);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 
+                0 8px 32px rgba(212, 175, 55, 0.15),
+                0 0 15px rgba(255, 215, 100, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gold-glass-card:hover {
+            transform: translateY(-5px);
+            background: rgba(212, 175, 55, 0.12);
+            border-color: rgba(255, 215, 100, 0.45);
+            box-shadow: 
+                0 12px 40px rgba(212, 175, 55, 0.25),
+                0 0 25px rgba(255, 215, 100, 0.18);
+        }
+
+        .gold-glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.1) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: skewX(-25deg);
+            animation: cardShine 7s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes cardShine {
+            0% { left: -150%; }
+            15% { left: 150%; }
+            100% { left: 150%; }
+        }
+
+        /* Gold Accents CTA button */
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-light), var(--gold-primary));
+            color: #011F20 !important;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: none;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s;
+        }
+
+        .btn-gold:hover {
+            background: linear-gradient(135deg, var(--gold-light), #FFF, var(--gold-light));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5), 0 0 10px rgba(255, 215, 100, 0.25);
+        }
+
+        /* Masonry Grid Gallery Styles */
+        .gallery-container {
+            padding: 80px 0;
+            background-color: var(--bg-light);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-gap: 24px;
+            grid-auto-flow: dense;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 215, 100, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 250px;
+        }
+
+        .gallery-item.tall {
+            height: 524px;
+            grid-row: span 2;
+        }
+
+        .gallery-item.wide {
+            grid-column: span 2;
+        }
+
+        .gallery-item img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 215, 100, 0.45);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.25);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.04);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 24px 20px 20px;
+            background: linear-gradient(to top, rgba(1, 31, 32, 0.95) 0%, rgba(1, 31, 32, 0.4) 60%, rgba(1, 31, 32, 0) 100%);
+            opacity: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            height: 60%;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-title {
+            color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 1.05rem;
+            margin-bottom: 4px;
+        }
+
+        .gallery-category {
+            color: #FFF099;
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        @media (max-width: 991px) {
+            .gallery-item.wide {
+                grid-column: span 1;
+            }
+            .gallery-item.tall {
+                grid-row: span 1;
+                height: 250px;
+            }
+        }
+
+        /* Timeline Section Styles */
+        .timeline-section {
+            padding: 80px 0;
+            background-color: var(--primary-teal-dark);
+            color: var(--text-white);
+            position: relative;
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 40px auto 0;
+            padding: 0 20px;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-orange), var(--gold-primary), var(--accent-orange));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+            width: 50%;
+            padding-right: 40px;
+            box-sizing: border-box;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-right: 0;
+            padding-left: 40px;
+            text-align: left;
+        }
+
+        .timeline-badge {
+            position: absolute;
+            right: -15px;
+            top: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--accent-orange);
+            border: 4px solid var(--primary-teal-dark);
+            box-shadow: 0 0 10px var(--accent-orange);
+            z-index: 10;
+        }
+
+        .timeline-item:nth-child(even) .timeline-badge {
+            left: -15px;
+            right: auto;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        .timeline-content:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 215, 100, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .timeline-date {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            color: var(--accent-orange);
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+        }
+
+        .timeline-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            color: var(--text-white);
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .timeline-desc {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .timeline-img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-top: 14px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 767px) {
+            .timeline-line {
+                left: 20px;
+            }
+            .timeline-item {
+                width: 100%;
+                padding-right: 0;
+                padding-left: 45px;
+                text-align: left;
+                margin-bottom: 40px;
+            }
+            .timeline-item:nth-child(even) {
+                left: 0;
+                padding-left: 45px;
+            }
+            .timeline-badge {
+                left: 5px !important;
+                right: auto !important;
+            }
+        }
+
+        /* Success Story Case Study styles */
+        .story-section {
+            padding: 80px 0;
+            background-color: var(--bg-white);
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .story-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .story-img-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid var(--border-color);
+        }
+
+        .story-img-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s;
+        }
+
+        .story-img-card:hover img {
+            transform: scale(1.03);
+        }
+
+        @media (max-width: 991px) {
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+
+        /* Parallax Footer CTA */
+        .parallax-cta {
+            position: relative;
+            padding: 100px 0;
+            color: var(--text-white);
+            background: url('assets/images/awards/c40da9dc-022d-4deb-a473-60ee106dddf9.jpg') no-repeat center center/cover;
+            background-attachment: fixed;
+            text-align: center;
+        }
+
+        .parallax-cta-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(1, 31, 32, 0.95) 0%,
+                rgba(1, 31, 32, 0.8) 50%,
+                rgba(1, 31, 32, 0.95) 100%
+            );
+            z-index: 1;
+        }
+
+        .parallax-cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
 
@@ -91,91 +544,270 @@
     </header>
 
     <!-- ==========================================================================
-       PAGE BANNER
+       LUXURY SHIMMERING HERO SECTION
        ========================================================================== -->
-    <section class="page-banner" id="award-banner" style="background-color: var(--primary-teal-dark);">
-        <div class="container">
-            <h1 class="page-banner-title" id="award-banner-title">Reside Awards 2026</h1>
-            <div class="breadcrumbs" id="award-breadcrumbs">
-                <a href="index.html">Home</a>
-                <span>/</span>
-                <span>Reside Awards 2026</span>
+    <section class="showcase-hero" id="awards-showcase-hero">
+        <div class="showcase-hero-overlay"></div>
+        <div class="container" style="position: relative; z-index: 10;">
+            <div class="grid grid-2" style="align-items: center; gap: 40px;">
+                <!-- Left Editorial Hero Column -->
+                <div class="showcase-hero-content">
+                    <div class="hero-tagline gold-shimmer-text" style="font-weight: 800; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 20px;">🏆 Gold Winner Showcase</div>
+                    <h1 class="gold-shimmer-text" style="font-size: clamp(2.4rem, 5.5vw, 3.8rem); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; line-height: 1.15; margin-bottom: 24px;">Reside Awards 2026 Gold Award Winner</h1>
+                    <h2 style="font-size: clamp(1.2rem, 2.5vw, 1.6rem); font-weight: 600; color: rgba(255,255,255,0.9); margin-bottom: 16px;">Goodwood Station Social Housing Development</h2>
+                    <p style="font-size: clamp(0.95rem, 1.8vw, 1.15rem); color: rgba(255,255,255,0.85); line-height: 1.6; margin-bottom: 36px; max-width: 600px;">
+                        Recognised for excellence in social housing development and community impact at the Reside Awards 2026.
+                    </p>
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <a href="developments.html" class="btn btn-gold" style="padding: 14px 30px; font-size: 0.88rem; border-radius: var(--radius-sm);">View Development</a>
+                        <a href="contact.html" class="btn btn-white" style="padding: 14px 30px; font-size: 0.88rem; border-radius: var(--radius-sm); border: 2px solid #FFF; color: #FFF; background: transparent;">Contact Us</a>
+                    </div>
+                </div>
+                
+                <!-- Right Side Floating Giant Ribbon Display -->
+                <div style="display: flex; justify-content: center; align-items: center; filter: drop-shadow(0 15px 35px rgba(255, 215, 100, 0.25));">
+                    <img loading="eager" src="assets/images/reside_gold_award_2026.png" alt="Reside Awards 2026 Gold Award Trophy Ribbon" style="max-height: 480px; width: auto; animation: slow-sway 8s ease-in-out infinite; transform-origin: top center;">
+                </div>
             </div>
         </div>
     </section>
 
     <!-- ==========================================================================
-       AWARD RECOGNITION CONTENT
+       AWARD HIGHLIGHTS (GLASSMORPHIC CARDS)
        ========================================================================== -->
-    <section id="award-detail-section" style="padding: 80px 0;">
+    <section style="padding: 80px 0; background-color: var(--primary-teal-dark); border-top: 1px solid rgba(255,255,255,0.08);">
         <div class="container">
-            <div class="grid grid-2 reveal" id="award-detail-grid" style="gap: 48px; align-items: start;">
-                <!-- Article Content -->
-                <div id="award-detail-content">
-                    <div class="hero-tagline" style="color: var(--accent-orange); margin-bottom: 16px;">Corporate Recognition</div>
-                    <h2 style="margin-bottom: 24px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: var(--primary-teal-dark); font-size: 2.2rem; line-height: 1.25;" id="award-heading">Gold Award: Social Housing Project of the Year</h2>
-                    <p style="margin-bottom: 20px; font-size: 1.15rem; font-weight: 500; color: var(--text-primary); line-height: 1.6;" id="award-lead">
-                        FCI Community Housing Services has been awarded the highly prestigious **Reside Awards 2026 Gold Award** for the landmark Goodwood Station Social Housing Development.
+            <div class="grid grid-4" style="gap: 24px;">
+                <!-- Highlight Card 1 -->
+                <div class="gold-glass-card">
+                    <div style="font-size: 2.2rem; margin-bottom: 16px;">🏆</div>
+                    <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: #FFF; font-size: 1.15rem; margin-bottom: 10px;">Gold Award Winner</h3>
+                    <p style="font-size: 0.85rem; color: rgba(255,255,255,0.85); line-height: 1.5; margin: 0;">Garnered the highest honor in South African social development categories for visual and organizational execution.</p>
+                </div>
+                <!-- Highlight Card 2 -->
+                <div class="gold-glass-card">
+                    <div style="font-size: 2.2rem; margin-bottom: 16px;">🏘</div>
+                    <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: #FFF; font-size: 1.15rem; margin-bottom: 10px;">Social Housing of the Year</h3>
+                    <p style="font-size: 0.85rem; color: rgba(255,255,255,0.85); line-height: 1.5; margin: 0;">Awarded specifically to the Goodwood Station project, recognizing it as the absolute gold standard for affordable housing complexes.</p>
+                </div>
+                <!-- Highlight Card 3 -->
+                <div class="gold-glass-card">
+                    <div style="font-size: 2.2rem; margin-bottom: 16px;">🌍</div>
+                    <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: #FFF; font-size: 1.15rem; margin-bottom: 10px;">Sustainable Development</h3>
+                    <p style="font-size: 0.85rem; color: rgba(255,255,255,0.85); line-height: 1.5; margin: 0;">Certified with green-architectural heat pumps and efficient utilities, drastically saving carbon metrics and user costs.</p>
+                </div>
+                <!-- Highlight Card 4 -->
+                <div class="gold-glass-card">
+                    <div style="font-size: 2.2rem; margin-bottom: 16px;">🚆</div>
+                    <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: #FFF; font-size: 1.15rem; margin-bottom: 10px;">Transit-Oriented Build</h3>
+                    <p style="font-size: 0.85rem; color: rgba(255,255,255,0.85); line-height: 1.5; margin: 0;">Strategically built onto primary transit centers, keeping low-income families highly integrated with economic networks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       ABOUT THE AWARD
+       ========================================================================== -->
+    <section style="padding: 80px 0; background-color: var(--bg-white);">
+        <div class="container">
+            <div class="grid grid-2" style="gap: 48px; align-items: center;">
+                <!-- Overview Copy -->
+                <div>
+                    <div class="hero-tagline" style="color: var(--accent-orange); margin-bottom: 16px;">Accredited Prestige</div>
+                    <h2 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: var(--primary-teal-dark); font-size: 2.2rem; line-height: 1.25; margin-bottom: 24px;">The South African Property Benchmark</h2>
+                    <p style="font-size: 1.05rem; line-height: 1.65; color: var(--text-primary); margin-bottom: 20px;">
+                        The <strong>Reside Awards</strong> represent the absolute pinnacle of property development, architectural innovation, and community design recognition in South Africa.
                     </p>
-                    <p style="margin-bottom: 20px; line-height: 1.7;" id="award-p1">
-                        The Reside Awards are widely recognized as the premier property and social housing developer recognition program in South Africa, celebrating exceptional achievements in community-centric property developments, architectural innovation, and social upliftment. 
+                    <p style="line-height: 1.7; color: var(--text-secondary); margin-bottom: 20px;">
+                        In partnership with the leading publication <strong>REI (Real Estate Investor Magazine)</strong>, the awards evaluate hundreds of commercial and social developments nationwide. Adjudicated by an independent panel of senior urban planners, academic engineers, and environmental specialists, a Reside Award is a highly coveted mark of quality and strategic excellence.
                     </p>
-                    <p style="margin-bottom: 20px; line-height: 1.7;" id="award-p2">
-                        Goodwood Station Social Housing was selected by an independent panel of industry experts, municipal planners, and academic leads as the outstanding **Social Housing Project of the Year**. The development was recognized for setting a benchmark in South African urban planning, demonstrating that affordable housing can be synonymous with visual excellence, energy efficiency, and modern community design.
+                    <p style="line-height: 1.7; color: var(--text-secondary); margin-bottom: 0;">
+                        To secure the **Gold Award** in the Social Housing category, FCI was audited across rigorous criteria including cost efficiency, black empowerment (BEE Level 1 status), architectural aesthetics, transit integration, and sustainability.
                     </p>
-                    <h3 style="margin-top: 36px; margin-bottom: 16px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: var(--primary-teal-dark); font-size: 1.4rem;" id="award-subheading">Key Pillars of Excellence</h3>
-                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 16px; margin-bottom: 30px; padding: 0;" id="award-pillars-list">
-                        <li style="display: flex; align-items: start; gap: 12px;">
-                            <span style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background-color: rgba(255,153,0,0.15); color: var(--accent-orange); font-weight: 700; font-size: 0.9rem; flex-shrink: 0; margin-top: 2px;">✓</span>
-                            <div>
-                                <strong>Transit-Oriented Integration:</strong> Positioned directly adjacent to primary commuter rail and bus networks, reconnecting families with economic corridors and urban social amenities.
-                            </div>
-                        </li>
-                        <li style="display: flex; align-items: start; gap: 12px;">
-                            <span style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background-color: rgba(255,153,0,0.15); color: var(--accent-orange); font-weight: 700; font-size: 0.9rem; flex-shrink: 0; margin-top: 2px;">✓</span>
-                            <div>
-                                <strong>Premium Living Spaces:</strong> Providing Bachelor, 1-Bedroom, and 2-Bedroom layouts styled with clean aesthetics, durable modern finishes, and rich community courtyards.
-                            </div>
-                        </li>
-                        <li style="display: flex; align-items: start; gap: 12px;">
-                            <span style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background-color: rgba(255,153,0,0.15); color: var(--accent-orange); font-weight: 700; font-size: 0.9rem; flex-shrink: 0; margin-top: 2px;">✓</span>
-                            <div>
-                                <strong>Sustainability Accreditations:</strong> Equipped with energy-efficient heat pumps, water conservation technologies, and natural light optimization to dramatically reduce carbon footprints and monthly utility costs.
-                            </div>
-                        </li>
-                    </ul>
-                    <div style="margin-top: 40px; display: flex; gap: 16px; flex-wrap: wrap;">
-                        <a href="developments.html" class="btn btn-primary" id="btn-award-developments">View Development Specs</a>
-                        <a href="index.html" class="btn btn-secondary" id="btn-award-home">Return to Homepage</a>
+                </div>
+                
+                <!-- Award Banner Overlay Frame -->
+                <div style="border-radius: var(--radius-md); overflow: hidden; border: 1px solid rgba(212,175,55,0.25); box-shadow: var(--shadow-medium); background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(1, 31, 32, 0.05)); padding: 24px; text-align: center;">
+                    <img loading="lazy" src="assets/images/awards/342f8102-edfb-4a92-9a80-fb2a4a0a86ba.png" alt="Reside Awards REI Partner Certification Banner" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid rgba(212,175,55,0.15);">
+                    <div style="margin-top: 20px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 0.95rem; color: var(--primary-teal-dark);">
+                        Official Adjudication in Partnership with REI
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- Showcase Card -->
-                <div style="display: flex; flex-direction: column; justify-content: center;" id="award-showcase-sidebar">
-                    <div class="glass-award-card" style="background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-top: 4px solid var(--accent-orange); border-radius: var(--radius-md); padding: 40px; text-align: center; box-shadow: var(--shadow-medium); position: relative; overflow: hidden;">
-                        <div style="max-width: 140px; margin: 0 auto 24px;">
-                            <img loading="lazy" src="assets/images/reside_gold_award_2026.png" alt="Reside Awards 2026 Gold Award Seal" style="width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));">
-                        </div>
-                        <span style="display: inline-block; background-color: rgba(255,153,0,0.1); color: var(--accent-orange); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; padding: 6px 16px; border-radius: var(--radius-pill); margin-bottom: 20px; border: 1px solid rgba(255,153,0,0.2);">Official Winner Certificate</span>
-                        <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: var(--primary-teal-dark); font-size: 1.3rem; margin-bottom: 16px;">Goodwood Station Development</h3>
-                        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; margin-top: 20px;">
-                            <tr style="border-bottom: 1px solid var(--border-color);">
-                                <th style="padding: 10px 0; font-weight: 600; color: var(--text-secondary);">Awarding Body</th>
-                                <td style="padding: 10px 0; text-align: right; font-weight: 700; color: var(--primary-teal-dark);">Reside Magazine Summit</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid var(--border-color);">
-                                <th style="padding: 10px 0; font-weight: 600; color: var(--text-secondary);">Award Level</th>
-                                <td style="padding: 10px 0; text-align: right; font-weight: 700; color: var(--accent-orange);">🏆 Gold Winner</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid var(--border-color);">
-                                <th style="padding: 10px 0; font-weight: 600; color: var(--text-secondary);">Year Recognition</th>
-                                <td style="padding: 10px 0; text-align: right; font-weight: 700; color: var(--primary-teal-dark);">2026 Calendar</td>
-                            </tr>
-                            <tr>
-                                <th style="padding: 10px 0; font-weight: 600; color: var(--text-secondary);">Developer Profile</th>
-                                <td style="padding: 10px 0; text-align: right; font-weight: 700; color: var(--secondary-green);">FCI Community Housing</td>
-                            </tr>
-                        </table>
+    <!-- ==========================================================================
+       GOODWOOD STATION SUCCESS STORY
+       ========================================================================== -->
+    <section class="story-section">
+        <div class="container">
+            <div class="story-grid">
+                <!-- Visual Cards Grid (Local Images Only) -->
+                <div class="story-images">
+                    <div class="story-img-card" style="grid-column: span 2;">
+                        <img loading="lazy" src="assets/images/awards/cf088188-e170-4ec6-b2d8-546116e1fcbe.jpg" alt="Goodwood Station Completed Social Housing Complex Building Block">
+                    </div>
+                    <div class="story-img-card">
+                        <img loading="lazy" src="assets/images/awards/7df5923c-fefd-497b-9855-84f478cd3d00.jpg" alt="Official Reside Awards Handover Ceremony Team">
+                    </div>
+                    <div class="story-img-card">
+                        <img loading="lazy" src="assets/images/awards/d6a73b28-1791-463f-9f02-a42eda1f64e1.jpg" alt="FCI Leadership Team Celebrating Reside Gold Award 2026">
+                    </div>
+                </div>
+                
+                <!-- Editorial Success Case Study -->
+                <div>
+                    <div class="hero-tagline" style="color: var(--secondary-green); margin-bottom: 16px;">Case Study Story</div>
+                    <h2 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: var(--primary-teal-dark); font-size: 2.2rem; line-height: 1.25; margin-bottom: 24px;">Goodwood Station Success Story</h2>
+                    <p style="font-size: 1.05rem; line-height: 1.65; color: var(--text-primary); margin-bottom: 20px;">
+                        The Goodwood Station Social Housing Development is not just a building complex—it represents a landmark victory for urban regeneration and affordable housing inclusion.
+                    </p>
+                    <p style="line-height: 1.7; color: var(--text-secondary); margin-bottom: 20px;">
+                        Historically, low-income families are pushed to the outer geographical margins of South African cities, creating massive financial and temporal commute overheads. Located directly along Cape Town's railway backbone, Goodwood Station reintegrates families directly into active socio-economic hubs.
+                    </p>
+                    <p style="line-height: 1.7; color: var(--text-secondary); margin-bottom: 20px;">
+                        Developed in partnership with the **Social Housing Regulatory Authority (SHRA)** and the **City of Cape Town**, the project provides secure rental housing for citizens earning combined monthly gross incomes between R1,800 and R22,500. Under FCI's premium property management, the complex features beautifully landscaped, secure play courtyards, commercial transit retail, and strict access control, giving families a standard of living that completely reimagines what affordable housing can be.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       DEVELOPMENT TIMELINE
+       ========================================================================== -->
+    <section class="timeline-section" id="awards-timeline">
+        <div class="container">
+            <div style="text-align: center; max-width: 600px; margin: 0 auto 50px;">
+                <div class="hero-tagline gold-shimmer-text" style="font-weight: 800; font-size: 1.05rem; text-transform: uppercase;">Milestones & Achievements</div>
+                <h2 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: #FFF; font-size: 2.2rem; line-height: 1.25; margin-top: 12px; margin-bottom: 20px;">Development Pathway</h2>
+                <p style="font-size: 0.95rem; color: rgba(255,255,255,0.85); line-height: 1.5;">Tracing the journey of Goodwood Station from its initial strategic sanction to its crowning recognition at the Reside Awards 2026.</p>
+            </div>
+            
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                
+                <!-- Step 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-badge"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">December 2017</div>
+                        <h4 class="timeline-title">Development Sanction & Planning</h4>
+                        <p class="timeline-desc">Official project approval and environmental scoping acquired. FCI completes agreements with municipal partners to integrate transit designs.</p>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-badge"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">January 2020</div>
+                        <h4 class="timeline-title">Groundbreaking & Construction</h4>
+                        <p class="timeline-desc">Contractors break ground, launching a major construction effort. The team ensures energy-saving concrete frameworks and efficient thermal configurations.</p>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-badge"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">March 2024</div>
+                        <h4 class="timeline-title">Community Occupation</h4>
+                        <p class="timeline-desc">First waves of vetted applicants receive their keys, moving into safe, beautifully built Bachelor, 1-Bedroom, and 2-Bedroom units.</p>
+                        <!-- Local Image under timeline card -->
+                        <img loading="lazy" src="assets/images/awards/cf088188-e170-4ec6-b2d8-546116e1fcbe.jpg" alt="Active community complexes occupied by families" class="timeline-img">
+                    </div>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-badge"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">October 2025</div>
+                        <h4 class="timeline-title">Institutional Accolades</h4>
+                        <p class="timeline-desc">Cape Town executive leaders inspect the location, highlighting the sustainable heat-pump configurations and safety design integrations as a blueprint for the country.</p>
+                    </div>
+                </div>
+                
+                <!-- Step 5 -->
+                <div class="timeline-item">
+                    <div class="timeline-badge"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">April 2026</div>
+                        <h4 class="timeline-title">Reside Awards 2026 Gold Award</h4>
+                        <p class="timeline-desc">Goodwood Station is officially crowned the Social Housing Project of the Year at the Reside Magazine Summit, cementing FCI's reputation as a premium developer.</p>
+                        <img loading="lazy" src="assets/images/awards/d6a73b28-1791-463f-9f02-a42eda1f64e1.jpg" alt="FCI corporate team receiving Reside Gold trophy on stage" class="timeline-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       AWARD SHOWCASE GALLERY (MASONRY)
+       ========================================================================== -->
+    <section class="gallery-container" id="awards-gallery-grid">
+        <div class="container">
+            <div style="text-align: center; max-width: 600px; margin: 0 auto 50px;">
+                <div class="hero-tagline" style="color: var(--accent-orange); font-weight: 800;">Visual Showcase</div>
+                <h2 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: var(--primary-teal-dark); font-size: 2.2rem; line-height: 1.25; margin-top: 12px; margin-bottom: 20px;">Event & Project Gallery</h2>
+                <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5;">High-resolution event photography from the official Reside Awards ceremony and project details of Goodwood Station.</p>
+            </div>
+            
+            <div class="gallery-grid" id="showcase-masonry">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item wide" data-src="assets/images/awards/3f2c2727-4e72-46d6-b046-0cfa728658a7.jpg" data-caption="Reside Awards 2026 Handover Ceremony" data-category="Event Ceremony">
+                    <img loading="lazy" src="assets/images/awards/3f2c2727-4e72-46d6-b046-0cfa728658a7.jpg" alt="FCI Leadership receives Reside Gold Award 2026 trophy">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Event Ceremony</span>
+                        <h4 class="gallery-title">Reside Awards 2026 Handover Ceremony</h4>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item" data-src="assets/images/awards/7df5923c-fefd-497b-9855-84f478cd3d00.jpg" data-caption="Official Reside Magazine Award Presenters" data-category="Trophy Handover">
+                    <img loading="lazy" src="assets/images/awards/7df5923c-fefd-497b-9855-84f478cd3d00.jpg" alt="Presenters handing over the Gold Award trophy ribbon to FCI team">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Trophy Handover</span>
+                        <h4 class="gallery-title">Official Reside Magazine Award Presenters</h4>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item tall" data-src="assets/images/awards/406782293_122118085712101539_4072357412325605472_n.jpg" data-caption="Team Ceremony Celebration" data-category="Event Celebration">
+                    <img loading="lazy" src="assets/images/awards/406782293_122118085712101539_4072357412325605472_n.jpg" alt="FCI Team members together on stage with the Gold Award ribbon">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Event Celebration</span>
+                        <h4 class="gallery-title">Team Ceremony Celebration</h4>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item" data-src="assets/images/awards/cf088188-e170-4ec6-b2d8-546116e1fcbe.jpg" data-caption="Goodwood Station Exterior Blocks" data-category="Project Detail">
+                    <img loading="lazy" src="assets/images/awards/cf088188-e170-4ec6-b2d8-546116e1fcbe.jpg" alt="Beautifully built modern exterior brick units of Goodwood Station">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Project Detail</span>
+                        <h4 class="gallery-title">Goodwood Station Exterior Blocks</h4>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item wide" data-src="assets/images/awards/c40da9dc-022d-4deb-a473-60ee106dddf9.jpg" data-caption="Goodwood Station Social Housing Aerial Landscape" data-category="Project Photography">
+                    <img loading="lazy" src="assets/images/awards/c40da9dc-022d-4deb-a473-60ee106dddf9.jpg" alt="Spacious transit-oriented housing complex under clear Cape Town skies">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Project Photography</span>
+                        <h4 class="gallery-title">Goodwood Station Social Housing Aerial Landscape</h4>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 6 -->
+                <div class="gallery-item" data-src="assets/images/awards/d6a73b28-1791-463f-9f02-a42eda1f64e1.jpg" data-caption="FCI Corporate stage presentation" data-category="Team Photographs">
+                    <img loading="lazy" src="assets/images/awards/d6a73b28-1791-463f-9f02-a42eda1f64e1.jpg" alt="FCI Leadership and developers posing with the official Reside certificate board">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Team Photographs</span>
+                        <h4 class="gallery-title">FCI Corporate Stage Presentation</h4>
                     </div>
                 </div>
             </div>
@@ -193,6 +825,20 @@
                 <img loading="lazy" src="assets/images/CityofCapeTown_logo.png" alt="City of Cape Town Municipality Partner Logo" style="height: 55px; opacity: 0.85; filter: grayscale(100%); transition: 0.3s;" onmouseover="this.style.filter='none'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.85'">
                 <img loading="lazy" src="assets/images/westerncape_departmentofhumansettlements.jpg" alt="Western Cape Provincial Government Partner Logo" style="height: 55px; opacity: 0.85; filter: grayscale(100%); transition: 0.3s;" onmouseover="this.style.filter='none'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.85'">
                 <img loading="lazy" src="assets/images/NASHO_Affiliation.png" alt="National Association of Social Housing Organisations (NASAHO) Logo" style="height: 55px; opacity: 0.85; filter: grayscale(100%); transition: 0.3s;" onmouseover="this.style.filter='none'; this.style.opacity='1'" onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.85'">
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       PARALLAX FOOTER CALL TO ACTION (CTA)
+       ========================================================================== -->
+    <section class="parallax-cta">
+        <div class="parallax-cta-overlay"></div>
+        <div class="container" style="position: relative; z-index: 10;">
+            <div class="parallax-cta-content reveal">
+                <h2 class="gold-shimmer-text" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4.5vw, 2.8rem); line-height: 1.25; margin-bottom: 24px;">Building Sustainable Communities For The Future</h2>
+                <p style="font-size: 1.05rem; line-height: 1.6; color: rgba(255,255,255,0.92); margin-bottom: 36px;">Explore our detailed unit specs, dynamic pricing structures, and sustainable community parameters.</p>
+                <a href="developments.html" class="btn btn-gold" style="padding: 14px 40px; font-size: 0.95rem; border-radius: var(--radius-sm);">Explore Our Developments</a>
             </div>
         </div>
     </section>
@@ -273,9 +919,104 @@
     </div>
 
     <!-- ==========================================================================
+       LIGHTBOX MODAL VIEWPORT STRUCTURE
+       ========================================================================== -->
+    <div class="lightbox-modal" id="gallery-lightbox">
+        <button class="lightbox-close" id="lightbox-close-btn">&times;</button>
+        <button class="lightbox-nav lightbox-prev" id="lightbox-prev-btn">&#10094;</button>
+        <div class="lightbox-content">
+            <img src="" alt="" class="lightbox-img" id="lightbox-main-img">
+            <div class="lightbox-caption" id="lightbox-caption-text"></div>
+            <div class="lightbox-category" id="lightbox-category-text"></div>
+        </div>
+        <button class="lightbox-nav lightbox-next" id="lightbox-next-btn">&#10095;</button>
+    </div>
+
+    <!-- ==========================================================================
        SCRIPTS
        ========================================================================== -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/motion.js"></script>
+
+    <!-- Page Specific Lightbox Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const lightbox = document.getElementById('gallery-lightbox');
+            const lightboxImg = document.getElementById('lightbox-main-img');
+            const lightboxCaption = document.getElementById('lightbox-caption-text');
+            const lightboxCategory = document.getElementById('lightbox-category-text');
+            const closeBtn = document.getElementById('lightbox-close-btn');
+            const prevBtn = document.getElementById('lightbox-prev-btn');
+            const nextBtn = document.getElementById('lightbox-next-btn');
+
+            let currentIndex = 0;
+            const imagesList = [];
+
+            // Compile the list of images
+            galleryItems.forEach((item, index) => {
+                imagesList.push({
+                    src: item.getAttribute('data-src'),
+                    caption: item.getAttribute('data-caption'),
+                    category: item.getAttribute('data-category')
+                });
+
+                item.addEventListener('click', () => {
+                    currentIndex = index;
+                    openLightbox();
+                });
+            });
+
+            function openLightbox() {
+                updateLightboxContent();
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Stop body scrolling
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            }
+
+            function updateLightboxContent() {
+                const currentData = imagesList[currentIndex];
+                lightboxImg.src = currentData.src;
+                lightboxImg.alt = currentData.caption;
+                lightboxCaption.textContent = currentData.caption;
+                lightboxCategory.textContent = currentData.category;
+            }
+
+            function showPrev() {
+                currentIndex = (currentIndex - 1 + imagesList.length) % imagesList.length;
+                updateLightboxContent();
+            }
+
+            function showNext() {
+                currentIndex = (currentIndex + 1) % imagesList.length;
+                updateLightboxContent();
+            }
+
+            // Navigation event listeners
+            closeBtn.addEventListener('click', closeLightbox);
+            prevBtn.addEventListener('click', showPrev);
+            nextBtn.addEventListener('click', showNext);
+
+            // Close lightbox on clicking backdrop
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            // Keyboard navigation handles
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') showPrev();
+                if (e.key === 'ArrowRight') showNext();
+            });
+        });
+    </script>
 </body>
 </html>
