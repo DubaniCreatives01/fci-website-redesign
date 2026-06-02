@@ -1765,39 +1765,16 @@ section {
    RESIDE AWARDS 2026 GOLD AWARD BADGE & HERO SPLIT LAYOUT
    ========================================================================== */
 
-/* Split Layout for Hero section */
-.hero-split-layout {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-    width: 100%;
-    z-index: 3;
-    position: relative;
-}
-
-.hero-split-layout .hero-content {
-    flex: 1;
-    text-align: left;
-    margin: 0;
-    max-width: 720px;
-}
-
-.hero-split-layout .hero-content p {
-    margin-left: 0;
-    margin-right: 0;
-}
-
-.hero-split-layout .hero-actions {
-    justify-content: flex-start;
-}
-
+/* Premium floating award badge positioning on desktop */
 .hero-badge-wrapper {
-    flex-shrink: 0;
+    position: absolute;
+    right: 48px;
+    top: -80px; /* Overlap header sticky nav which is 80px high */
+    z-index: 101; /* Layer above the header (which is z-index 100) */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 3;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hero-award-badge {
@@ -1805,58 +1782,53 @@ section {
     display: block;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: var(--radius-md);
 }
 
 .award-badge-img {
     display: block;
-    width: 320px; /* Desktop width: approximately 280–350px width */
+    width: 85px; /* Extremely premium elegant narrow ribbon width to match the mockup */
     height: auto;
     object-fit: contain;
-    filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.35));
-    transition: all 0.3s ease;
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4));
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Subtle hover animation */
 .hero-award-badge:hover {
-    transform: scale(1.04); /* Slight scale increase (1.03–1.05) */
+    transform: translateY(2px) scale(1.05); /* Slight bounce and scale */
 }
 
 .hero-award-badge:hover .award-badge-img {
-    filter: drop-shadow(0 25px 45px rgba(255, 153, 0, 0.25)); /* Soft shadow enhancement with subtle gold glow */
+    filter: drop-shadow(0 20px 40px rgba(255, 153, 0, 0.35)); /* Enhanced glowing golden shadow on hover */
 }
 
-/* Tablet view styling for split layout */
+/* Tablet view styling for award badge */
 @media (max-width: 1199px) {
-    .hero-split-layout {
-        gap: 30px;
+    .hero-badge-wrapper {
+        right: 24px;
+        top: -80px;
     }
     .award-badge-img {
-        width: 250px; /* Tablet: approximately 220–280px width */
+        width: 75px; /* Slightly smaller on medium screens */
     }
 }
 
-/* Mobile responsive styling for split layout */
+/* Mobile responsive styling for award badge */
 @media (max-width: 991px) {
-    .hero-split-layout {
-        flex-direction: column;
-        text-align: center;
-        gap: 32px;
-    }
-    .hero-split-layout .hero-content {
-        text-align: center;
-        max-width: 100%;
-    }
-    .hero-split-layout .hero-content p {
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .hero-split-layout .hero-actions {
+    .hero-badge-wrapper {
+        position: relative;
+        right: auto;
+        top: auto;
+        margin: 32px auto 0;
+        display: flex;
         justify-content: center;
+        align-items: center;
+        z-index: 3;
     }
     .award-badge-img {
-        width: 200px; /* Mobile: approximately 180–220px width */
+        width: 85px; /* Center-aligned narrow ribbon on mobile below content */
         margin: 0 auto;
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
     }
 }
 
