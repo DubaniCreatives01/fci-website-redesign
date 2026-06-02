@@ -7,6 +7,36 @@
     <meta name="description" content="FCI Community Housing Services is a premium Section 21 non-profit organization established in 2012, developing and managing quality, affordable social and rental housing in South Africa.">
     <link rel="icon" type="image/jpeg" href="assets/images/favicon.jpg">
     <link rel="stylesheet" href="assets/css/main.css">
+
+    <!-- Schema.org Structured Metadata for Reside Awards 2026 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "FCI Community Housing Services",
+      "url": "https://fcichs.co.za",
+      "logo": "https://fcichs.co.za/assets/images/newLogo.png",
+      "award": [
+        "Reside Awards 2026 Gold Award - Social Housing Project 2026 (Goodwood Station Social Housing Development)"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Housing Developments",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "Accommodation",
+              "name": "Goodwood Station Social Housing Development",
+              "description": "Recipient of the Reside Awards 2026 Gold Award for excellence in social housing development and sustainable community living.",
+              "image": "https://fcichs.co.za/assets/images/reside_gold_award_2026.png"
+            }
+          }
+        ]
+      }
+    }
+    </script>
 </head>
 <body>
 
@@ -145,13 +175,22 @@
         </div>
 
         <div class="container">
-            <div class="hero-content">
-                <div class="hero-tagline" id="hero-tag">Gearing for Sustainable Growth</div>
-                <h1 id="hero-title">Building Sustainable Communities For The Future</h1>
-                <p id="hero-desc">FCI Community Housing Services contributes to the restructuring of South African cities by providing well-located, affordable rental housing and dedicated community development services.</p>
-                <div class="hero-actions" id="hero-btns">
-                    <a href="downloads.html" class="btn btn-primary" id="btn-hero-apply">Apply For Housing</a>
-                    <a href="developments.html" class="btn btn-white" id="btn-hero-view">Explore Projects</a>
+            <div class="hero-split-layout">
+                <div class="hero-content">
+                    <div class="hero-tagline" id="hero-tag">Gearing for Sustainable Growth</div>
+                    <h1 id="hero-title">Building Sustainable Communities For The Future</h1>
+                    <p id="hero-desc">FCI Community Housing Services contributes to the restructuring of South African cities by providing well-located, affordable rental housing and dedicated community development services.</p>
+                    <div class="hero-actions" id="hero-btns">
+                        <a href="downloads.html" class="btn btn-primary" id="btn-hero-apply">Apply For Housing</a>
+                        <a href="developments.html" class="btn btn-white" id="btn-hero-view">Explore Projects</a>
+                    </div>
+                </div>
+                
+                <!-- Premium Gold Award Badge Container -->
+                <div class="hero-badge-wrapper">
+                    <div class="hero-award-badge" id="hero-gold-badge">
+                        <img loading="lazy" src="assets/images/reside_gold_award_2026.png" alt="Reside Awards 2026 Gold Award – Social Housing Project 2026" class="award-badge-img">
+                    </div>
                 </div>
             </div>
         </div>
@@ -184,6 +223,25 @@
             </div>
         </div>
     </div>
+
+    <!-- ==========================================================================
+       AWARD RECOGNITION SECTION
+       ========================================================================== -->
+    <section id="award-recognition" class="reveal">
+        <div class="container">
+            <div class="award-grid">
+                <div class="award-banner-card">
+                    <span class="award-winner-badge">Proud Winner of the Reside Awards 2026</span>
+                    <h2 class="award-category-title">Gold Award – Social Housing Project 2026</h2>
+                    <h3 class="award-project-title">Goodwood Station Social Housing Development</h3>
+                    <p class="award-description">This project was recognised for excellence in social housing development and its contribution to sustainable community living.</p>
+                    <div style="margin-top: 30px;">
+                        <a href="developments.html" class="btn btn-secondary" id="btn-award-learn-more">Learn More About the Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- ==========================================================================
        ABOUT FCI (EDITORIAL SPLIT SCREEN)

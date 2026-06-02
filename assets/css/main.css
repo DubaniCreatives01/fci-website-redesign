@@ -1761,4 +1761,196 @@ section {
     }
 }
 
+/* ==========================================================================
+   RESIDE AWARDS 2026 GOLD AWARD BADGE & HERO SPLIT LAYOUT
+   ========================================================================== */
+
+/* Split Layout for Hero section */
+.hero-split-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    width: 100%;
+    z-index: 3;
+    position: relative;
+}
+
+.hero-split-layout .hero-content {
+    flex: 1;
+    text-align: left;
+    margin: 0;
+    max-width: 720px;
+}
+
+.hero-split-layout .hero-content p {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.hero-split-layout .hero-actions {
+    justify-content: flex-start;
+}
+
+.hero-badge-wrapper {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+
+.hero-award-badge {
+    position: relative;
+    display: block;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: var(--radius-md);
+}
+
+.award-badge-img {
+    display: block;
+    width: 320px; /* Desktop width: approximately 280–350px width */
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.35));
+    transition: all 0.3s ease;
+}
+
+/* Subtle hover animation */
+.hero-award-badge:hover {
+    transform: scale(1.04); /* Slight scale increase (1.03–1.05) */
+}
+
+.hero-award-badge:hover .award-badge-img {
+    filter: drop-shadow(0 25px 45px rgba(255, 153, 0, 0.25)); /* Soft shadow enhancement with subtle gold glow */
+}
+
+/* Tablet view styling for split layout */
+@media (max-width: 1199px) {
+    .hero-split-layout {
+        gap: 30px;
+    }
+    .award-badge-img {
+        width: 250px; /* Tablet: approximately 220–280px width */
+    }
+}
+
+/* Mobile responsive styling for split layout */
+@media (max-width: 991px) {
+    .hero-split-layout {
+        flex-direction: column;
+        text-align: center;
+        gap: 32px;
+    }
+    .hero-split-layout .hero-content {
+        text-align: center;
+        max-width: 100%;
+    }
+    .hero-split-layout .hero-content p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .hero-split-layout .hero-actions {
+        justify-content: center;
+    }
+    .award-badge-img {
+        width: 200px; /* Mobile: approximately 180–220px width */
+        margin: 0 auto;
+    }
+}
+
+/* Award Recognition Section */
+#award-recognition {
+    padding: 80px 0 40px;
+    background-color: var(--bg-primary);
+}
+
+.award-grid {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.award-banner-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-top: 4px solid var(--accent-orange); /* Golden accent top border */
+    border-radius: var(--radius-md);
+    padding: 48px;
+    text-align: center;
+    box-shadow: var(--shadow-medium);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle background gold ribbon vector overlay */
+.award-banner-card::before {
+    content: '★';
+    position: absolute;
+    right: -20px;
+    bottom: -30px;
+    font-size: 15rem;
+    color: rgba(255, 153, 0, 0.03);
+    font-family: Arial, sans-serif;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.award-winner-badge {
+    display: inline-block;
+    background-color: rgba(255, 153, 0, 0.1);
+    color: var(--accent-orange);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 8px 20px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 24px;
+    border: 1px solid rgba(255, 153, 0, 0.2);
+}
+
+.award-category-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: var(--primary-teal-dark);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+}
+
+.award-project-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--secondary-green);
+    margin-bottom: 20px;
+}
+
+.award-description {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .award-banner-card {
+        padding: 36px 20px;
+    }
+    .award-category-title {
+        font-size: 1.6rem;
+    }
+    .award-project-title {
+        font-size: 1.1rem;
+    }
+    .award-description {
+        font-size: 0.95rem;
+    }
+}
+
 
