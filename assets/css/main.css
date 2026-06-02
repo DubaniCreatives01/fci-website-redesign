@@ -2028,4 +2028,24 @@ section {
     }
 }
 
+/* ==========================================================================
+   MOBILE BREAKPOINT: HIDE ALL FLOATING & HANGING AWARD ELEMENTS ON MOBILE
+   ========================================================================== */
+@media (max-width: 768px) {
+    .hero-award-tag-wrapper,
+    .hero-award-tag,
+    .award-tag-img,
+    .hero-award-widget-wrapper,
+    .glass-award-widget,
+    .btn-widget-award,
+    .award-ribbon,
+    .award-widget,
+    .floating-award,
+    .award-card,
+    .award-showcase {
+        display: none !important;
+    }
+}
+
+
 
