@@ -201,16 +201,29 @@
             </div>
         </div>
 
-        <!-- Glassmorphic Right Side Spotlight Award Widget -->
-        <div class="hero-award-widget-wrapper reveal">
-            <div class="glass-award-widget">
-                <div class="widget-award-badge">
-                    <span>🏆 GOLD AWARD</span>
+        <!-- Glassmorphic Right Side Spotlight Award Widget (Split Layout) -->
+        <div class="hero-award-widget-wrapper reveal" style="top: 150px;">
+            <div class="glass-award-widget-split">
+                <!-- Left Side: Reside Gold -->
+                <div class="widget-split-card reside-card">
+                    <div class="widget-award-badge gold-badge" style="background: rgba(255, 215, 100, 0.2); border: 1px solid rgba(255, 215, 100, 0.35); color: #FFF099; font-size: 0.58rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; padding: 2px 6px; border-radius: 6px; margin-bottom: 6px; display: inline-block; width: fit-content;">
+                        <span>🏆 RESIDE GOLD</span>
+                    </div>
+                    <h3 class="widget-award-title" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.8rem; font-weight: 800; margin-bottom: 2px; color: var(--text-white); line-height: 1.2;">Reside Awards 2026</h3>
+                    <h4 class="widget-award-subtitle" style="font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 600; color: rgba(255, 255, 255, 0.7); margin-bottom: 8px; line-height: 1.2;">Gold Award</h4>
+                    <a href="/reside-awards-2026" class="btn-widget-award-split" style="display: flex; align-items: center; justify-content: center; width: 100%; padding: 5px 8px; font-size: 0.65rem; font-weight: 800; background: linear-gradient(135deg, #D4AF37, #F5D76E, #D4AF37); border: none; text-transform: uppercase; border-radius: 4px; color: #011F20; text-decoration: none; box-shadow: 0 4px 10px rgba(212, 175, 55, 0.2); transition: all 0.3s; margin-top: auto;">View Details</a>
                 </div>
-                <h3 class="widget-award-title">Award Winning Development</h3>
-                <h4 class="widget-award-subtitle">Goodwood Station Social Housing Development</h4>
-                <p class="widget-award-desc">Winner of the Reside Awards 2026 Gold Award for Social Housing Project of the Year.</p>
-                <a href="/reside-awards-2026" class="btn btn-primary btn-widget-award">View Award Details</a>
+                <!-- Divider line -->
+                <div class="widget-split-divider" style="width: 1px; background: rgba(255, 215, 100, 0.2); align-self: stretch;"></div>
+                <!-- Right Side: IPMA Silver -->
+                <div class="widget-split-card ipma-card">
+                    <div class="widget-award-badge silver-badge" style="background: rgba(192, 192, 192, 0.2); border: 1px solid rgba(192, 192, 192, 0.35); color: #E0E0E0; font-size: 0.58rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; padding: 2px 6px; border-radius: 6px; margin-bottom: 6px; display: inline-block; width: fit-content;">
+                        <span>🥈 IPMA SILVER</span>
+                    </div>
+                    <h3 class="widget-award-title" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.8rem; font-weight: 800; margin-bottom: 2px; color: var(--text-white); line-height: 1.2;">IPMA Global Awards 2025</h3>
+                    <h4 class="widget-award-subtitle" style="font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 600; color: rgba(255, 255, 255, 0.7); margin-bottom: 8px; line-height: 1.2;">Silver Award</h4>
+                    <a href="/ipma-global-awards-2025" class="btn-widget-award-split" style="display: flex; align-items: center; justify-content: center; width: 100%; padding: 5px 8px; font-size: 0.65rem; font-weight: 800; background: linear-gradient(135deg, #D4AF37, #F5D76E, #D4AF37); border: none; text-transform: uppercase; border-radius: 4px; color: #011F20; text-decoration: none; box-shadow: 0 4px 10px rgba(212, 175, 55, 0.2); transition: all 0.3s; margin-top: auto;">View Details</a>
+                </div>
             </div>
         </div>
 
@@ -333,7 +346,115 @@
     </section>
 
     <!-- ==========================================================================
+       AWARDS & RECOGNITION SECTION (OFFICIAL LOGOS & BRANDING ONLY)
+       ========================================================================== -->
+    <section id="home-awards-recognition" style="padding: 100px 0; background: linear-gradient(160deg, #080D13 0%, #0D1117 50%, #080D13 100%); position: relative; overflow: hidden;">
+        <!-- Background shimmer -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at 20% 50%, rgba(192,192,192,0.04) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, rgba(212,175,55,0.04) 0%, transparent 60%); pointer-events: none;"></div>
+        <div class="container" style="position: relative; z-index: 2;">
+            <!-- Section Header -->
+            <div style="text-align: center; max-width: 700px; margin: 0 auto 64px;" class="reveal" id="awards-recognition-intro">
+                <div class="hero-tagline" style="background: linear-gradient(135deg, #C0C0C0, #FFF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em;">Distinguished Honors</div>
+                <h2 style="color: #fff; font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin-top: 12px; margin-bottom: 20px; line-height: 1.2;" id="awards-recognition-title">Awards & Recognition</h2>
+                <p style="color: rgba(255,255,255,0.65); font-size: 1.05rem; line-height: 1.7;" id="awards-recognition-desc">FCI is internationally and nationally recognized for excellence in delivering transformative, high-quality community housing solutions.</p>
+            </div>
+
+            <!-- Two Award Cards -->
+            <div class="grid grid-2 reveal" style="gap: 28px; max-width: 1000px; margin: 0 auto;" id="awards-recognition-grid">
+
+                <!-- Award Card 1: IPMA Silver Card -->
+                <div id="award-home-card-ipma" style="background: rgba(192,192,192,0.06); border: 1px solid rgba(192,192,192,0.2); border-radius: 16px; overflow: hidden; transition: all 0.35s cubic-bezier(0.4,0,0.2,1); position: relative; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div style="padding: 32px 32px 24px; background: linear-gradient(135deg, rgba(192,192,192,0.08) 0%, transparent 100%); border-bottom: 1px solid rgba(192,192,192,0.12); position: relative; overflow: hidden;">
+                        <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: radial-gradient(circle, rgba(192,192,192,0.08) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
+                        
+                        <!-- Official Logo -->
+                        <div style="margin-bottom: 20px; height: 70px; display: flex; align-items: center;">
+                            <img loading="lazy" src="assets/images/awards/IG-PEA_logo-color_2018-300x185.jpg" alt="IPMA Global Project Excellence Award Logo" style="max-height: 100%; width: auto; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);">
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+                            <div>
+                                <div style="font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #C0C0C0; margin-bottom: 4px;">Silver Award</div>
+                                <h3 style="color: #fff; font-size: 1.25rem; line-height: 1.3; margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800;">IPMA Global Project Excellence Awards 2025</h3>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <span style="background: rgba(192,192,192,0.1); border: 1px solid rgba(192,192,192,0.25); border-radius: 12px; padding: 3px 10px; font-size: 0.7rem; font-weight: 800; color: #C0C0C0;">Social Project of the Year</span>
+                            <span style="background: rgba(232,119,34,0.1); border: 1px solid rgba(232,119,34,0.25); border-radius: 12px; padding: 3px 10px; font-size: 0.7rem; font-weight: 700; color: #E87722;">🇩🇪 Berlin, Germany</span>
+                        </div>
+                    </div>
+                    <div style="padding: 24px 32px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1;">
+                        <p style="color: rgba(255,255,255,0.65); font-size: 0.88rem; line-height: 1.7; margin-bottom: 24px;">Recognised among 70+ competing nations at the world's most prestigious project management awards for outstanding social impact and community housing excellence.</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: auto;">
+                            <div style="display: flex; gap: 20px;">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 1.1rem; font-weight: 800; color: #C0C0C0; font-family: 'Plus Jakarta Sans', sans-serif;">IPMA</div>
+                                    <div style="font-size: 0.65rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px;">Body</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 1.1rem; font-weight: 800; color: #E87722; font-family: 'Plus Jakarta Sans', sans-serif;">70+</div>
+                                    <div style="font-size: 0.65rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px;">Nations</div>
+                                </div>
+                            </div>
+                            <a href="/ipma-global-awards-2025" class="btn btn-secondary" style="font-size: 0.8rem; padding: 10px 20px; border: 2px solid rgba(192,192,192,0.4); color: #C0C0C0; background: transparent;" id="btn-home-ipma-view">View Award</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Award Card 2: Reside Gold Card -->
+                <div id="award-home-card-reside" style="background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.2); border-radius: 16px; overflow: hidden; transition: all 0.35s cubic-bezier(0.4,0,0.2,1); position: relative; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div style="padding: 32px 32px 24px; background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 100%); border-bottom: 1px solid rgba(212,175,55,0.12); position: relative; overflow: hidden;">
+                        <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
+                        
+                        <!-- Official Logo -->
+                        <div style="margin-bottom: 20px; height: 70px; display: flex; align-items: center;">
+                            <img loading="lazy" src="assets/images/reside_gold_award_2026.png" alt="Reside Awards 2026 Gold Award Trophy Logo" style="max-height: 100%; width: auto;">
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+                            <div>
+                                <div style="font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #D4AF37; margin-bottom: 4px;">Gold Award</div>
+                                <h3 style="color: #fff; font-size: 1.25rem; line-height: 1.3; margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800;">Reside Awards 2026</h3>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <span style="background: rgba(212,175,55,0.12); border: 1px solid rgba(212,175,55,0.3); border-radius: 12px; padding: 3px 10px; font-size: 0.7rem; font-weight: 800; color: #D4AF37;">Social Housing Project of the Year</span>
+                            <span style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 3px 10px; font-size: 0.7rem; font-weight: 700; color: rgba(255,255,255,0.5);">🇿🇦 South Africa</span>
+                        </div>
+                    </div>
+                    <div style="padding: 24px 32px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1;">
+                        <p style="color: rgba(255,255,255,0.65); font-size: 0.88rem; line-height: 1.7; margin-bottom: 24px;">South Africa's premier residential property development recognition — awarded to Goodwood Station for outstanding design and community upliftment.</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: auto;">
+                            <div style="display: flex; gap: 20px;">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 1.1rem; font-weight: 800; color: #D4AF37; font-family: 'Plus Jakarta Sans', sans-serif;">Gold</div>
+                                    <div style="font-size: 0.65rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px;">Level</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 1.1rem; font-weight: 800; color: #D4AF37; font-family: 'Plus Jakarta Sans', sans-serif;">2026</div>
+                                    <div style="font-size: 0.65rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px;">Year</div>
+                                </div>
+                            </div>
+                            <a href="/reside-awards-2026" class="btn btn-primary" style="font-size: 0.8rem; padding: 10px 20px; background: linear-gradient(135deg, #D4AF37, #F5D060); color: #1A1200 !important; font-weight: 800; border: none;" id="btn-home-reside-view">View Award</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom tagline + hover styles -->
+            <div style="text-align: center; margin-top: 48px;" class="reveal">
+                <p style="color: rgba(255,255,255,0.35); font-size: 0.82rem; font-style: italic;">Goodwood Station Social Housing Project · Cape Town, South Africa</p>
+            </div>
+        </div>
+        <style>
+            #award-home-card-ipma:hover { transform: translateY(-8px); border-color: rgba(192,192,192,0.4); box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(192,192,192,0.08); }
+            #award-home-card-reside:hover { transform: translateY(-8px); border-color: rgba(212,175,55,0.4); box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(212,175,55,0.1); }
+        </style>
+    </section>
+
+    <!-- ==========================================================================
        FEATURED DEVELOPMENT (GOODWOOD STATION)
+```,StartLine:333,TargetContent:
        ========================================================================== -->
     <section id="featured-development">
         <div class="container">
@@ -557,103 +678,6 @@
             </div>
         </div>
     </div>
-
-    <!-- ==========================================================================
-       INTERNATIONALLY AWARD-WINNING SECTION
-       ========================================================================== -->
-    <section id="home-awards-recognition" style="padding: 100px 0; background: linear-gradient(160deg, #080D13 0%, #0D1117 50%, #080D13 100%); position: relative; overflow: hidden;">
-        <!-- Background shimmer -->
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at 20% 50%, rgba(192,192,192,0.04) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, rgba(212,175,55,0.04) 0%, transparent 60%); pointer-events: none;"></div>
-        <div class="container" style="position: relative; z-index: 2;">
-            <!-- Section Header -->
-            <div style="text-align: center; max-width: 700px; margin: 0 auto 64px;" class="reveal" id="awards-recognition-intro">
-                <div class="hero-tagline" style="background: linear-gradient(135deg, #C0C0C0, #FFF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em;">Globally Recognised</div>
-                <h2 style="color: #fff; font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin-top: 12px; margin-bottom: 20px; line-height: 1.2;" id="awards-recognition-title">Internationally Award-Winning Development</h2>
-                <p style="color: rgba(255,255,255,0.65); font-size: 1.05rem; line-height: 1.7;" id="awards-recognition-desc">The Goodwood Station Social Housing Project has earned recognition at the highest levels — from a global IPMA platform in Berlin, Germany to South Africa's premier property awards.</p>
-            </div>
-
-            <!-- Two Award Cards -->
-            <div class="grid grid-2 reveal" style="gap: 28px; max-width: 1000px; margin: 0 auto;" id="awards-recognition-grid">
-
-                <!-- IPMA Silver Card -->
-                <div id="award-home-card-ipma" style="background: rgba(192,192,192,0.06); border: 1px solid rgba(192,192,192,0.2); border-radius: 16px; overflow: hidden; transition: all 0.35s cubic-bezier(0.4,0,0.2,1); position: relative;">
-                    <div style="padding: 32px 32px 24px; background: linear-gradient(135deg, rgba(192,192,192,0.08) 0%, transparent 100%); border-bottom: 1px solid rgba(192,192,192,0.12); position: relative; overflow: hidden;">
-                        <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: radial-gradient(circle, rgba(192,192,192,0.08) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
-                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
-                            <div style="flex-shrink: 0; font-size: 2.2rem; line-height: 1;" aria-label="Silver Medal">🥈</div>
-                            <div>
-                                <div style="font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #C0C0C0; margin-bottom: 4px;">Silver Award · 2025</div>
-                                <h3 style="color: #fff; font-size: 1.15rem; line-height: 1.3; margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800;">IPMA Global Project Excellence Awards</h3>
-                            </div>
-                        </div>
-                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                            <span style="background: rgba(192,192,192,0.1); border: 1px solid rgba(192,192,192,0.25); border-radius: 12px; padding: 3px 10px; font-size: 0.7rem; font-weight: 800; color: #C0C0C0;">Social Project of the Year</span>
-                            <span style="background: rgba(232,119,34,0.1); border: 1px solid rgba(232,119,34,0.25); border-radius: 12px; padding: 3px 10px; font-size: 0.7rem; font-weight: 700; color: #E87722;">🇩🇪 Berlin, Germany</span>
-                        </div>
-                    </div>
-                    <div style="padding: 24px 32px;">
-                        <p style="color: rgba(255,255,255,0.65); font-size: 0.88rem; line-height: 1.7; margin-bottom: 24px;">Recognised among 70+ competing nations at the world's most prestigious project management awards — the IPMA Global Gala in Berlin — for outstanding social impact and community housing excellence.</p>
-                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-                            <div style="display: flex; gap: 20px;">
-                                <div style="text-align: center;">
-                                    <div style="font-size: 1.1rem; font-weight: 800; color: #C0C0C0; font-family: 'Plus Jakarta Sans', sans-serif;">IPMA</div>
-                                    <div style="font-size: 0.65rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px;">Body</div>
-                                </div>
-                                <div style="text-align: center;">
-                                    <div style="font-size: 1.1rem; font-weight: 800; color: #E87722; font-family: 'Plus Jakarta Sans', sans-serif;">70+</div>
-                                    <div style="font-size: 0.65rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px;">Nations</div>
-                                </div>
-                            </div>
-                            <a href="/ipma-global-awards-2025" class="btn btn-secondary" style="font-size: 0.8rem; padding: 10px 20px; border: 2px solid rgba(192,192,192,0.4); color: #C0C0C0; background: transparent;" id="btn-home-ipma-view">View IPMA Award</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Reside Gold Card -->
-                <div id="award-home-card-reside" style="background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.2); border-radius: 16px; overflow: hidden; transition: all 0.35s cubic-bezier(0.4,0,0.2,1); position: relative;">
-                    <div style="padding: 32px 32px 24px; background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 100%); border-bottom: 1px solid rgba(212,175,55,0.12); position: relative; overflow: hidden;">
-                        <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
-                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
-                            <div style="flex-shrink: 0; font-size: 2.2rem; line-height: 1;" aria-label="Trophy">🏆</div>
-                            <div>
-                                <div style="font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #D4AF37; margin-bottom: 4px;">Gold Award · 2026</div>
-                                <h3 style="color: #fff; font-size: 1.15rem; line-height: 1.3; margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800;">Reside Awards 2026</h3>
-                            </div>
-                        </div>
-                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                            <span style="background: rgba(212,175,55,0.12); border: 1px solid rgba(212,175,55,0.3); border-radius: 12px; padding: 3px 10px; font-size: 0.7rem; font-weight: 800; color: #D4AF37;">Social Housing Project of the Year</span>
-                            <span style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 3px 10px; font-size: 0.7rem; font-weight: 700; color: rgba(255,255,255,0.5);">🇿🇦 South Africa</span>
-                        </div>
-                    </div>
-                    <div style="padding: 24px 32px;">
-                        <p style="color: rgba(255,255,255,0.65); font-size: 0.88rem; line-height: 1.7; margin-bottom: 24px;">South Africa's premier residential property development recognition — awarded to Goodwood Station for outstanding design, community upliftment, and transformative impact on affordable housing accessibility.</p>
-                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-                            <div style="display: flex; gap: 20px;">
-                                <div style="text-align: center;">
-                                    <div style="font-size: 1.1rem; font-weight: 800; color: #D4AF37; font-family: 'Plus Jakarta Sans', sans-serif;">Gold</div>
-                                    <div style="font-size: 0.65rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px;">Level</div>
-                                </div>
-                                <div style="text-align: center;">
-                                    <div style="font-size: 1.1rem; font-weight: 800; color: #D4AF37; font-family: 'Plus Jakarta Sans', sans-serif;">2026</div>
-                                    <div style="font-size: 0.65rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px;">Year</div>
-                                </div>
-                            </div>
-                            <a href="/reside-awards-2026" class="btn btn-primary" style="font-size: 0.8rem; padding: 10px 20px; background: linear-gradient(135deg, #D4AF37, #F5D060); color: #1A1200 !important; font-weight: 800; border: none;" id="btn-home-reside-view">View Gold Award</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Bottom tagline + hover styles -->
-            <div style="text-align: center; margin-top: 48px;" class="reveal">
-                <p style="color: rgba(255,255,255,0.35); font-size: 0.82rem; font-style: italic;">Goodwood Station Social Housing Project · Cape Town, South Africa</p>
-            </div>
-        </div>
-        <style>
-            #award-home-card-ipma:hover { transform: translateY(-8px); border-color: rgba(192,192,192,0.4); box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(192,192,192,0.08); }
-            #award-home-card-reside:hover { transform: translateY(-8px); border-color: rgba(212,175,55,0.4); box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(212,175,55,0.1); }
-        </style>
-    </section>
 
     <!-- ==========================================================================
        CALL TO ACTION BANNER (PORTAL ACCESS)

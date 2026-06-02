@@ -1983,6 +1983,63 @@ section {
     100% { transform: translateY(-4px); }
 }
 
+/* Split Award Widget Styles */
+.glass-award-widget-split {
+    position: relative;
+    display: flex;
+    gap: 12px;
+    width: 380px; /* Compact dual-award card layout */
+    max-width: 380px;
+    background: rgba(212, 175, 55, 0.18); /* Luxury gold-glass design preserved */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 215, 100, 0.35); /* Polished gold border */
+    border-radius: 16px;
+    padding: 12px;
+    color: var(--text-white);
+    box-shadow: 
+        0 8px 32px rgba(212, 175, 55, 0.25),
+        0 0 20px rgba(255, 215, 100, 0.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: left;
+    overflow: hidden;
+}
+
+.glass-award-widget-split::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.12) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    animation: shine-sweep 8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.glass-award-widget-split:hover {
+    transform: translateY(-2px) scale(1.02);
+    background: rgba(212, 175, 55, 0.24);
+    border-color: rgba(255, 215, 100, 0.5);
+    box-shadow: 
+        0 12px 40px rgba(212, 175, 55, 0.35),
+        0 0 30px rgba(255, 215, 100, 0.25);
+}
+
+.widget-split-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 /* Tablet view adjustment for glass award widget */
 @media (max-width: 1199px) {
     .hero-award-widget-wrapper {
@@ -1992,6 +2049,11 @@ section {
     .glass-award-widget {
         width: 220px; /* Reduce proportionally */
         padding: 12px;
+    }
+    .glass-award-widget-split {
+        width: 330px;
+        padding: 10px;
+        gap: 8px;
     }
     .widget-award-title {
         font-size: 0.85rem;
@@ -2021,6 +2083,15 @@ section {
         background: rgba(212, 175, 55, 0.22); /* Gold glass backing preserved */
         border-radius: 16px;
         padding: 14px;
+        box-shadow: 0 10px 24px rgba(212, 175, 55, 0.18);
+    }
+    .glass-award-widget-split {
+        width: 100%;
+        max-width: 380px;
+        text-align: left;
+        background: rgba(212, 175, 55, 0.22);
+        border-radius: 16px;
+        padding: 12px;
         box-shadow: 0 10px 24px rgba(212, 175, 55, 0.18);
     }
     .widget-award-badge {
