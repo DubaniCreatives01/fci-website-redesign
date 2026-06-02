@@ -1863,7 +1863,7 @@ section {
 
 .hero-award-widget-wrapper {
     position: absolute;
-    right: max(16px, calc((100% - 1200px) / 2 - 340px)); /* Shifted dramatically right to sit side-by-side with the ribbon with clear breathing room */
+    right: max(16px, calc(50% - 960px)); /* Maximizes horizontal offset to sit side-by-side with the ribbon with a perfect 104px gap on widescreen */
     top: 150px; /* Aligned vertically right below the hanging ribbon */
     z-index: 10;
     pointer-events: auto;
