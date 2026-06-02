@@ -1858,75 +1858,111 @@ section {
 }
 
 /* ==========================================================================
-   GLASSMORPHIC SPOTLIGHT AWARD WIDGET
+   GLASSMORPHIC SPOTLIGHT GOLD AWARD WIDGET
    ========================================================================== */
 
 .hero-award-widget-wrapper {
     position: absolute;
-    right: 48px;
-    bottom: 80px; /* Sits elegantly floating at the bottom-right of the hero section */
+    right: calc((100% - 1200px) / 2 - 20px); /* Move into the empty space directly beneath and slightly to the right of the hanging ribbon */
+    top: 150px; /* Aligned vertically right below the hanging ribbon */
     z-index: 10;
     pointer-events: auto;
-    animation: float-spotlight 6s ease-in-out infinite; /* Slower, highly elegant vertical floating sway */
+    animation: float-spotlight 8s ease-in-out infinite; /* imperceptible slow luxury vertical float */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-award-widget {
-    width: 300px;
-    background: rgba(255, 255, 255, 0.08);
+    position: relative;
+    width: 240px; /* Compact premium information card */
+    max-width: 240px;
+    background: rgba(212, 175, 55, 0.18); /* Luxury gold-glass design */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 20px;
-    padding: 24px;
+    border: 1px solid rgba(255, 215, 100, 0.35); /* Polished gold border */
+    border-radius: 16px; /* Slightly tighter border radius for premium compact feel */
+    padding: 14px; /* Reduced padding for compact look */
     color: var(--text-white);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    box-shadow: 
+        0 8px 32px rgba(212, 175, 55, 0.25),
+        0 0 20px rgba(255, 215, 100, 0.15);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-align: left;
+    overflow: hidden; /* Bound diagonal shine sweep */
+}
+
+/* Subtle moving luxury shine sweep */
+.glass-award-widget::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.12) 50%, /* Reduced opacity to be very subtle */
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    animation: shine-sweep 8s ease-in-out infinite; /* 8 seconds for slow luxury watch shine loop */
+    pointer-events: none;
+    z-index: 2;
+}
+
+@keyframes shine-sweep {
+    0% { left: -150%; }
+    15% { left: 150%; } /* Slow diagonal sweep (1.2 seconds) */
+    100% { left: 150%; } /* Long pause (6.8 seconds) to feel premium, not flashy */
 }
 
 .glass-award-widget:hover {
-    transform: scale(1.03); /* Soft premium hover scaling */
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 25px 50px rgba(255, 153, 0, 0.15); /* Sleek gold glass glow on hover */
+    transform: translateY(-2px) scale(1.02); /* Slight premium lift */
+    background: rgba(212, 175, 55, 0.24);
+    border-color: rgba(255, 215, 100, 0.5);
+    box-shadow: 
+        0 12px 40px rgba(212, 175, 55, 0.35),
+        0 0 30px rgba(255, 215, 100, 0.25);
 }
 
 .widget-award-badge {
     display: inline-block;
-    background: rgba(255, 153, 0, 0.15);
-    border: 1px solid rgba(255, 153, 0, 0.3);
-    color: var(--accent-orange);
-    font-size: 0.72rem;
-    font-weight: 700;
+    background: rgba(255, 215, 100, 0.2);
+    border: 1px solid rgba(255, 215, 100, 0.35);
+    color: #FFF099; /* Bright elegant gold */
+    font-size: 0.62rem; /* Reduced font size */
+    font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    padding: 4px 12px;
-    border-radius: 12px;
-    margin-bottom: 14px;
+    padding: 2px 8px; /* Reduced padding */
+    border-radius: 8px;
+    margin-bottom: 8px; /* Reduced margin */
 }
 
 .widget-award-title {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1.15rem;
+    font-size: 0.9rem; /* Reduced font size */
     font-weight: 800;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
     color: var(--text-white);
     letter-spacing: -0.01em;
+    line-height: 1.25;
 }
 
 .widget-award-subtitle {
     font-family: 'Inter', sans-serif;
-    font-size: 0.82rem;
+    font-size: 0.68rem; /* Reduced font size */
     font-weight: 600;
     color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 12px;
+    margin-bottom: 8px; /* Reduced margin */
+    line-height: 1.3;
 }
 
 .widget-award-desc {
-    font-size: 0.8rem;
-    line-height: 1.45;
+    font-size: 0.72rem; /* Reduced font size */
+    line-height: 1.35;
     color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 18px;
+    margin-bottom: 12px; /* Reduced margin */
 }
 
 .btn-widget-award {
@@ -1934,48 +1970,49 @@ section {
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 10px 16px;
-    font-size: 0.82rem;
-    font-weight: 700;
-    background-color: var(--accent-orange);
-    border-color: var(--accent-orange);
+    padding: 6px 12px; /* Reduced padding/button height */
+    font-size: 0.72rem; /* Reduced font size */
+    font-weight: 800;
+    background: linear-gradient(135deg, #D4AF37, #F5D76E, #D4AF37); /* Luxury polished gold gradient */
+    border: none;
     text-transform: uppercase;
     border-radius: var(--radius-sm);
-    color: var(--text-white);
+    color: #011F20; /* High contrast corporate dark navy-teal text */
     text-decoration: none;
+    box-shadow: 0 4px 10px rgba(212, 175, 55, 0.25);
     transition: all 0.3s;
 }
 
 .btn-widget-award:hover {
-    background-color: var(--accent-orange-dark);
-    border-color: var(--accent-orange-dark);
-    transform: translateY(-1px);
-    color: var(--text-white);
+    background: linear-gradient(135deg, #E6C250, #FFF099, #E6C250); /* Brighter gold hover */
+    transform: translateY(-2px); /* Slight lift */
+    box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4), 0 0 10px rgba(255, 215, 100, 0.2); /* Brighter hover glow */
+    color: #011F20;
 }
 
-/* Float spotlight wave keyframe animation */
+/* Almost imperceptible slow luxury vertical float translating between -4px and 4px */
 @keyframes float-spotlight {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-8px); }
-    100% { transform: translateY(0px); }
+    0% { transform: translateY(-4px); }
+    50% { transform: translateY(4px); }
+    100% { transform: translateY(-4px); }
 }
 
 /* Tablet view adjustment for glass award widget */
 @media (max-width: 1199px) {
     .hero-award-widget-wrapper {
-        right: 24px;
-        bottom: 48px;
+        right: 12px; /* Move closer to edge */
+        top: 130px;
     }
     .glass-award-widget {
-        width: 260px;
-        padding: 18px;
+        width: 220px; /* Reduce proportionally */
+        padding: 12px;
     }
     .widget-award-title {
-        font-size: 1.05rem;
+        font-size: 0.85rem;
     }
     .widget-award-desc {
-        font-size: 0.78rem;
-        margin-bottom: 14px;
+        font-size: 0.68rem;
+        margin-bottom: 10px;
     }
 }
 
@@ -1984,7 +2021,7 @@ section {
     .hero-award-widget-wrapper {
         position: relative;
         right: auto;
-        bottom: auto;
+        top: auto;
         margin: 24px auto 0;
         display: flex;
         justify-content: center;
@@ -1993,15 +2030,15 @@ section {
     }
     .glass-award-widget {
         width: 100%;
-        max-width: 320px; /* Symmetrical centered layout on mobile */
+        max-width: 240px; /* Keep it compact on mobile too */
         text-align: center;
-        background: rgba(255, 255, 255, 0.08);
-        border-radius: 20px;
-        padding: 24px;
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        background: rgba(212, 175, 55, 0.22); /* Gold glass backing preserved */
+        border-radius: 16px;
+        padding: 14px;
+        box-shadow: 0 10px 24px rgba(212, 175, 55, 0.18);
     }
     .widget-award-badge {
-        margin: 0 auto 14px;
+        margin: 0 auto 8px;
     }
 }
 
