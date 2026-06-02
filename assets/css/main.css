@@ -1773,12 +1773,14 @@ section {
 .header-award-tag-wrapper {
     position: absolute;
     right: 0;
-    top: 0;
+    top: 100%; /* Hanging directly beneath the header navigation container */
+    margin-top: 8px; /* Positioned approximately 5-10px below the gold divider line */
     z-index: 102; /* Float gracefully above navigation items and boundaries */
     display: flex;
     justify-content: center;
     align-items: flex-start;
     pointer-events: auto;
+    transition: all 0.3s ease; /* Smooth vertical slide if header shrinks */
 }
 
 .header-award-tag {
@@ -1842,6 +1844,7 @@ section {
         top: 50%;
         transform: translateY(-50%);
         bottom: auto;
+        margin-top: 0; /* Override desktop top-margin hanging spacing */
     }
     
     .header-award-tag {
