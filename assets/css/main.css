@@ -1765,25 +1765,20 @@ section {
    RESIDE AWARDS 2026 GOLD AWARD BADGE & HERO SPLIT LAYOUT
    ========================================================================== */
 
-/* Premium Header-Suspended Hanging Award Tag styling */
-.main-header .container {
-    position: relative; /* Guarantee anchor context for hanging tag */
-}
-
-.header-award-tag-wrapper {
+/* Premium Hero-Suspended Hanging Award Tag styling */
+.hero-award-tag-wrapper {
     position: absolute;
-    right: 0;
-    top: 100%; /* Hanging directly beneath the header navigation container */
-    margin-top: 8px; /* Positioned approximately 5-10px below the gold divider line */
-    z-index: 102; /* Float gracefully above navigation items and boundaries */
+    right: calc((100% - 1200px) / 2 + 24px); /* Align with the right margin of the centered container */
+    top: 0; /* Align directly underneath the header bottom boundary */
+    z-index: 99; /* Float above hero video/overlay but scroll UNDER the header (z-index 100) */
     display: flex;
     justify-content: center;
     align-items: flex-start;
     pointer-events: auto;
-    transition: all 0.3s ease; /* Smooth vertical slide if header shrinks */
+    transition: all 0.3s ease;
 }
 
-.header-award-tag {
+.hero-award-tag {
     display: block;
     position: relative;
     cursor: pointer;
@@ -1811,25 +1806,18 @@ section {
 }
 
 /* Subtle corporate hover animation */
-.header-award-tag:hover {
+.hero-award-tag:hover {
     transform: scale(1.03); /* Extremely soft, premium scale tag indicator */
 }
 
-.header-award-tag:hover .award-tag-img {
+.hero-award-tag:hover .award-tag-img {
     filter: drop-shadow(0 12px 24px rgba(255, 153, 0, 0.35)); /* Sleek gold glow */
-}
-
-/* Desktop layout spacing: adjust nav-menu to accommodate the tag on the right on homepage only */
-@media (min-width: 992px) {
-    .home-page .nav-menu {
-        padding-right: 165px; /* Pushes the menu to the left to allocate dedicated gap */
-    }
 }
 
 /* Tablet view adjustment */
 @media (max-width: 1199px) {
-    .home-page .nav-menu {
-        padding-right: 135px;
+    .hero-award-tag-wrapper {
+        right: 24px;
     }
     .award-tag-img {
         width: 110px; /* Tablet: increased by 40% from 80px */
@@ -1838,16 +1826,14 @@ section {
 
 /* Mobile responsive layout adjustment */
 @media (max-width: 991px) {
-    .header-award-tag-wrapper {
+    .hero-award-tag-wrapper {
         right: auto;
-        left: 24px; /* Symmetrical balance against the right hamburger button */
-        top: 50%;
-        transform: translateY(-50%);
-        bottom: auto;
-        margin-top: 0; /* Override desktop top-margin hanging spacing */
+        left: 24px; /* Symmetrical balance on the left side */
+        top: 0;
+        margin-top: 0;
     }
     
-    .header-award-tag {
+    .hero-award-tag {
         animation: none; /* Disable sway on mobile to prevent overlapping */
     }
     
