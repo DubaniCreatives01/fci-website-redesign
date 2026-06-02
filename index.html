@@ -37,6 +37,18 @@
       }
     }
     </script>
+    <link rel="canonical" href="https://fcichs.co.za/">
+    <!-- Clean URLs Client-Side Redirect -->
+    <script>
+        if (window.location.pathname.endsWith('.html')) {
+            let cleanPath = window.location.pathname.slice(0, -5);
+            if (cleanPath.endsWith('/index')) {
+                cleanPath = cleanPath.slice(0, -5);
+            }
+            if (cleanPath === '') cleanPath = '/';
+            window.location.replace(window.location.origin + cleanPath + window.location.search + window.location.hash);
+        }
+    </script>
 </head>
 <body class="home-page">
 
@@ -66,7 +78,7 @@
        ========================================================================== -->
     <header class="main-header" id="main-header">
         <div class="container">
-            <a href="index.html" class="logo" id="logo-link">
+            <a href="/" class="logo" id="logo-link">
                 <img src="assets/images/newLogo-300x129.png" alt="FCI Community Housing Services Logo" id="logo-img">
             </a>
             
@@ -77,14 +89,14 @@
             </button>
             
             <ul class="nav-menu" id="nav-menu">
-                <li><a href="index.html" class="nav-link active" id="nav-home">Home</a></li>
-                <li><a href="about.html" class="nav-link" id="nav-about">About Us</a></li>
-                <li><a href="developments.html" class="nav-link" id="nav-developments">Developments</a></li>
-                <li><a href="projects.html" class="nav-link" id="nav-projects">Projects</a></li>
-                <li><a href="programmes.html" class="nav-link" id="nav-programmes">Programmes</a></li>
-                <li><a href="news.html" class="nav-link" id="nav-news">News</a></li>
-                <li><a href="downloads.html" class="nav-link" id="nav-downloads">Downloads</a></li>
-                <li><a href="contact.html" class="nav-link" id="nav-contact">Contact</a></li>
+                <li><a href="/" class="nav-link active" id="nav-home">Home</a></li>
+                <li><a href="/about" class="nav-link" id="nav-about">About Us</a></li>
+                <li><a href="/developments" class="nav-link" id="nav-developments">Developments</a></li>
+                <li><a href="/projects" class="nav-link" id="nav-projects">Projects</a></li>
+                <li><a href="/programmes" class="nav-link" id="nav-programmes">Programmes</a></li>
+                <li><a href="/news" class="nav-link" id="nav-news">News</a></li>
+                <li><a href="/downloads" class="nav-link" id="nav-downloads">Downloads</a></li>
+                <li><a href="/contact" class="nav-link" id="nav-contact">Contact</a></li>
             </ul>
         </div>
     </header>
@@ -100,7 +112,7 @@
         
         <!-- Premium Hanging Award Tag -->
         <div class="hero-award-tag-wrapper">
-            <a href="reside-awards-2026.html" class="hero-award-tag" id="hero-gold-tag">
+            <a href="/reside-awards-2026" class="hero-award-tag" id="hero-gold-tag">
                 <img loading="lazy" src="assets/images/reside_gold_award_2026.png" alt="Reside Awards 2026 Gold Award – Social Housing Project 2026" class="award-tag-img">
             </a>
         </div>
@@ -174,7 +186,7 @@
                 <div style="margin-bottom: 12px; text-align: left;">
                     <p style="font-size: 0.85rem; color: rgba(255,255,255,0.85); line-height: 1.45; margin-bottom: 16px;">Apply online instantly. Submit documents and check eligibility in 5 simple steps.</p>
                 </div>
-                <a href="apply.html" class="btn btn-primary" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 10px 16px; font-size: 0.82rem; font-weight: 700; background-color: var(--accent-orange); border-color: var(--accent-orange); text-transform: uppercase; border-radius: var(--radius-sm); transition: all 0.3s; color: var(--text-white); text-decoration: none;" id="btn-widget-apply">
+                <a href="/apply" class="btn btn-primary" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 10px 16px; font-size: 0.82rem; font-weight: 700; background-color: var(--accent-orange); border-color: var(--accent-orange); text-transform: uppercase; border-radius: var(--radius-sm); transition: all 0.3s; color: var(--text-white); text-decoration: none;" id="btn-widget-apply">
                     <span>Apply Online</span>
                     <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
                 </a>
@@ -190,7 +202,7 @@
                 <h3 class="widget-award-title">Award Winning Development</h3>
                 <h4 class="widget-award-subtitle">Goodwood Station Social Housing Development</h4>
                 <p class="widget-award-desc">Winner of the Reside Awards 2026 Gold Award for Social Housing Project of the Year.</p>
-                <a href="reside-awards-2026.html" class="btn btn-primary btn-widget-award">View Award Details</a>
+                <a href="/reside-awards-2026" class="btn btn-primary btn-widget-award">View Award Details</a>
             </div>
         </div>
 
@@ -200,8 +212,8 @@
                 <h1 id="hero-title">Building Sustainable Communities For The Future</h1>
                 <p id="hero-desc">FCI Community Housing Services contributes to the restructuring of South African cities by providing well-located, affordable rental housing and dedicated community development services.</p>
                 <div class="hero-actions" id="hero-btns">
-                    <a href="downloads.html" class="btn btn-primary" id="btn-hero-apply">Apply For Housing</a>
-                    <a href="developments.html" class="btn btn-white" id="btn-hero-view">Explore Projects</a>
+                    <a href="/downloads" class="btn btn-primary" id="btn-hero-apply">Apply For Housing</a>
+                    <a href="/developments" class="btn btn-white" id="btn-hero-view">Explore Projects</a>
                 </div>
             </div>
         </div>
@@ -255,7 +267,7 @@
                         Particularly focused on peri-urban and rural areas battling with severe housing backlogs, we act as a highly accredited, specialized vehicle leveraging public and private partnerships to access government subsidies. Our developments reconnect low-to-medium income earners with transport nodes, economic opportunities, and social amenities.
                     </p>
                     <div>
-                        <a href="about.html" class="btn btn-secondary" id="btn-about-teaser-read">Read Our History</a>
+                        <a href="/about" class="btn btn-secondary" id="btn-about-teaser-read">Read Our History</a>
                     </div>
                 </div>
             </div>
@@ -281,7 +293,7 @@
                     <div class="card-content">
                         <h3 class="card-title">Affordable Rental Housing</h3>
                         <p class="card-desc">Developing and owning high-density, beautifully designed, and sustainable rental units for households earning between R1,800 and R22,000.</p>
-                        <a href="about.html#services" class="card-link">Learn More <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
+                        <a href="/about#services" class="card-link">Learn More <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
                     </div>
                 </div>
                 
@@ -293,7 +305,7 @@
                     <div class="card-content">
                         <h3 class="card-title">Gap Housing Accommodation</h3>
                         <p class="card-desc">Providing direct rental opportunities for citizens who fall within the gap market, ineligible for BNG subsidies yet excluded from conventional bank funding.</p>
-                        <a href="about.html#services" class="card-link">Learn More <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
+                        <a href="/about#services" class="card-link">Learn More <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
                     </div>
                 </div>
                 
@@ -305,7 +317,7 @@
                     <div class="card-content">
                         <h3 class="card-title">Property Management Services</h3>
                         <p class="card-desc">Delivering community operations, routine maintenance oversight, and robust, sustainable turn-around administration systems.</p>
-                        <a href="about.html#services" class="card-link">Learn More <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
+                        <a href="/about#services" class="card-link">Learn More <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
                     </div>
                 </div>
             </div>
@@ -328,7 +340,7 @@
                         Partnering with PRASA and the City of Cape Town, FCI secured exclusive development rights around Goodwood Station to construct a massive mixed-use transit-oriented community hub. This project enables residents to live comfortably close to rail corridors, social schools, and workplaces.
                     </p>
                     <div>
-                        <a href="developments.html" class="btn btn-primary" id="btn-featured-dev-view">View Unit Specifications</a>
+                        <a href="/developments" class="btn btn-primary" id="btn-featured-dev-view">View Unit Specifications</a>
                     </div>
                 </div>
                 
@@ -478,7 +490,7 @@
                     <p style="margin-top: 8px;" id="news-teaser-desc">Stay informed with updates regarding tenant selections, student programs, and city partnerships.</p>
                 </div>
                 <div>
-                    <a href="news.html" class="btn btn-secondary" id="btn-news-teaser-all">View All News</a>
+                    <a href="/news" class="btn btn-secondary" id="btn-news-teaser-all">View All News</a>
                 </div>
             </div>
             
@@ -492,7 +504,7 @@
                         <div style="font-size: 0.8rem; color: var(--accent-orange); font-weight: 700; margin-bottom: 8px;">18 SEPTEMBER 2023</div>
                         <h3 class="card-title" style="font-size: 1.25rem;">Tenanting Set to Begin at Goodwood Project</h3>
                         <p class="card-desc">Cape Town Mayor Geordin Hill-Lewis inspected construction progress to announce November tenancies for over 1,000 residents and families.</p>
-                        <a href="news.html#news-article-goodwood" class="card-link">Read Full Article <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
+                        <a href="/news#news-article-goodwood" class="card-link">Read Full Article <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
                     </div>
                 </div>
                 
@@ -505,7 +517,7 @@
                         <div style="font-size: 0.8rem; color: var(--accent-orange); font-weight: 700; margin-bottom: 8px;">22 JANUARY 2024</div>
                         <h3 class="card-title" style="font-size: 1.25rem;">PRASA to House 3,200 NSFAS Students</h3>
                         <p class="card-desc">Partnering with regional property agencies, PRASA executes a massive project providing high-density housing near Cape Town Station.</p>
-                        <a href="news.html#news-article-prasa" class="card-link">Read Full Article <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
+                        <a href="/news#news-article-prasa" class="card-link">Read Full Article <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
                     </div>
                 </div>
                 
@@ -518,7 +530,7 @@
                         <div style="font-size: 0.8rem; color: var(--accent-orange); font-weight: 700; margin-bottom: 8px;">06 JUNE 2024</div>
                         <h3 class="card-title" style="font-size: 1.25rem;">Re-structuring South African Cities</h3>
                         <p class="card-desc">FCI leads debate on smart municipal developments, emphasizing long-term social rental frameworks to restore transport integration.</p>
-                        <a href="news.html#news-article-discussion" class="card-link">Read Full Article <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
+                        <a href="/news#news-article-discussion" class="card-link">Read Full Article <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
                     </div>
                 </div>
             </div>
@@ -549,8 +561,8 @@
                     FCI Community Housing Services makes it seamless to apply for housing, enquire about partnership integration, or participate in our student programmes.
                 </p>
                 <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;" id="home-cta-btns">
-                    <a href="downloads.html" class="btn btn-primary" id="btn-home-cta-apply">Download Application Pack</a>
-                    <a href="contact.html" class="btn btn-white" id="btn-home-cta-inquire">Contact Department Admin</a>
+                    <a href="/downloads" class="btn btn-primary" id="btn-home-cta-apply">Download Application Pack</a>
+                    <a href="/contact" class="btn btn-white" id="btn-home-cta-inquire">Contact Department Admin</a>
                 </div>
             </div>
         </div>
@@ -580,11 +592,11 @@
                 <div id="footer-col-nav">
                     <h3 class="footer-heading">Corporate Links</h3>
                     <ul class="footer-links">
-                        <li><a href="about.html" id="foot-link-about">About Our Vision</a></li>
-                        <li><a href="developments.html" id="foot-link-devs">Developments Spec</a></li>
-                        <li><a href="projects.html" id="foot-link-projects">Project Pipelines</a></li>
-                        <li><a href="programmes.html" id="foot-link-prog">Social Impact</a></li>
-                        <li><a href="news.html" id="foot-link-news">Latest News</a></li>
+                        <li><a href="/about" id="foot-link-about">About Our Vision</a></li>
+                        <li><a href="/developments" id="foot-link-devs">Developments Spec</a></li>
+                        <li><a href="/projects" id="foot-link-projects">Project Pipelines</a></li>
+                        <li><a href="/programmes" id="foot-link-prog">Social Impact</a></li>
+                        <li><a href="/news" id="foot-link-news">Latest News</a></li>
                     </ul>
                 </div>
                 
@@ -621,8 +633,8 @@
             <div class="footer-bottom" id="footer-legal-bar">
                 <p id="footer-copyright">Copyright &copy; 2026 - FCI Community Housing Services. All rights reserved.</p>
                 <div class="footer-legal-links" id="footer-legal-row">
-                    <a href="downloads.html" id="foot-legal-terms">Accreditation Policies</a>
-                    <a href="contact.html" id="foot-legal-privacy">POPIA Compliant Contact</a>
+                    <a href="/downloads" id="foot-legal-terms">Accreditation Policies</a>
+                    <a href="/contact" id="foot-legal-privacy">POPIA Compliant Contact</a>
                 </div>
             </div>
         </div>

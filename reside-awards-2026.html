@@ -484,6 +484,18 @@
             margin: 0 auto;
         }
     </style>
+    <link rel="canonical" href="https://fcichs.co.za/reside-awards-2026">
+    <!-- Clean URLs Client-Side Redirect -->
+    <script>
+        if (window.location.pathname.endsWith('.html')) {
+            let cleanPath = window.location.pathname.slice(0, -5);
+            if (cleanPath.endsWith('/index')) {
+                cleanPath = cleanPath.slice(0, -5);
+            }
+            if (cleanPath === '') cleanPath = '/';
+            window.location.replace(window.location.origin + cleanPath + window.location.search + window.location.hash);
+        }
+    </script>
 </head>
 <body>
 
@@ -513,7 +525,7 @@
        ========================================================================== -->
     <header class="main-header" id="main-header">
         <div class="container">
-            <a href="index.html" class="logo" id="logo-link">
+            <a href="/" class="logo" id="logo-link">
                 <img src="assets/images/newLogo-300x129.png" alt="FCI Community Housing Services Logo" id="logo-img">
             </a>
             
@@ -524,14 +536,14 @@
             </button>
             
             <ul class="nav-menu" id="nav-menu">
-                <li><a href="index.html" class="nav-link" id="nav-home">Home</a></li>
-                <li><a href="about.html" class="nav-link" id="nav-about">About Us</a></li>
-                <li><a href="developments.html" class="nav-link" id="nav-developments">Developments</a></li>
-                <li><a href="projects.html" class="nav-link" id="nav-projects">Projects</a></li>
-                <li><a href="programmes.html" class="nav-link" id="nav-programmes">Programmes</a></li>
-                <li><a href="news.html" class="nav-link" id="nav-news">News</a></li>
-                <li><a href="downloads.html" class="nav-link" id="nav-downloads">Downloads</a></li>
-                <li><a href="contact.html" class="nav-link" id="nav-contact">Contact</a></li>
+                <li><a href="/" class="nav-link" id="nav-home">Home</a></li>
+                <li><a href="/about" class="nav-link" id="nav-about">About Us</a></li>
+                <li><a href="/developments" class="nav-link" id="nav-developments">Developments</a></li>
+                <li><a href="/projects" class="nav-link" id="nav-projects">Projects</a></li>
+                <li><a href="/programmes" class="nav-link" id="nav-programmes">Programmes</a></li>
+                <li><a href="/news" class="nav-link" id="nav-news">News</a></li>
+                <li><a href="/downloads" class="nav-link" id="nav-downloads">Downloads</a></li>
+                <li><a href="/contact" class="nav-link" id="nav-contact">Contact</a></li>
             </ul>
             
 
@@ -554,8 +566,8 @@
                         Recognised for excellence in social housing development and community impact at the Reside Awards 2026.
                     </p>
                     <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                        <a href="developments.html" class="btn btn-gold" style="padding: 14px 30px; font-size: 0.88rem; border-radius: var(--radius-sm);">View Development</a>
-                        <a href="contact.html" class="btn btn-white" style="padding: 14px 30px; font-size: 0.88rem; border-radius: var(--radius-sm); border: 2px solid #FFF; color: #FFF; background: transparent;">Contact Us</a>
+                        <a href="/developments" class="btn btn-gold" style="padding: 14px 30px; font-size: 0.88rem; border-radius: var(--radius-sm);">View Development</a>
+                        <a href="/contact" class="btn btn-white" style="padding: 14px 30px; font-size: 0.88rem; border-radius: var(--radius-sm); border: 2px solid #FFF; color: #FFF; background: transparent;">Contact Us</a>
                     </div>
                 </div>
                 
@@ -833,7 +845,7 @@
             <div class="parallax-cta-content reveal">
                 <h2 class="gold-shimmer-text" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4.5vw, 2.8rem); line-height: 1.25; margin-bottom: 24px;">Building Sustainable Communities For The Future</h2>
                 <p style="font-size: 1.05rem; line-height: 1.6; color: rgba(255,255,255,0.92); margin-bottom: 36px;">Explore our detailed unit specs, dynamic pricing structures, and sustainable community parameters.</p>
-                <a href="developments.html" class="btn btn-gold" style="padding: 14px 40px; font-size: 0.95rem; border-radius: var(--radius-sm);">Explore Our Developments</a>
+                <a href="/developments" class="btn btn-gold" style="padding: 14px 40px; font-size: 0.95rem; border-radius: var(--radius-sm);">Explore Our Developments</a>
             </div>
         </div>
     </section>
@@ -845,7 +857,7 @@
         <div class="container">
             <div class="footer-grid" id="footer-links-grid">
                 <div class="footer-col" id="footer-branding">
-                    <a href="index.html" class="logo" style="margin-bottom: 20px; display: inline-block;">
+                    <a href="/" class="logo" style="margin-bottom: 20px; display: inline-block;">
                         <img loading="lazy" src="assets/images/newLogo-300x129.png" alt="FCI Housing Logo">
                     </a>
                     <p style="color: rgba(255,255,255,0.7); line-height: 1.6; font-size: 0.92rem; margin-bottom: 24px;">Developing premium, well-located, affordable social rental housing communities across South African cities since 2012.</p>
@@ -854,20 +866,20 @@
                 <div class="footer-col" id="footer-nav">
                     <h4 class="footer-title">Quick Links</h4>
                     <ul class="footer-menu">
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="developments.html">Developments</a></li>
-                        <li><a href="projects.html">Projects Pipeline</a></li>
-                        <li><a href="programmes.html">Social Programmes</a></li>
-                        <li><a href="news.html">News & Updates</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/developments">Developments</a></li>
+                        <li><a href="/projects">Projects Pipeline</a></li>
+                        <li><a href="/programmes">Social Programmes</a></li>
+                        <li><a href="/news">News & Updates</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-col" id="footer-support">
                     <h4 class="footer-title">Tenant Portal</h4>
                     <ul class="footer-menu">
-                        <li><a href="apply.html">Apply for Housing</a></li>
-                        <li><a href="downloads.html">Document Downloads</a></li>
-                        <li><a href="contact.html">Office Location</a></li>
+                        <li><a href="/apply">Apply for Housing</a></li>
+                        <li><a href="/downloads">Document Downloads</a></li>
+                        <li><a href="/contact">Office Location</a></li>
                     </ul>
                 </div>
                 
@@ -893,9 +905,9 @@
             <div class="footer-bottom" id="footer-legal">
                 <p>&copy; 2026 FCI Community Housing Services. All Rights Reserved. NPO Reg: 109-178-NPO. POPIA Compliant.</p>
                 <div class="footer-bottom-links">
-                    <a href="downloads.html">POPIA Manual</a>
+                    <a href="/downloads">POPIA Manual</a>
                     <span>|</span>
-                    <a href="downloads.html">Tenant Rules</a>
+                    <a href="/downloads">Tenant Rules</a>
                 </div>
             </div>
         </div>

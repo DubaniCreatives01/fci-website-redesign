@@ -7,6 +7,18 @@
     <meta name="description" content="Explore FCI Community Housing Services' project portfolio including completed social housing developments, active construction, and future community pipelines.">
     <link rel="icon" type="image/jpeg" href="assets/images/favicon.jpg">
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="canonical" href="https://fcichs.co.za/projects">
+    <!-- Clean URLs Client-Side Redirect -->
+    <script>
+        if (window.location.pathname.endsWith('.html')) {
+            let cleanPath = window.location.pathname.slice(0, -5);
+            if (cleanPath.endsWith('/index')) {
+                cleanPath = cleanPath.slice(0, -5);
+            }
+            if (cleanPath === '') cleanPath = '/';
+            window.location.replace(window.location.origin + cleanPath + window.location.search + window.location.hash);
+        }
+    </script>
 </head>
 <body>
 
@@ -36,7 +48,7 @@
        ========================================================================== -->
     <header class="main-header" id="main-header">
         <div class="container">
-            <a href="index.html" class="logo" id="logo-link">
+            <a href="/" class="logo" id="logo-link">
                 <img src="assets/images/newLogo-300x129.png" alt="FCI Community Housing Services Logo" id="logo-img">
             </a>
             
@@ -47,14 +59,14 @@
             </button>
             
             <ul class="nav-menu" id="nav-menu">
-                <li><a href="index.html" class="nav-link" id="nav-home">Home</a></li>
-                <li><a href="about.html" class="nav-link" id="nav-about">About Us</a></li>
-                <li><a href="developments.html" class="nav-link" id="nav-developments">Developments</a></li>
-                <li><a href="projects.html" class="nav-link active" id="nav-projects">Projects</a></li>
-                <li><a href="programmes.html" class="nav-link" id="nav-programmes">Programmes</a></li>
-                <li><a href="news.html" class="nav-link" id="nav-news">News</a></li>
-                <li><a href="downloads.html" class="nav-link" id="nav-downloads">Downloads</a></li>
-                <li><a href="contact.html" class="nav-link" id="nav-contact">Contact</a></li>
+                <li><a href="/" class="nav-link" id="nav-home">Home</a></li>
+                <li><a href="/about" class="nav-link" id="nav-about">About Us</a></li>
+                <li><a href="/developments" class="nav-link" id="nav-developments">Developments</a></li>
+                <li><a href="/projects" class="nav-link active" id="nav-projects">Projects</a></li>
+                <li><a href="/programmes" class="nav-link" id="nav-programmes">Programmes</a></li>
+                <li><a href="/news" class="nav-link" id="nav-news">News</a></li>
+                <li><a href="/downloads" class="nav-link" id="nav-downloads">Downloads</a></li>
+                <li><a href="/contact" class="nav-link" id="nav-contact">Contact</a></li>
             </ul>
             
 
@@ -68,7 +80,7 @@
         <div class="container">
             <h1 class="page-banner-title" id="projects-banner-title">Our Project Portfolio</h1>
             <div class="breadcrumbs" id="projects-breadcrumbs">
-                <a href="index.html">Home</a>
+                <a href="/">Home</a>
                 <span>/</span>
                 <span>Projects</span>
             </div>
@@ -96,7 +108,7 @@
                     <div class="card-content">
                         <h3 class="card-title">Goodwood Station Development</h3>
                         <p class="card-desc">Massive transit-oriented mixed-use re-development surrounding Goodwood Station. Featuring phase-2 expansions, robust facilities, and rental units for over 1,000 families.</p>
-                        <a href="developments.html" class="card-link">View Specifications <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
+                        <a href="/developments" class="card-link">View Specifications <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
                     </div>
                 </div>
                 
@@ -109,7 +121,7 @@
                     <div class="card-content">
                         <h3 class="card-title">Heideveld Station Development</h3>
                         <p class="card-desc">Acquired exclusive PRASA development rights to construct affordable social rentals around Heideveld Station. RCG approval reached in Dec 2017, now fully occupied and managed.</p>
-                        <a href="about.html#about-history" class="card-link">Learn More <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
+                        <a href="/about#about-history" class="card-link">Learn More <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
                     </div>
                 </div>
                 
@@ -122,7 +134,7 @@
                     <div class="card-content">
                         <h3 class="card-title">City of Cape Town SH Partnership</h3>
                         <p class="card-desc">FCI signed a Social Housing Conditional-Partnership agreement in October 2019 to secure accredited land parcels near key transport corridors for upcoming gap-market projects.</p>
-                        <a href="contact.html" class="card-link">Partner With Us <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
+                        <a href="/contact" class="card-link">Partner With Us <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/></svg></a>
                     </div>
                 </div>
             </div>
@@ -140,8 +152,8 @@
                     FCI Community Housing Services makes it seamless to apply for housing, enquire about partnership integration, or participate in our student programmes.
                 </p>
                 <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;" id="projects-cta-btns">
-                    <a href="downloads.html" class="btn btn-primary" id="btn-projects-cta-apply">Download Application Pack</a>
-                    <a href="contact.html" class="btn btn-white" id="btn-projects-cta-inquire">Contact Department Admin</a>
+                    <a href="/downloads" class="btn btn-primary" id="btn-projects-cta-apply">Download Application Pack</a>
+                    <a href="/contact" class="btn btn-white" id="btn-projects-cta-inquire">Contact Department Admin</a>
                 </div>
             </div>
         </div>
@@ -171,11 +183,11 @@
                 <div id="footer-col-nav">
                     <h3 class="footer-heading">Corporate Links</h3>
                     <ul class="footer-links">
-                        <li><a href="about.html" id="foot-link-about">About Our Vision</a></li>
-                        <li><a href="developments.html" id="foot-link-devs">Developments Spec</a></li>
-                        <li><a href="projects.html" id="foot-link-projects">Project Pipelines</a></li>
-                        <li><a href="programmes.html" id="foot-link-prog">Social Impact</a></li>
-                        <li><a href="news.html" id="foot-link-news">Latest News</a></li>
+                        <li><a href="/about" id="foot-link-about">About Our Vision</a></li>
+                        <li><a href="/developments" id="foot-link-devs">Developments Spec</a></li>
+                        <li><a href="/projects" id="foot-link-projects">Project Pipelines</a></li>
+                        <li><a href="/programmes" id="foot-link-prog">Social Impact</a></li>
+                        <li><a href="/news" id="foot-link-news">Latest News</a></li>
                     </ul>
                 </div>
                 
@@ -212,8 +224,8 @@
             <div class="footer-bottom" id="footer-legal-bar">
                 <p id="footer-copyright">Copyright &copy; 2026 - FCI Community Housing Services. All rights reserved.</p>
                 <div class="footer-legal-links" id="footer-legal-row">
-                    <a href="downloads.html" id="foot-legal-terms">Accreditation Policies</a>
-                    <a href="contact.html" id="foot-legal-privacy">POPIA Compliant Contact</a>
+                    <a href="/downloads" id="foot-legal-terms">Accreditation Policies</a>
+                    <a href="/contact" id="foot-legal-privacy">POPIA Compliant Contact</a>
                 </div>
             </div>
         </div>

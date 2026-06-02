@@ -7,6 +7,18 @@
     <meta name="description" content="Learn about FCI Community Housing Services' mission, vision, core values, credentials, and executive leadership driving sustainable social housing in South Africa.">
     <link rel="icon" type="image/jpeg" href="assets/images/favicon.jpg">
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="canonical" href="https://fcichs.co.za/about">
+    <!-- Clean URLs Client-Side Redirect -->
+    <script>
+        if (window.location.pathname.endsWith('.html')) {
+            let cleanPath = window.location.pathname.slice(0, -5);
+            if (cleanPath.endsWith('/index')) {
+                cleanPath = cleanPath.slice(0, -5);
+            }
+            if (cleanPath === '') cleanPath = '/';
+            window.location.replace(window.location.origin + cleanPath + window.location.search + window.location.hash);
+        }
+    </script>
 </head>
 <body>
 
@@ -36,7 +48,7 @@
        ========================================================================== -->
     <header class="main-header" id="main-header">
         <div class="container">
-            <a href="index.html" class="logo" id="logo-link">
+            <a href="/" class="logo" id="logo-link">
                 <img src="assets/images/newLogo-300x129.png" alt="FCI Community Housing Services Logo" id="logo-img">
             </a>
             
@@ -47,14 +59,14 @@
             </button>
             
             <ul class="nav-menu" id="nav-menu">
-                <li><a href="index.html" class="nav-link" id="nav-home">Home</a></li>
-                <li><a href="about.html" class="nav-link active" id="nav-about">About Us</a></li>
-                <li><a href="developments.html" class="nav-link" id="nav-developments">Developments</a></li>
-                <li><a href="projects.html" class="nav-link" id="nav-projects">Projects</a></li>
-                <li><a href="programmes.html" class="nav-link" id="nav-programmes">Programmes</a></li>
-                <li><a href="news.html" class="nav-link" id="nav-news">News</a></li>
-                <li><a href="downloads.html" class="nav-link" id="nav-downloads">Downloads</a></li>
-                <li><a href="contact.html" class="nav-link" id="nav-contact">Contact</a></li>
+                <li><a href="/" class="nav-link" id="nav-home">Home</a></li>
+                <li><a href="/about" class="nav-link active" id="nav-about">About Us</a></li>
+                <li><a href="/developments" class="nav-link" id="nav-developments">Developments</a></li>
+                <li><a href="/projects" class="nav-link" id="nav-projects">Projects</a></li>
+                <li><a href="/programmes" class="nav-link" id="nav-programmes">Programmes</a></li>
+                <li><a href="/news" class="nav-link" id="nav-news">News</a></li>
+                <li><a href="/downloads" class="nav-link" id="nav-downloads">Downloads</a></li>
+                <li><a href="/contact" class="nav-link" id="nav-contact">Contact</a></li>
             </ul>
             
 
@@ -68,7 +80,7 @@
         <div class="container">
             <h1 class="page-banner-title" id="about-banner-title">Who We Are</h1>
             <div class="breadcrumbs" id="about-breadcrumbs">
-                <a href="index.html">Home</a>
+                <a href="/">Home</a>
                 <span>/</span>
                 <span>About Us</span>
             </div>
@@ -350,11 +362,11 @@
                 <div id="footer-col-nav">
                     <h3 class="footer-heading">Corporate Links</h3>
                     <ul class="footer-links">
-                        <li><a href="about.html" id="foot-link-about">About Our Vision</a></li>
-                        <li><a href="developments.html" id="foot-link-devs">Developments Spec</a></li>
-                        <li><a href="projects.html" id="foot-link-projects">Project Pipelines</a></li>
-                        <li><a href="programmes.html" id="foot-link-prog">Social Impact</a></li>
-                        <li><a href="news.html" id="foot-link-news">Latest News</a></li>
+                        <li><a href="/about" id="foot-link-about">About Our Vision</a></li>
+                        <li><a href="/developments" id="foot-link-devs">Developments Spec</a></li>
+                        <li><a href="/projects" id="foot-link-projects">Project Pipelines</a></li>
+                        <li><a href="/programmes" id="foot-link-prog">Social Impact</a></li>
+                        <li><a href="/news" id="foot-link-news">Latest News</a></li>
                     </ul>
                 </div>
                 
@@ -391,8 +403,8 @@
             <div class="footer-bottom" id="footer-legal-bar">
                 <p id="footer-copyright">Copyright &copy; 2026 - FCI Community Housing Services. All rights reserved.</p>
                 <div class="footer-legal-links" id="footer-legal-row">
-                    <a href="downloads.html" id="foot-legal-terms">Accreditation Policies</a>
-                    <a href="contact.html" id="foot-legal-privacy">POPIA Compliant Contact</a>
+                    <a href="/downloads" id="foot-legal-terms">Accreditation Policies</a>
+                    <a href="/contact" id="foot-legal-privacy">POPIA Compliant Contact</a>
                 </div>
             </div>
         </div>
