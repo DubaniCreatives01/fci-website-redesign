@@ -2269,6 +2269,49 @@ section {
     background: rgba(2, 59, 60, 0.05);
 }
 
+/* ==========================================================================
+   TOP DISCLAIMER MARQUEE BANNER
+   ========================================================================== */
+.disclaimer-banner {
+    width: 100%;
+    background-color: #FF9900; /* High contrast brand accent orange */
+    color: #011F20; /* High contrast brand dark teal text */
+    padding: 10px 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 1100; /* Placed above headers and navigation menus */
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    border-bottom: 1px solid rgba(1, 31, 32, 0.1);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
 
+.disclaimer-marquee {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+}
 
+.disclaimer-track {
+    display: flex;
+    white-space: nowrap;
+    width: max-content;
+    animation: disclaimer-marquee-scroll 45s linear infinite; /* Slow, easy-to-read speed */
+    will-change: transform;
+}
 
+.disclaimer-track span {
+    padding-right: 150px; /* Clean spacing between loops */
+    display: inline-block;
+}
+
+@keyframes disclaimer-marquee-scroll {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-50%, 0, 0); /* Perfectly seamless looping */
+    }
+}
