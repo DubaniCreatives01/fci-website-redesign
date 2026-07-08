@@ -614,12 +614,12 @@
                 </div>
 
                 <div class="grid grid-2" style="gap: 24px; margin-top: 24px;">
-                    <!-- Doc 3: 3 Months Payslips -->
+                    <!-- Doc 3: Proof of income -->
                     <div>
-                        <p style="font-weight: 700; font-size: 0.9rem; color: var(--text-primary); margin-bottom: 8px;">3. 3 Months Recent Payslips <span style="color:#d32f2f;">*</span></p>
+                        <p style="font-weight: 700; font-size: 0.9rem; color: var(--text-primary); margin-bottom: 8px;">3. Proof of income (Latest 2 months pay slips or accountants letter verifying income if self-employed). <span style="color:#d32f2f;">*</span></p>
                         <div class="upload-zone" id="upload-zone-payslips">
                             <svg class="upload-icon" width="32" height="32" fill="currentColor" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
-                            <div style="font-size: 0.85rem; font-weight: 700;">Drag or click to choose payslips</div>
+                            <div style="font-size: 0.85rem; font-weight: 700;">Drag or click to choose proof of income</div>
                             <span style="font-size: 0.72rem; color: var(--text-muted);">PDF or JPEG format capped at 4MB</span>
                             <input type="file" id="file-payslips" accept=".pdf,.png,.jpg,.jpeg" required onchange="handleFileSelect('payslips')">
                             <div class="file-status" id="status-payslips">No file selected</div>
@@ -698,6 +698,13 @@
                         <input type="checkbox" id="declaration-check" required style="accent-color: var(--primary-teal); width:20px; height:20px; margin-top:2px; flex-shrink:0;">
                         <div style="font-size: 0.88rem; line-height: 1.5;">
                             <strong>Truth & Accuracy Declaration:</strong> I solemnly declare that all information supplied in this online form is accurate, complete, and authentic, and that any misrepresentation may result in instant disqualification and forfeiture of subsidized units.
+                        </div>
+                    </label>
+
+                    <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer;">
+                        <input type="checkbox" id="tc-check" required style="accent-color: var(--primary-teal); width:20px; height:20px; margin-top:2px; flex-shrink:0;">
+                        <div style="font-size: 0.88rem; line-height: 1.5;">
+                            <strong>TERMS AND CONDITIONS:</strong> A non-refundable application fee of R200 (incl. VAT) is payable for the vetting, review and processing of applications.
                         </div>
                     </label>
                 </div>
@@ -1010,7 +1017,7 @@
                              `4. UPLOADED CERTIFIED FILE METADATA:\n` +
                              `- Certified ID copy: ${idFile}\n` +
                              `- 3 Months Bank Statements: ${bankFile}\n` +
-                             `- 3 Months Recent Payslips: ${payFile}\n` +
+                             `- Proof of income: ${payFile}\n` +
                              `- Proof of Residential Address: ${addressFile}\n\n` +
                              `============================================================\n` +
                              `Consent: POPIA compliance and verification terms have been accepted.\n`;
