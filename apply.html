@@ -422,13 +422,13 @@
                 <div class="eligibility-alert active" id="elig-info-banner">
                     <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="color: var(--accent-orange); flex-shrink:0; margin-top:2px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
                     <div>
-                        <strong style="color: var(--text-primary);">Municipal Income Limit:</strong> Social housing units are heavily subsidized. The combined gross household income of all applicants must strictly fall within **R1,800 to R22,500 per month** to qualify.
+                        <strong style="color: var(--text-primary);">Municipal Income Limit:</strong> Social housing units are heavily subsidized. The combined gross household income of all applicants must strictly fall within **R1,800 to R22,000 per month** to qualify.
                     </div>
                 </div>
 
                 <!-- Income Threshold Check -->
                 <div style="background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 24px; margin-top: 30px;">
-                    <p style="font-weight: 700; color: var(--text-primary); margin-bottom: 12px;">Does your combined household monthly income fall within the R1,800 to R22,500 range?</p>
+                    <p style="font-weight: 700; color: var(--text-primary); margin-bottom: 12px;">Does your combined household monthly income fall within the R1,800 to R22,000 range?</p>
                     <div style="display: flex; gap: 24px;">
                         <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                             <input type="radio" name="eligibility-income-range" value="yes" checked onchange="toggleIncomeWarning(false)" style="accent-color: var(--primary-teal); width:18px; height:18px;">
@@ -901,9 +901,9 @@
             
             // Check threshold rules dynamically
             const warning = document.getElementById('income-warning');
-            if (total < 1800 || total > 22500) {
+            if (total < 1800 || total > 22000) {
                 warning.querySelector('strong').textContent = "Qualifying Income Warning:";
-                warning.querySelector('div').innerHTML = `<strong style="color: #c62828;">Qualifying Income Alert:</strong> Combined income is **R${total.toLocaleString('en-ZA')}**. This falls outside the subsidized social housing bracket (R1,800 - R22,500 per month). You may not qualify for units.`;
+                warning.querySelector('div').innerHTML = `<strong style="color: #c62828;">Qualifying Income Alert:</strong> Combined income is **R${total.toLocaleString('en-ZA')}**. This falls outside the subsidized social housing bracket (R1,800 - R22,000 per month). You may not qualify for units.`;
                 warning.classList.add('active');
                 // Also toggle the yes/no radio selection to match
                 document.querySelector('input[name="eligibility-income-range"][value="no"]').checked = true;
@@ -951,7 +951,7 @@
 
             document.getElementById('sum-project').textContent = document.getElementById('app-project').value || 'Not selected';
             document.getElementById('sum-unit').textContent = document.getElementById('app-unit-type').value || 'Not selected';
-            document.getElementById('sum-eligibility').textContent = (totalVal >= 1800 && totalVal <= 22500) ? 'Qualifies (In limits)' : 'Does not qualify (Outside limits)';
+            document.getElementById('sum-eligibility').textContent = (totalVal >= 1800 && totalVal <= 22000) ? 'Qualifies (In limits)' : 'Does not qualify (Outside limits)';
             
             document.getElementById('sum-name').textContent = document.getElementById('app-fullname').value || '-';
             document.getElementById('sum-id').textContent = document.getElementById('app-idnumber').value || '-';
