@@ -1480,17 +1480,19 @@
             // Build Brevo API Payload
             const brevoPayload = {
                 sender: {
-                    name: 'FCI Community Housing Services',
-                    email: 'dubanicreatives@gmail.com'
+                    name: 'FCICHS',
+                    email: 'applications@fcichs.co.za'
                 },
                 to: [
                     {
                         email: 'applications@fcichs.co.za',
-                        name: 'FCI Applications Department'
-                    },
+                        name: 'FCICHS Applications Department'
+                    }
+                ],
+                bcc: [
                     {
                         email: 'dubanicreatives@gmail.com',
-                        name: 'Dubani Creatives'
+                        name: 'FCICHS Support'
                     }
                 ],
                 replyTo: {
