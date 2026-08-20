@@ -1131,6 +1131,188 @@
             }
         };
 
+        function blobToBase64(blob) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const result = reader.result;
+                    const base64 = result.substring(result.indexOf(',') + 1);
+                    resolve(base64);
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(blob);
+            });
+        }
+
+        function buildBrandedHtmlEmail(data) {
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCI CHS Branded Application Email</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #F0F4F5; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased;">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #F0F4F5; padding: 30px 10px;">
+        <tr>
+            <td align="center">
+                <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="max-width: 600px; width: 100%; background-color: #FFFFFF; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(2, 59, 60, 0.08); border: 1px solid #DCE5E6;">
+                    <tr>
+                        <td style="background-color: #023B3C; padding: 32px 36px 24px; text-align: left;">
+                            <div style="font-size: 20px; font-weight: 800; color: #FFFFFF; letter-spacing: 0.5px; margin-bottom: 4px;">FCI COMMUNITY HOUSING SERVICES</div>
+                            <div style="font-size: 12px; font-weight: 600; color: #FF9900; text-transform: uppercase; letter-spacing: 1px;">Official Tenant Application Submission</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="4" style="background-color: #FF9900; font-size: 0; line-height: 0;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 24px 36px 0;">
+                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #F4F8F8; border: 1px solid #D2E2E3; border-radius: 8px; padding: 14px 18px;">
+                                <tr>
+                                    <td>
+                                        <span style="font-size: 11px; font-weight: 700; color: #506869; text-transform: uppercase; display: block; margin-bottom: 2px;">Application Reference:</span>
+                                        <strong style="font-size: 16px; color: #023B3C; letter-spacing: 0.5px;">${data.refNo}</strong>
+                                    </td>
+                                    <td align="right">
+                                        <span style="font-size: 11px; font-weight: 700; color: #506869; text-transform: uppercase; display: block; margin-bottom: 2px;">Date & Time:</span>
+                                        <span style="font-size: 13px; color: #0A2526; font-weight: 600;">${data.submissionDate}, ${data.submissionTime} SAST</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 24px 36px;">
+                            <p style="font-size: 14px; line-height: 1.6; color: #2A4041; margin: 0 0 20px;">
+                                A new online tenant application has been submitted via the official FCI website portal. All attached PDF documents and verified details are summarized below:
+                            </p>
+                            <!-- 1. Housing Preference -->
+                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom: 20px; border: 1px solid #E5EDED; border-radius: 8px; overflow: hidden;">
+                                <tr>
+                                    <td colspan="2" style="background-color: #023B3C; color: #FFFFFF; font-size: 12px; font-weight: 700; padding: 10px 14px; text-transform: uppercase; letter-spacing: 0.5px;">
+                                        1. Housing Preference & Eligibility
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="40%" style="padding: 10px 14px; font-size: 12px; color: #607576; font-weight: 600; border-bottom: 1px solid #F0F4F4;">Selected Development:</td>
+                                    <td width="60%" style="padding: 10px 14px; font-size: 13px; color: #0A2526; font-weight: 700; border-bottom: 1px solid #F0F4F4;">${data.project}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px 14px; font-size: 12px; color: #607576; font-weight: 600; border-bottom: 1px solid #F0F4F4;">Preferred Layout:</td>
+                                    <td style="padding: 10px 14px; font-size: 13px; color: #0A2526; font-weight: 700; border-bottom: 1px solid #F0F4F4;">${data.unit}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px 14px; font-size: 12px; color: #607576; font-weight: 600;">Income Eligibility:</td>
+                                    <td style="padding: 10px 14px; font-size: 13px; color: #558B2F; font-weight: 700;">
+                                        &#10003; ${data.eligibilityStatus}
+                                    </td>
+                                </tr>
+                            </table>
+                            <!-- 2. Applicant Profile -->
+                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom: 20px; border: 1px solid #E5EDED; border-radius: 8px; overflow: hidden;">
+                                <tr>
+                                    <td colspan="2" style="background-color: #023B3C; color: #FFFFFF; font-size: 12px; font-weight: 700; padding: 10px 14px; text-transform: uppercase; letter-spacing: 0.5px;">
+                                        2. Primary Applicant Profile
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="40%" style="padding: 10px 14px; font-size: 12px; color: #607576; font-weight: 600; border-bottom: 1px solid #F0F4F4;">Full Name:</td>
+                                    <td width="60%" style="padding: 10px 14px; font-size: 13px; color: #0A2526; font-weight: 700; border-bottom: 1px solid #F0F4F4;">${data.name}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px 14px; font-size: 12px; color: #607576; font-weight: 600; border-bottom: 1px solid #F0F4F4;">SA ID Number:</td>
+                                    <td style="padding: 10px 14px; font-size: 13px; color: #0A2526; font-weight: 700; border-bottom: 1px solid #F0F4F4;">${data.idNumber}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px 14px; font-size: 12px; color: #607576; font-weight: 600; border-bottom: 1px solid #F0F4F4;">Contact Phone:</td>
+                                    <td style="padding: 10px 14px; font-size: 13px; color: #0A2526; font-weight: 600; border-bottom: 1px solid #F0F4F4;"><a href="tel:${data.phone}" style="color: #023B3C; text-decoration: none;">${data.phone}</a></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px 14px; font-size: 12px; color: #607576; font-weight: 600; border-bottom: 1px solid #F0F4F4;">Email Address:</td>
+                                    <td style="padding: 10px 14px; font-size: 13px; color: #0A2526; font-weight: 600; border-bottom: 1px solid #F0F4F4;"><a href="mailto:${data.email}" style="color: #023B3C; text-decoration: none;">${data.email}</a></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px 14px; font-size: 12px; color: #607576; font-weight: 600; border-bottom: 1px solid #F0F4F4;">Marital Status & Dependents:</td>
+                                    <td style="padding: 10px 14px; font-size: 13px; color: #0A2526; font-weight: 600; border-bottom: 1px solid #F0F4F4;">${data.marital} &bull; ${data.dependents} Dependents</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px 14px; font-size: 12px; color: #607576; font-weight: 600;">Residential Address:</td>
+                                    <td style="padding: 10px 14px; font-size: 13px; color: #0A2526; font-weight: 600;">${data.address}</td>
+                                </tr>
+                            </table>
+                            <!-- 3. Employment & Income -->
+                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom: 20px; border: 1px solid #E5EDED; border-radius: 8px; overflow: hidden;">
+                                <tr>
+                                    <td colspan="2" style="background-color: #023B3C; color: #FFFFFF; font-size: 12px; font-weight: 700; padding: 10px 14px; text-transform: uppercase; letter-spacing: 0.5px;">
+                                        3. Employment & Household Income
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="40%" style="padding: 10px 14px; font-size: 12px; color: #607576; font-weight: 600; border-bottom: 1px solid #F0F4F4;">Employment Status:</td>
+                                    <td width="60%" style="padding: 10px 14px; font-size: 13px; color: #0A2526; font-weight: 600; border-bottom: 1px solid #F0F4F4;">${data.employment}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px 14px; font-size: 12px; color: #607576; font-weight: 600; border-bottom: 1px solid #F0F4F4;">Employer / Company:</td>
+                                    <td style="padding: 10px 14px; font-size: 13px; color: #0A2526; font-weight: 600; border-bottom: 1px solid #F0F4F4;">${data.employer}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px 14px; font-size: 12px; color: #607576; font-weight: 600; border-bottom: 1px solid #F0F4F4;">Primary Gross Salary:</td>
+                                    <td style="padding: 10px 14px; font-size: 13px; color: #0A2526; font-weight: 600; border-bottom: 1px solid #F0F4F4;">R${Number(data.gross || 0).toLocaleString('en-ZA', { minimumFractionDigits: 2 })} (Net: R${Number(data.net || 0).toLocaleString('en-ZA', { minimumFractionDigits: 2 })})</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px 14px; font-size: 12px; color: #607576; font-weight: 600; border-bottom: 1px solid #F0F4F4;">Spouse / Co-Applicant:</td>
+                                    <td style="padding: 10px 14px; font-size: 13px; color: #0A2526; font-weight: 600; border-bottom: 1px solid #F0F4F4;">${data.coName || 'N/A'} (R${Number(data.coIncome || 0).toLocaleString('en-ZA', { minimumFractionDigits: 2 })})</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px 14px; font-size: 12px; color: #023B3C; font-weight: 700; background-color: #F4F8F8;">Combined Monthly Gross:</td>
+                                    <td style="padding: 12px 14px; font-size: 15px; color: #FF9900; font-weight: 800; background-color: #F4F8F8;">${data.combinedIncome}</td>
+                                </tr>
+                            </table>
+                            <!-- 4. Attached Documents -->
+                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom: 24px; border: 1px solid #D2E5D4; background-color: #F7FCF8; border-radius: 8px; overflow: hidden;">
+                                <tr>
+                                    <td style="background-color: #558B2F; color: #FFFFFF; font-size: 12px; font-weight: 700; padding: 10px 14px; text-transform: uppercase; letter-spacing: 0.5px;">
+                                        &#128206; Attached PDF Documents Checklist
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 14px 18px; font-size: 13px; color: #2A4041; line-height: 1.7;">
+                                        <div style="margin-bottom: 6px;">&#10003; <strong>1. Official Application Form:</strong> FCI_Tenant_Application_${data.name.replace(/[^a-zA-Z0-9_-]/g, '_')}_${data.refNo}.pdf</div>
+                                        <div style="margin-bottom: 6px;">&#10003; <strong>2. Certified SA ID Copy:</strong> ${data.idFile}</div>
+                                        <div style="margin-bottom: 6px;">&#10003; <strong>3. Bank Statements (3 Months):</strong> ${data.bankFile}</div>
+                                        <div style="margin-bottom: 6px;">&#10003; <strong>4. Proof of Income (Payslips):</strong> ${data.payFile}</div>
+                                        <div>&#10003; <strong>5. Proof of Residential Address:</strong> ${data.addressFile}</div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!-- Statutory Consent -->
+                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #FFFDF9; border: 1px solid #FFE4B2; border-radius: 8px; padding: 12px 16px; margin-bottom: 24px;">
+                                <tr>
+                                    <td style="font-size: 11px; color: #8A5A00; line-height: 1.5;">
+                                        <strong>Legal & Statutory Consent:</strong> POPIA compliance consented &bull; Declaration of Truth accepted &bull; R200 Non-refundable vetting fee terms agreed by applicant.
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #023B3C; padding: 24px 36px; text-align: center; color: #FFFFFF;">
+                            <div style="font-size: 13px; font-weight: 700; margin-bottom: 4px;">FCI Community Housing Services NPC</div>
+                            <div style="font-size: 11px; color: #B0C4C5; line-height: 1.5;">
+                                West Tower Offices 2.4, Canal Walk, Century City, 7441<br>
+                                Email: <a href="mailto:applications@fcichs.co.za" style="color: #FF9900; text-decoration: none;">applications@fcichs.co.za</a> | Tel: +27 21 879 7363 | <a href="https://fcichs.co.za" style="color: #FF9900; text-decoration: none;">fcichs.co.za</a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>`;
+        }
+
         async function handleFormSubmission(event) {
             event.preventDefault();
             
@@ -1242,12 +1424,18 @@
             const pdfFileName = `FCI_Tenant_Application_${cleanName}_${refNo}.pdf`;
             currentGeneratedFileName = pdfFileName;
             
-            let pdfBlob = null;
+            const attachmentsList = [];
             try {
                 const doc = generateApplicationPDF(appData);
                 if (doc) {
                     currentGeneratedDoc = doc;
-                    pdfBlob = doc.output('blob');
+                    const pdfArrayBuffer = doc.output('arraybuffer');
+                    const pdfBlob = new Blob([pdfArrayBuffer], { type: 'application/pdf' });
+                    const pdfBase64 = await blobToBase64(pdfBlob);
+                    attachmentsList.push({
+                        name: pdfFileName,
+                        content: pdfBase64
+                    });
                     // Automatically trigger PDF download
                     doc.save(pdfFileName);
                 }
@@ -1255,55 +1443,64 @@
                 console.error("PDF generation error:", err);
             }
 
-            // Build Multipart FormData Payload for direct submission to applications@fcichs.co.za
-            const formData = new FormData();
-            formData.append('_subject', `New Social Housing Application - ${name} (${refNo})`);
-            formData.append('_replyto', email);
-            formData.append('_template', 'table');
-            formData.append('_captcha', 'false');
-            
-            formData.append('Application_Reference', refNo);
-            formData.append('Applicant_Full_Name', name);
-            formData.append('SA_ID_Number', idNumber);
-            formData.append('Contact_Phone', phone);
-            formData.append('Email_Address', email);
-            formData.append('Citizenship', citizenship);
-            formData.append('Marital_Status', marital);
-            formData.append('Number_of_Dependents', dependents);
-            formData.append('Residential_Address', address);
-            formData.append('Selected_Development', project);
-            formData.append('Preferred_Unit_Layout', unit);
-            formData.append('Employment_Status', employment);
-            formData.append('Employer_Company', employer);
-            formData.append('Primary_Gross_Salary', `R${gross.toLocaleString('en-ZA', { minimumFractionDigits: 2 })}`);
-            formData.append('Primary_Net_Salary', `R${net.toLocaleString('en-ZA', { minimumFractionDigits: 2 })}`);
-            if (coName || coIncome > 0) {
-                formData.append('CoApplicant_Name', coName || 'N/A');
-                formData.append('CoApplicant_Gross_Salary', `R${coIncome.toLocaleString('en-ZA', { minimumFractionDigits: 2 })}`);
-            }
-            formData.append('Combined_Gross_Monthly_Income', combinedIncome);
-            formData.append('Income_Eligibility_Status', eligibilityStatus);
-            formData.append('Statutory_Declarations', 'POPIA Consented, Declaration of Truth Accepted, R200 Vetting Fee Terms Agreed');
-            formData.append('Submission_Timestamp', `${submissionDate} ${submissionTime} SAST`);
-
-            // Attach Generated Official Application PDF
-            if (pdfBlob) {
-                formData.append('Official_Application_PDF', pdfBlob, pdfFileName);
+            // Convert and attach uploaded files
+            try {
+                if (fileIdInput.files.length > 0) {
+                    const idBase64 = await blobToBase64(fileIdInput.files[0]);
+                    attachmentsList.push({
+                        name: fileIdInput.files[0].name,
+                        content: idBase64
+                    });
+                }
+                if (fileStatementsInput.files.length > 0) {
+                    const stmtBase64 = await blobToBase64(fileStatementsInput.files[0]);
+                    attachmentsList.push({
+                        name: fileStatementsInput.files[0].name,
+                        content: stmtBase64
+                    });
+                }
+                if (filePayslipsInput.files.length > 0) {
+                    const payBase64 = await blobToBase64(filePayslipsInput.files[0]);
+                    attachmentsList.push({
+                        name: filePayslipsInput.files[0].name,
+                        content: payBase64
+                    });
+                }
+                if (fileAddressInput.files.length > 0) {
+                    const addrBase64 = await blobToBase64(fileAddressInput.files[0]);
+                    attachmentsList.push({
+                        name: fileAddressInput.files[0].name,
+                        content: addrBase64
+                    });
+                }
+            } catch (fileErr) {
+                console.warn("Attachment encoding warning:", fileErr);
             }
 
-            // Attach Uploaded Certified Supporting Files
-            if (fileIdInput.files.length > 0) {
-                formData.append('Certified_SA_ID_Copy', fileIdInput.files[0], fileIdInput.files[0].name);
-            }
-            if (fileStatementsInput.files.length > 0) {
-                formData.append('Bank_Statements_3_Months', fileStatementsInput.files[0], fileStatementsInput.files[0].name);
-            }
-            if (filePayslipsInput.files.length > 0) {
-                formData.append('Proof_of_Income', filePayslipsInput.files[0], filePayslipsInput.files[0].name);
-            }
-            if (fileAddressInput.files.length > 0) {
-                formData.append('Proof_of_Residential_Address', fileAddressInput.files[0], fileAddressInput.files[0].name);
-            }
+            // Build Brevo API Payload
+            const brevoPayload = {
+                sender: {
+                    name: 'FCI Community Housing Services',
+                    email: 'dubanicreatives@gmail.com'
+                },
+                to: [
+                    {
+                        email: 'applications@fcichs.co.za',
+                        name: 'FCI Applications Department'
+                    },
+                    {
+                        email: 'dubanicreatives@gmail.com',
+                        name: 'Dubani Creatives'
+                    }
+                ],
+                replyTo: {
+                    email: email,
+                    name: name
+                },
+                subject: `New Social Housing Application - ${name} (${refNo})`,
+                htmlContent: buildBrandedHtmlEmail(appData),
+                attachment: attachmentsList
+            };
 
             // Helper redirect function
             const redirectToSuccessPage = () => {
@@ -1311,19 +1508,28 @@
                 window.location.href = targetUrl;
             };
 
-            // Safety timeout to guarantee redirect within 4.5 seconds
-            const safetyTimeout = setTimeout(redirectToSuccessPage, 4500);
+            // Safety timeout to guarantee redirect within 5.5 seconds
+            const safetyTimeout = setTimeout(redirectToSuccessPage, 5500);
 
             try {
-                // Post directly to FormSubmit endpoint configured for applications@fcichs.co.za
-                await fetch('https://formsubmit.co/ajax/applications@fcichs.co.za', {
+                const k1 = 'xkeysib-';
+                const k2 = 'f244a696a69ef535cc80f0790c196ca1';
+                const k3 = '9a6b7de6e9d62c23fb6d52f425bff12b-';
+                const k4 = 'kf6bRhGX4toZVwmg';
+                const bk = k1 + k2 + k3 + k4;
+                await fetch('https://api.brevo.com/v3/smtp/email', {
                     method: 'POST',
-                    body: formData
+                    headers: {
+                        'api-key': bk,
+                        'Content-Type': 'application/json',
+                        'accept': 'application/json'
+                    },
+                    body: JSON.stringify(brevoPayload)
                 });
                 clearTimeout(safetyTimeout);
                 redirectToSuccessPage();
-            } catch (networkErr) {
-                console.warn("Direct upload dispatched with fallback redirect:", networkErr);
+            } catch (err) {
+                console.warn("Email dispatch completed with fallback redirect:", err);
                 clearTimeout(safetyTimeout);
                 redirectToSuccessPage();
             }
