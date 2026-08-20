@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Submitted Successfully - FCI Community Housing Services</title>
+    <meta name="description" content="Your social housing application has been successfully submitted to FCI Community Housing Services. View your tracking code, submission details, and follow-up guidance.">
+    <link rel="icon" type="image/jpeg" href="assets/images/favicon.jpg">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="canonical" href="https://fcichs.co.za/application-success">
+    <!-- Clean URLs Client-Side Redirect -->
+    <script>
+        if (window.location.pathname.endsWith('.html')) {
+            let cleanPath = window.location.pathname.slice(0, -5);
+            if (cleanPath.endsWith('/index')) {
+                cleanPath = cleanPath.slice(0, -5);
+            }
+            if (cleanPath === '') cleanPath = '/';
+            window.location.replace(window.location.origin + cleanPath + window.location.search + window.location.hash);
+        }
+    </script>
+    <style>
+        .success-card {
+            background-color: var(--bg-primary);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            padding: 48px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 40px;
+        }
+        .success-header-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: rgba(85, 139, 47, 0.12);
+            color: var(--secondary-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+        .tracking-box {
+            background: linear-gradient(135deg, rgba(2, 59, 60, 0.04), rgba(255, 153, 0, 0.08));
+            border: 2px dashed rgba(2, 59, 60, 0.25);
+            border-radius: var(--radius-md);
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 32px 0;
+        }
+        .tracking-code {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-teal);
+            letter-spacing: 0.05em;
+        }
+        .pipeline-tracker {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 36px 0;
+            position: relative;
+        }
+        .pipeline-step {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 20px 16px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .pipeline-step.active {
+            background: rgba(2, 59, 60, 0.05);
+            border-color: var(--primary-teal);
+            border-top: 3px solid var(--primary-teal);
+        }
+        .pipeline-step.completed {
+            background: rgba(85, 139, 47, 0.05);
+            border-color: var(--secondary-green);
+            border-top: 3px solid var(--secondary-green);
+        }
+        .pipeline-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--border-color);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        .pipeline-step.completed .pipeline-icon {
+            background: var(--secondary-green);
+            color: #fff;
+        }
+        .pipeline-step.active .pipeline-icon {
+            background: var(--primary-teal);
+            color: #fff;
+        }
+        .summary-table-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+        .summary-cell {
+            padding: 14px 18px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+        .summary-cell span {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        .summary-cell strong {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+        .checklist-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: var(--radius-pill);
+            background: rgba(85, 139, 47, 0.12);
+            color: #33691E;
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+        @media (max-width: 991px) {
+            .pipeline-tracker {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .summary-table-grid {
+                grid-template-columns: 1fr;
+            }
+            .tracking-box {
+                flex-direction: column;
+                text-align: center;
+            }
+            .success-card {
+                padding: 28px 20px;
+            }
+        }
+        @media print {
+            .main-header, .tophead, .disclaimer-banner, footer, .floating-contact-bar, .action-buttons-row, .breadcrumbs {
+                display: none !important;
+            }
+            .success-card {
+                border: none;
+                box-shadow: none;
+                padding: 0;
+            }
+            body {
+                background: #fff;
+                color: #000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ==========================================================================
+       DISCLAIMER BANNER
+       ========================================================================== -->
+    <div class="disclaimer-banner" id="disclaimer-marquee-banner">
+        <div class="disclaimer-marquee">
+            <div class="disclaimer-track">
+                <span> Important Update: Please be advised that DCI CHS has ceased all operations. As part of our transition to FCI CHS, we have officially migrated to our new website domain: fcichs.co.za]. Any and all official correspondence will come strictly from designated FCI CHS representatives utilizing their unique email addresses tied to this new domain. @fcichs.co.za</span>
+                <span> Important Update: Please be advised that DCI CHS has ceased all operations. As part of our transition to FCI CHS, we have officially migrated to our new website domain: fcichs.co.za]. Any and all official correspondence will come strictly from designated FCI CHS representatives utilizing their unique email addresses tied to this new domain. @fcichs.co.za</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       TOP INFO BAR
+       ========================================================================== -->
+    <div class="tophead" id="tophead-bar">
+        <div class="container">
+            <div class="tophead-info">
+                <a href="tel:+27218797363" id="tophead-phone">
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.15 15.15 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    <span>+27 21 879 7363</span>
+                </a>
+                <a href="mailto:info@fcichs.co.za" id="tophead-email">
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <span>info@fcichs.co.za</span>
+                </a>
+            </div>
+            <div>
+                <span>BEE Level 1 Contributor</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       HEADER STICKY NAV
+       ========================================================================== -->
+    <header class="main-header" id="main-header">
+        <div class="container">
+            <a href="/" class="logo" id="logo-link">
+                <img src="assets/images/newLogo-300x129.png" alt="FCI Community Housing Services Logo" id="logo-img">
+            </a>
+            
+            <button class="hamburger" id="menu-hamburger" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="/" class="nav-link" id="nav-home">Home</a></li>
+                <li><a href="/about" class="nav-link" id="nav-about">About Us</a></li>
+                <li class="dropdown-item">
+                    <a href="#" class="nav-link dropdown-toggle" id="nav-awards">Awards <span class="arrow">▼</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/ipma-global-awards-2025" id="nav-dropdown-ipma">IPMA Global Awards 2025</a></li>
+                        <li><a href="/reside-awards-2026" id="nav-dropdown-reside">Reside Awards 2026</a></li>
+                    </ul>
+                </li>
+                <li><a href="/developments" class="nav-link" id="nav-developments">Developments</a></li>
+                <li><a href="/projects" class="nav-link" id="nav-projects">Projects</a></li>
+                <li><a href="/programmes" class="nav-link" id="nav-programmes">Programmes</a></li>
+                <li><a href="/news" class="nav-link" id="nav-news">News</a></li>
+                <li><a href="/downloads" class="nav-link" id="nav-downloads">Downloads</a></li>
+                <li><a href="/contact" class="nav-link" id="nav-contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ==========================================================================
+       PAGE BANNER
+       ========================================================================== -->
+    <section class="page-banner" id="success-banner">
+        <div class="container">
+            <h1 class="page-banner-title" id="success-banner-title">Application Confirmation</h1>
+            <div class="breadcrumbs" id="success-breadcrumbs">
+                <a href="/">Home</a>
+                <span>/</span>
+                <a href="/apply">Apply Online</a>
+                <span>/</span>
+                <span>Confirmation</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       SUCCESS & TRACKING CONTAINER
+       ========================================================================== -->
+    <section class="bg-light" style="padding: 60px 0 90px;" id="success-content-section">
+        <div class="container" style="max-width: 960px;">
+            
+            <div class="success-card reveal" id="main-success-card">
+                <!-- Top Icon & Header -->
+                <div class="success-header-icon">
+                    <svg width="44" height="44" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                </div>
+                
+                <div style="text-align: center; max-width: 720px; margin: 0 auto 24px;">
+                    <span style="font-size: 0.8rem; font-weight: 700; color: var(--secondary-green); text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 8px;">Official Submission Receipt</span>
+                    <h2 style="font-size: clamp(1.6rem, 3.5vw, 2.2rem); color: var(--primary-teal); margin-bottom: 14px;" id="success-main-heading">Your Application Has Been Successfully Submitted</h2>
+                    <p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.6;" id="success-lead-text">
+                        Thank you <strong id="lead-applicant-name">Applicant</strong>. Your online tenant application package and certified documents have been received by the FCI Housing Department for vetting and eligibility evaluation.
+                    </p>
+                </div>
+
+                <!-- Tracking Code Card -->
+                <div class="tracking-box" id="tracking-ref-card">
+                    <div>
+                        <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 4px;">Application Reference Number</span>
+                        <div class="tracking-code" id="display-ref-code">FCI-APP-849201</div>
+                        <span style="font-size: 0.82rem; color: var(--text-secondary);">Date Logged: <strong id="display-ref-date">-</strong></span>
+                    </div>
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <button type="button" class="btn btn-secondary" onclick="copyRefCode()" style="padding: 10px 20px; font-size: 0.85rem;" id="btn-copy-ref">
+                            📋 Copy Ref Code
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Live Vetting Status Tracker -->
+                <div style="margin-top: 40px;" id="pipeline-tracker-container">
+                    <h3 style="font-size: 1.15rem; color: var(--primary-teal); margin-bottom: 8px;">Application Vetting Pipeline</h3>
+                    <p style="font-size: 0.88rem; color: var(--text-muted);">Track your application stage as our housing coordinators verify your documents.</p>
+                    
+                    <div class="pipeline-tracker">
+                        <!-- Step 1 -->
+                        <div class="pipeline-step completed" id="track-step-1">
+                            <div class="pipeline-icon">✓</div>
+                            <h4 style="font-size: 0.88rem; margin-bottom: 4px;">1. Submitted</h4>
+                            <span style="font-size: 0.75rem; color: var(--secondary-green); font-weight: 700;">Completed</span>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="pipeline-step active" id="track-step-2">
+                            <div class="pipeline-icon">2</div>
+                            <h4 style="font-size: 0.88rem; margin-bottom: 4px;">2. Document Vetting</h4>
+                            <span style="font-size: 0.75rem; color: var(--primary-teal); font-weight: 700;">In Progress (2–5 Days)</span>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="pipeline-step" id="track-step-3">
+                            <div class="pipeline-icon">3</div>
+                            <h4 style="font-size: 0.88rem; margin-bottom: 4px;">3. Affordability Check</h4>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Pending</span>
+                        </div>
+                        <!-- Step 4 -->
+                        <div class="pipeline-step" id="track-step-4">
+                            <div class="pipeline-icon">4</div>
+                            <h4 style="font-size: 0.88rem; margin-bottom: 4px;">4. Unit Allocation</h4>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Pending</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submission Details Summary -->
+                <div style="margin-top: 40px;" id="application-summary-block">
+                    <h3 style="font-size: 1.15rem; color: var(--primary-teal); margin-bottom: 16px;">Compiled Application Details</h3>
+                    
+                    <div class="summary-table-grid">
+                        <div class="summary-cell">
+                            <span>Selected Development</span>
+                            <strong id="sum-disp-project">Goodwood Station Development</strong>
+                        </div>
+                        <div class="summary-cell">
+                            <span>Preferred Unit Layout</span>
+                            <strong id="sum-disp-unit">2 Bedroom Apartment</strong>
+                        </div>
+                        <div class="summary-cell">
+                            <span>Primary Applicant</span>
+                            <strong id="sum-disp-name">-</strong>
+                        </div>
+                        <div class="summary-cell">
+                            <span>South African ID Number</span>
+                            <strong id="sum-disp-id">-</strong>
+                        </div>
+                        <div class="summary-cell">
+                            <span>Contact Phone</span>
+                            <strong id="sum-disp-phone">-</strong>
+                        </div>
+                        <div class="summary-cell">
+                            <span>Email Address</span>
+                            <strong id="sum-disp-email">-</strong>
+                        </div>
+                        <div class="summary-cell">
+                            <span>Employment & Employer</span>
+                            <strong id="sum-disp-employment">-</strong>
+                        </div>
+                        <div class="summary-cell">
+                            <span>Combined Monthly Income</span>
+                            <strong id="sum-disp-income" style="color: var(--accent-orange);">-</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attached Documents Checklist -->
+                <div style="margin-top: 32px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 24px;" id="documents-receipt-checklist">
+                    <h4 style="color: var(--primary-teal); margin-bottom: 12px; font-size: 1rem;">Attached Supporting Documents</h4>
+                    <p style="font-size: 0.86rem; color: var(--text-secondary); margin-bottom: 16px;">The following certified documents were packaged and submitted with your application:</p>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.88rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 8px;">
+                            <span>1. Official Tenant Application Form (Generated PDF)</span>
+                            <span class="checklist-badge">✓ Attached</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 8px;">
+                            <span>2. Certified SA ID Copy: <strong id="doc-disp-id">Attached</strong></span>
+                            <span class="checklist-badge">✓ Attached</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 8px;">
+                            <span>3. 3 Months Bank Statements: <strong id="doc-disp-statements">Attached</strong></span>
+                            <span class="checklist-badge">✓ Attached</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 8px;">
+                            <span>4. Proof of Income (Payslips / Accountant Letter): <strong id="doc-disp-payslips">Attached</strong></span>
+                            <span class="checklist-badge">✓ Attached</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>5. Proof of Current Address: <strong id="doc-disp-address">Attached</strong></span>
+                            <span class="checklist-badge">✓ Attached</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Steps & Follow-Up Guidance -->
+                <div style="margin-top: 36px; border-left: 4px solid var(--accent-orange); padding: 20px 24px; background: rgba(255, 153, 0, 0.05); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+                    <h4 style="color: var(--primary-teal); margin-bottom: 8px; font-size: 1rem;">What Happens Next?</h4>
+                    <ul style="padding-left: 20px; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.65;">
+                        <li>Our applications unit will review your certified documents within <strong>2 to 5 business days</strong>.</li>
+                        <li>You will receive an official notification via email (or phone call) regarding your vetting outcome and unit allocation.</li>
+                        <li>A non-refundable application fee of R200 (incl. VAT) applies for the formal processing and credit vetting of applications.</li>
+                        <li>If you need to update any information or follow up on your progress, please quote your reference code <strong id="inline-ref-code" style="color: var(--primary-teal);">FCI-APP-XXXXXX</strong>.</li>
+                    </ul>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons-row" style="display: flex; justify-content: center; gap: 16px; margin-top: 40px; flex-wrap: wrap;">
+                    <button type="button" class="btn btn-primary" onclick="downloadApplicationPDF()" id="btn-download-pdf-copy" style="padding: 14px 28px;">
+                        📥 Download Application PDF
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="window.print()" id="btn-print-summary" style="padding: 14px 28px;">
+                        🖨️ Print Confirmation
+                    </button>
+                    <a href="/" class="btn btn-secondary" id="btn-return-home" style="padding: 14px 28px;">
+                        Return to Homepage
+                    </a>
+                </div>
+
+                <!-- Support Office Coordinates -->
+                <div style="margin-top: 48px; border-top: 1px solid var(--border-color); padding-top: 28px; text-align: center;" id="success-support-footer">
+                    <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 8px;">Need assistance or have questions regarding your application?</p>
+                    <div style="display: inline-flex; gap: 24px; flex-wrap: wrap; justify-content: center; font-size: 0.88rem;">
+                        <a href="mailto:applications@fcichs.co.za" style="color: var(--primary-teal); font-weight: 700; text-decoration: none;">📧 applications@fcichs.co.za</a>
+                        <span style="color: var(--border-color);">|</span>
+                        <a href="tel:+27218797363" style="color: var(--primary-teal); font-weight: 700; text-decoration: none;">📞 +27 21 879 7363</a>
+                        <span style="color: var(--border-color);">|</span>
+                        <span style="color: var(--text-secondary);">🏢 West Tower 2.4, Canal Walk, Century City</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       GLOBAL FOOTER
+       ========================================================================== -->
+    <footer class="main-footer" id="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1: Brand & Bio -->
+                <div class="footer-about" id="footer-col-about">
+                    <a href="/" class="footer-logo">
+                        <img src="assets/images/newLogo-300x129.png" alt="FCI Community Housing Services Logo" loading="lazy">
+                    </a>
+                    <p>FCI Community Housing Services NPC is a registered Social Housing Institution delivering affordable, high-density residential developments in South Africa.</p>
+                </div>
+                
+                <!-- Column 2: Quick Links -->
+                <div class="footer-links" id="footer-col-links">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/developments">Developments</a></li>
+                        <li><a href="/projects">Projects</a></li>
+                        <li><a href="/programmes">Programmes</a></li>
+                        <li><a href="/news">News</a></li>
+                        <li><a href="/downloads">Downloads</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3: Contact Details -->
+                <div class="footer-contact" id="footer-col-contact">
+                    <h3 class="footer-heading">Contact Details</h3>
+                    <div class="footer-contact-item">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        <span>West Tower Offices 2.4, Canal Walk, Century Boulevard, Century City, 7441, Western Cape</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        <span>info@fcichs.co.za</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.15 15.15 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                        <span>+27 21 879 7363</span>
+                    </div>
+                </div>
+                
+                <!-- Column 4: Newsletter -->
+                <div class="footer-newsletter" id="footer-col-news">
+                    <h3 class="footer-heading">Tenant Newsletter</h3>
+                    <p>Subscribe to receive quarterly newsletters regarding active developments and applicant lotteries.</p>
+                    <form class="newsletter-form" id="newsletter-subscription-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+                        <input type="email" class="newsletter-input" placeholder="Your Email Address" aria-label="Email subscription" required id="newsletter-email">
+                        <button type="submit" class="newsletter-btn" id="btn-newsletter-sub">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom" id="footer-bottom-bar">
+                <p>&copy; 2026 FCI Community Housing Services. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="/downloads">POPIA Manual</a>
+                    <span>|</span>
+                    <a href="/downloads">Tenant Rules</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Global Floating Quick-Contact Widgets -->
+    <div class="floating-contact-bar" id="floating-contact-widgets">
+        <a href="mailto:info@fcichs.co.za?subject=Inquiry from FCI website" class="floating-contact-btn floating-email" aria-label="Send Email" id="float-btn-mail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span class="contact-btn-label">Email Support</span>
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jspdf.umd.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/motion.js"></script>
+    <script>
+        // Read application metadata from sessionStorage or URL parameters
+        let appData = null;
+        try {
+            const stored = sessionStorage.getItem('fci_last_submission');
+            if (stored) {
+                appData = JSON.parse(stored);
+            }
+        } catch (e) {
+            console.error("Could not read sessionStorage:", e);
+        }
+
+        // Fallback to URL search params
+        const urlParams = new URLSearchParams(window.location.search);
+        const refNo = urlParams.get('ref') || appData?.refNo || `FCI-APP-${Date.now().toString().slice(-6)}`;
+        const applicantName = urlParams.get('name') || appData?.name || 'Applicant';
+        const project = urlParams.get('project') || appData?.project || 'Goodwood Station Development';
+        const unit = urlParams.get('unit') || appData?.unit || 'Preferred Apartment';
+
+        // Populate elements
+        document.getElementById('lead-applicant-name').textContent = applicantName;
+        document.getElementById('display-ref-code').textContent = refNo;
+        document.getElementById('inline-ref-code').textContent = refNo;
+        document.getElementById('display-ref-date').textContent = appData?.submissionDate ? `${appData.submissionDate} at ${appData.submissionTime}` : new Date().toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' });
+        
+        document.getElementById('sum-disp-project').textContent = project;
+        document.getElementById('sum-disp-unit').textContent = unit;
+        document.getElementById('sum-disp-name').textContent = applicantName;
+        document.getElementById('sum-disp-id').textContent = appData?.idNumber || '-';
+        document.getElementById('sum-disp-phone').textContent = appData?.phone || '-';
+        document.getElementById('sum-disp-email').textContent = appData?.email || '-';
+        document.getElementById('sum-disp-employment').textContent = appData?.employment ? `${appData.employment} (${appData.employer || 'Private'})` : '-';
+        document.getElementById('sum-disp-income').textContent = appData?.combinedIncome || 'R0.00';
+
+        if (appData?.idFile) document.getElementById('doc-disp-id').textContent = appData.idFile;
+        if (appData?.bankFile) document.getElementById('doc-disp-statements').textContent = appData.bankFile;
+        if (appData?.payFile) document.getElementById('doc-disp-payslips').textContent = appData.payFile;
+        if (appData?.addressFile) document.getElementById('doc-disp-address').textContent = appData.addressFile;
+
+        function copyRefCode() {
+            navigator.clipboard.writeText(refNo).then(() => {
+                const btn = document.getElementById('btn-copy-ref');
+                const orig = btn.innerHTML;
+                btn.innerHTML = '✅ Copied!';
+                btn.style.backgroundColor = 'var(--secondary-green)';
+                btn.style.borderColor = 'var(--secondary-green)';
+                btn.style.color = '#fff';
+                setTimeout(() => {
+                    btn.innerHTML = orig;
+                    btn.style.backgroundColor = '';
+                    btn.style.borderColor = '';
+                    btn.style.color = '';
+                }, 2500);
+            }).catch(err => {
+                alert(`Reference Code: ${refNo}`);
+            });
+        }
+
+        function downloadApplicationPDF() {
+            if (!window.jspdf || !window.jspdf.jsPDF) {
+                alert("PDF engine is initializing, please try again in a moment.");
+                return;
+            }
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+            
+            const primaryColor = [2, 59, 60];
+            const accentColor = [255, 153, 0];
+            const darkColor = [1, 31, 32];
+            const grayBg = [245, 247, 248];
+            const textGray = [80, 95, 96];
+
+            doc.setFillColor(...primaryColor);
+            doc.rect(0, 0, 210, 28, 'F');
+            doc.setFillColor(...accentColor);
+            doc.rect(0, 28, 210, 2, 'F');
+
+            doc.setTextColor(255, 255, 255);
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(13.5);
+            doc.text('FCI COMMUNITY HOUSING SERVICES', 14, 11);
+
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(9);
+            doc.setTextColor(255, 204, 102);
+            doc.text('OFFICIAL TENANT APPLICATION FORM & SUBMISSION RECORD', 14, 17.5);
+
+            doc.setFontSize(8);
+            doc.setTextColor(220, 235, 235);
+            doc.text(`REF: ${refNo} | Date: ${appData?.submissionDate || new Date().toLocaleDateString()} ${appData?.submissionTime || ''}`, 14, 23.5);
+
+            let y = 35;
+
+            function drawSectionHeader(title) {
+                doc.setFillColor(...grayBg);
+                doc.roundedRect(14, y, 182, 6.5, 1.2, 1.2, 'F');
+                doc.setFillColor(...primaryColor);
+                doc.rect(14, y, 3, 6.5, 'F');
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(9);
+                doc.setTextColor(...primaryColor);
+                doc.text(title, 20, y + 4.6);
+                y += 9;
+            }
+
+            function drawFieldRow(label1, val1, label2, val2) {
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(7.8);
+                doc.setTextColor(...darkColor);
+                doc.text(label1, 16, y);
+                if (label2) doc.text(label2, 108, y);
+
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(...textGray);
+                doc.text(String(val1 || '-'), 16, y + 3.8);
+                if (label2) doc.text(String(val2 || '-'), 108, y + 3.8);
+
+                doc.setDrawColor(232, 236, 236);
+                doc.setLineWidth(0.2);
+                doc.line(16, y + 5.6, 194, y + 5.6);
+                y += 8.8;
+            }
+
+            drawSectionHeader('1. INTAKE & HOUSING PREFERENCE');
+            drawFieldRow('Selected Housing Project:', project, 'Preferred Unit Layout:', unit);
+            drawFieldRow('Income Eligibility Status:', appData?.eligibilityStatus || 'Qualifies (In limits)', 'Combined Gross Monthly Income:', appData?.combinedIncome || 'R0.00');
+            y += 1.5;
+
+            drawSectionHeader('2. PRIMARY APPLICANT DETAILS');
+            drawFieldRow('Full Name (as in ID):', applicantName, 'SA ID Number (13 Digits):', appData?.idNumber || '-');
+            drawFieldRow('Mobile Phone Number:', appData?.phone || '-', 'Email Address:', appData?.email || '-');
+            drawFieldRow('Citizenship Status:', appData?.citizenship || 'SA Citizen', 'Marital Status / Dependents:', `${appData?.marital || 'Single'} (${appData?.dependents || 0} dependents)`);
+            
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(7.8);
+            doc.setTextColor(...darkColor);
+            doc.text('Current Residential Address:', 16, y);
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(...textGray);
+            const splitAddr = doc.splitTextToSize(appData?.address || '-', 176);
+            doc.text(splitAddr, 16, y + 3.8);
+            y += 3.8 + (splitAddr.length * 3.8);
+            doc.setDrawColor(232, 236, 236);
+            doc.line(16, y, 194, y);
+            y += 3;
+
+            drawSectionHeader('3. EMPLOYMENT & FINANCIAL RECORD');
+            drawFieldRow('Employment Status:', appData?.employment || '-', 'Employer / Company Name:', appData?.employer || '-');
+            drawFieldRow('Primary Applicant Gross Salary:', `R${Number(appData?.gross || 0).toLocaleString('en-ZA', { minimumFractionDigits: 2 })}`, 'Primary Applicant Net Take-Home:', `R${Number(appData?.net || 0).toLocaleString('en-ZA', { minimumFractionDigits: 2 })}`);
+            if (appData?.coName || appData?.coIncome > 0) {
+                drawFieldRow('Spouse / Co-Applicant Name:', appData.coName || 'N/A', 'Co-Applicant Gross Salary:', `R${Number(appData?.coIncome || 0).toLocaleString('en-ZA', { minimumFractionDigits: 2 })}`);
+            }
+            y += 1.5;
+
+            drawSectionHeader('4. SUPPORTING DOCUMENTS METADATA');
+            drawFieldRow('1. Certified SA ID Copy:', appData?.idFile || 'Attached', '2. 3 Months Bank Statements:', appData?.bankFile || 'Attached');
+            drawFieldRow('3. Proof of Income (Payslips / Letter):', appData?.payFile || 'Attached', '4. Proof of Current Address:', appData?.addressFile || 'Attached');
+            y += 1.5;
+
+            drawSectionHeader('5. STATUTORY DECLARATION & LEGAL CONSENT');
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(7.2);
+            doc.setTextColor(...darkColor);
+            
+            const declarations = [
+                '[X] POPIA Act Consent: I grant consent to FCI Community Housing Services to process & store personal data under Act No. 4 of 2013.',
+                '[X] Truth & Accuracy Declaration: I declare all information supplied in this application is authentic, accurate, and binding.',
+                '[X] TERMS AND CONDITIONS: Non-refundable application fee of R200 (incl. VAT) payable for vetting, review, and processing.'
+            ];
+
+            declarations.forEach(dec => {
+                const splitDec = doc.splitTextToSize(dec, 176);
+                doc.text(splitDec, 16, y);
+                y += splitDec.length * 3.4;
+            });
+
+            y += 2;
+            doc.setFillColor(240, 248, 245);
+            doc.setDrawColor(85, 139, 47);
+            doc.roundedRect(14, y, 182, 9, 1.2, 1.2, 'FD');
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(7.2);
+            doc.setTextColor(85, 139, 47);
+            doc.text(`DIGITAL SUBMISSION RECORD VERIFIED - ${refNo}`, 20, y + 3.8);
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(...textGray);
+            doc.text(`Submitted digitally via fcichs.co.za on ${appData?.submissionDate || new Date().toLocaleDateString()} at ${appData?.submissionTime || ''} SAST.`, 20, y + 7.2);
+
+            doc.setFillColor(...primaryColor);
+            doc.rect(0, 284, 210, 13, 'F');
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(7.2);
+            doc.setTextColor(255, 255, 255);
+            doc.text('FCI Community Housing Services NPC | Canal Walk Century City, Cape Town', 14, 289);
+            doc.text('Applications: applications@fcichs.co.za | Tel: +27 21 879 7363 | https://fcichs.co.za', 14, 293);
+
+            const cleanName = applicantName.replace(/[^a-zA-Z0-9_-]/g, '_');
+            doc.save(`FCI_Tenant_Application_${cleanName}_${refNo}.pdf`);
+        }
+    </script>
+</body>
+</html>

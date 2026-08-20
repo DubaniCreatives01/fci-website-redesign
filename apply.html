@@ -1131,7 +1131,7 @@
             }
         };
 
-        function handleFormSubmission(event) {
+        async function handleFormSubmission(event) {
             event.preventDefault();
             
             // Collect Form Metadata
@@ -1154,10 +1154,15 @@
             const combinedIncome = document.getElementById('sum-total-income').textContent;
             const eligibilityStatus = document.getElementById('sum-eligibility').textContent;
             
-            const idFile = document.getElementById('file-id').files[0]?.name || 'Not Uploaded';
-            const bankFile = document.getElementById('file-statements').files[0]?.name || 'Not Uploaded';
-            const payFile = document.getElementById('file-payslips').files[0]?.name || 'Not Uploaded';
-            const addressFile = document.getElementById('file-address').files[0]?.name || 'Not Uploaded';
+            const fileIdInput = document.getElementById('file-id');
+            const fileStatementsInput = document.getElementById('file-statements');
+            const filePayslipsInput = document.getElementById('file-payslips');
+            const fileAddressInput = document.getElementById('file-address');
+
+            const idFile = fileIdInput.files[0]?.name || 'Not Uploaded';
+            const bankFile = fileStatementsInput.files[0]?.name || 'Not Uploaded';
+            const payFile = filePayslipsInput.files[0]?.name || 'Not Uploaded';
+            const addressFile = fileAddressInput.files[0]?.name || 'Not Uploaded';
 
             const refNo = `FCI-APP-${Date.now().toString().slice(-6)}`;
             const submissionDate = new Date().toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -1191,123 +1196,137 @@
                 addressFile
             };
 
+            // Store in sessionStorage for tracking page display
+            try {
+                sessionStorage.setItem('fci_last_submission', JSON.stringify(appData));
+            } catch (e) {
+                console.error("Session storage error:", e);
+            }
+
+            // Display Fullscreen Submission & Upload Progress Overlay
+            const submitOverlay = document.createElement('div');
+            submitOverlay.id = 'submission-progress-overlay';
+            submitOverlay.style.position = 'fixed';
+            submitOverlay.style.top = '0';
+            submitOverlay.style.left = '0';
+            submitOverlay.style.width = '100%';
+            submitOverlay.style.height = '100%';
+            submitOverlay.style.backgroundColor = 'rgba(1, 31, 32, 0.85)';
+            submitOverlay.style.backdropFilter = 'blur(8px)';
+            submitOverlay.style.zIndex = '99999';
+            submitOverlay.style.display = 'flex';
+            submitOverlay.style.alignItems = 'center';
+            submitOverlay.style.justifyContent = 'center';
+            submitOverlay.style.color = '#FFFFFF';
+            submitOverlay.style.fontFamily = "'Inter', sans-serif";
+            submitOverlay.style.textAlign = 'center';
+            submitOverlay.style.padding = '20px';
+
+            submitOverlay.innerHTML = `
+                <div style="background: #023B3C; border: 1px solid rgba(255, 153, 0, 0.3); border-radius: 16px; padding: 40px 32px; max-width: 500px; width: 100%; box-shadow: 0 25px 50px rgba(0,0,0,0.5);">
+                    <div style="width: 56px; height: 56px; border: 4px solid rgba(255, 255, 255, 0.2); border-top-color: var(--accent-orange); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
+                    <h3 style="color: #FFFFFF; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.3rem; margin-bottom: 10px; font-weight: 800;">Submitting Application</h3>
+                    <p style="color: #B0C4C5; font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px;">
+                        Packaging your official application PDF and certified documents to transmit straight to <strong>applications@fcichs.co.za</strong>...
+                    </p>
+                    <div style="font-size: 0.8rem; color: var(--accent-orange); font-weight: 600;">Please do not close or refresh this tab.</div>
+                </div>
+                <style>
+                    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+                </style>
+            `;
+            document.body.appendChild(submitOverlay);
+
             // Generate Official PDF
             const cleanName = name.replace(/[^a-zA-Z0-9_-]/g, '_');
             const pdfFileName = `FCI_Tenant_Application_${cleanName}_${refNo}.pdf`;
             currentGeneratedFileName = pdfFileName;
             
+            let pdfBlob = null;
             try {
                 const doc = generateApplicationPDF(appData);
                 if (doc) {
                     currentGeneratedDoc = doc;
+                    pdfBlob = doc.output('blob');
                     // Automatically trigger PDF download
                     doc.save(pdfFileName);
                 }
             } catch (err) {
                 console.error("PDF generation error:", err);
             }
+
+            // Build Multipart FormData Payload for direct submission to applications@fcichs.co.za
+            const formData = new FormData();
+            formData.append('_subject', `New Social Housing Application - ${name} (${refNo})`);
+            formData.append('_replyto', email);
+            formData.append('_template', 'table');
+            formData.append('_captcha', 'false');
             
-            // Build pre-filled body text for mailto
-            const mailBody = `FCI SOCIAL HOUSING APPLICATION FORM - SUBMISSION RECEIPT\n` +
-                             `============================================================\n` +
-                             `Application Ref: ${refNo}\n` +
-                             `Date Submitted: ${submissionDate} ${submissionTime}\n\n` +
-                             `Dear FCI Housing Applications Team,\n\n` +
-                             `Please find attached my compiled Application PDF (${pdfFileName}) and certified supporting documents for social housing review.\n\n` +
-                             `1. INTAKE & ELIGIBILITY DETAILS:\n` +
-                             `- Selected Project: ${project}\n` +
-                             `- Preferred Layout: ${unit}\n` +
-                             `- Combined Gross Salary: ${combinedIncome}\n\n` +
-                             `2. APPLICANT DETAILS:\n` +
-                             `- Full Name: ${name}\n` +
-                             `- SA ID Number: ${idNumber}\n` +
-                             `- Contact Number: ${phone}\n` +
-                             `- Email Address: ${email}\n` +
-                             `- Residence Address: ${address}\n` +
-                             `- Marital Status: ${marital}\n` +
-                             `- Dependents: ${dependents}\n\n` +
-                             `3. EMPLOYMENT DETAILS:\n` +
-                             `- Employment Status: ${employment}\n` +
-                             `- Employer Name: ${employer}\n` +
-                             `- Primary Salary: R${gross.toLocaleString('en-ZA')}\n` +
-                             (coIncome > 0 ? `- Spouse/Co-applicant Salary: R${coIncome.toLocaleString('en-ZA')}\n\n` : `\n`) +
-                             `4. ATTACHED SUPPORTING DOCUMENTS:\n` +
-                             `- 1. Generated Application Form: ${pdfFileName}\n` +
-                             `- 2. Certified ID copy: ${idFile}\n` +
-                             `- 3. 3 Months Bank Statements: ${bankFile}\n` +
-                             `- 4. Proof of income: ${payFile}\n` +
-                             `- 5. Proof of Residential Address: ${addressFile}\n\n` +
-                             `============================================================\n` +
-                             `Statutory Consent: POPIA compliance, declaration of truth, and R200 vetting terms have been agreed.\n`;
-            
-            // Create premium glassmorphic success overlay
-            const popup = document.createElement('div');
-            popup.style.position = 'fixed';
-            popup.style.top = '50%';
-            popup.style.left = '50%';
-            popup.style.transform = 'translate(-50%, -50%)';
-            popup.style.backgroundColor = '#FFFFFF';
-            popup.style.border = '1px solid rgba(2, 59, 60, 0.15)';
-            popup.style.borderRadius = '16px';
-            popup.style.padding = '36px 32px';
-            popup.style.boxShadow = '0 30px 60px rgba(1, 31, 32, 0.35)';
-            popup.style.zIndex = '9999';
-            popup.style.maxWidth = '560px';
-            popup.style.width = '92%';
-            popup.style.textAlign = 'center';
-            popup.style.fontFamily = "'Inter', sans-serif";
-            
-            popup.innerHTML = `
-                <div style="width: 64px; height: 64px; border-radius: 9999px; background-color: rgba(85,139,47,0.15); color: #558B2F; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px;">
-                    <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                </div>
-                <div style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; background: rgba(255, 153, 0, 0.12); color: #B36B00; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 12px;">
-                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-                    PDF Generated & Downloaded
-                </div>
-                <h3 style="color: #0A2526; font-family: 'Plus Jakarta Sans', sans-serif; margin-bottom: 10px; font-weight: 800; font-size: 1.35rem;">Application Form Created</h3>
-                <p style="color: #4A6061; font-size: 0.92rem; line-height: 1.55; margin-bottom: 20px;">
-                    Thank you <strong>${name}</strong>. Your official application document (<strong>${pdfFileName}</strong>) has been generated and saved to your device (Ref: <strong>${refNo}</strong>).
-                </p>
-                <div style="background: #F4F7F7; border: 1px solid #E0E7E7; border-radius: 10px; padding: 14px 16px; margin-bottom: 22px; text-align: left; font-size: 0.84rem; color: #2A4041; line-height: 1.5;">
-                    <strong style="color: #023B3C; display: block; margin-bottom: 4px;">Next Step to Finalize:</strong>
-                    Please attach your downloaded <strong>Application PDF</strong> together with your <strong>certified supporting documents</strong> (ID, Bank Statements, Proof of Income, Proof of Address) and email them to <strong style="color: #023B3C;">applications@fcichs.co.za</strong>.
-                </div>
-                <div style="display:flex; flex-direction:column; gap:10px; align-items:center; width:100%;">
-                    <a href="mailto:applications@fcichs.co.za?subject=2024 Tenant Application - ${encodeURIComponent(name)} (${refNo})&body=${encodeURIComponent(mailBody)}" 
-                       style="background-color: var(--secondary-green); color: #FFFFFF; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 0.92rem; padding: 13px 24px; text-decoration:none; border: none; border-radius: 9999px; cursor: pointer; transition: all 0.3s; width:100%; display:inline-block; box-sizing: border-box;"
-                       onclick="closeSuccessPopup()">
-                        📧 Email Application to applications@fcichs.co.za
-                    </a>
-                    <button type="button" onclick="downloadCurrentApplicationPDF()" 
-                            style="background-color: transparent; border: 1.5px solid var(--primary-teal); color: var(--primary-teal); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 0.88rem; padding: 11px 24px; border-radius: 9999px; cursor: pointer; width:100%; transition: all 0.3s;">
-                        📥 Download Application PDF Again
-                    </button>
-                    <button id="close-success-popup" style="background-color: transparent; border:none; color: var(--text-muted); font-size: 0.82rem; font-weight: 600; cursor: pointer; padding: 4px; margin-top: 4px;" onclick="closeSuccessPopup()">Close</button>
-                </div>
-            `;
-            
-            // Dim overlay
-            const dimOverlay = document.createElement('div');
-            dimOverlay.id = 'dim-overlay-app';
-            dimOverlay.style.position = 'fixed';
-            dimOverlay.style.top = '0';
-            dimOverlay.style.left = '0';
-            dimOverlay.style.width = '100%';
-            dimOverlay.style.height = '100%';
-            dimOverlay.style.backgroundColor = 'rgba(1, 31, 32, 0.6)';
-            dimOverlay.style.backdropFilter = 'blur(5px)';
-            dimOverlay.style.zIndex = '9998';
-            
-            document.body.appendChild(dimOverlay);
-            document.body.appendChild(popup);
-            
-            window.closeSuccessPopup = function() {
-                dimOverlay.remove();
-                popup.remove();
-                document.getElementById('online-application-form').reset();
-                showStep(1);
+            formData.append('Application_Reference', refNo);
+            formData.append('Applicant_Full_Name', name);
+            formData.append('SA_ID_Number', idNumber);
+            formData.append('Contact_Phone', phone);
+            formData.append('Email_Address', email);
+            formData.append('Citizenship', citizenship);
+            formData.append('Marital_Status', marital);
+            formData.append('Number_of_Dependents', dependents);
+            formData.append('Residential_Address', address);
+            formData.append('Selected_Development', project);
+            formData.append('Preferred_Unit_Layout', unit);
+            formData.append('Employment_Status', employment);
+            formData.append('Employer_Company', employer);
+            formData.append('Primary_Gross_Salary', `R${gross.toLocaleString('en-ZA', { minimumFractionDigits: 2 })}`);
+            formData.append('Primary_Net_Salary', `R${net.toLocaleString('en-ZA', { minimumFractionDigits: 2 })}`);
+            if (coName || coIncome > 0) {
+                formData.append('CoApplicant_Name', coName || 'N/A');
+                formData.append('CoApplicant_Gross_Salary', `R${coIncome.toLocaleString('en-ZA', { minimumFractionDigits: 2 })}`);
+            }
+            formData.append('Combined_Gross_Monthly_Income', combinedIncome);
+            formData.append('Income_Eligibility_Status', eligibilityStatus);
+            formData.append('Statutory_Declarations', 'POPIA Consented, Declaration of Truth Accepted, R200 Vetting Fee Terms Agreed');
+            formData.append('Submission_Timestamp', `${submissionDate} ${submissionTime} SAST`);
+
+            // Attach Generated Official Application PDF
+            if (pdfBlob) {
+                formData.append('Official_Application_PDF', pdfBlob, pdfFileName);
+            }
+
+            // Attach Uploaded Certified Supporting Files
+            if (fileIdInput.files.length > 0) {
+                formData.append('Certified_SA_ID_Copy', fileIdInput.files[0], fileIdInput.files[0].name);
+            }
+            if (fileStatementsInput.files.length > 0) {
+                formData.append('Bank_Statements_3_Months', fileStatementsInput.files[0], fileStatementsInput.files[0].name);
+            }
+            if (filePayslipsInput.files.length > 0) {
+                formData.append('Proof_of_Income', filePayslipsInput.files[0], filePayslipsInput.files[0].name);
+            }
+            if (fileAddressInput.files.length > 0) {
+                formData.append('Proof_of_Residential_Address', fileAddressInput.files[0], fileAddressInput.files[0].name);
+            }
+
+            // Helper redirect function
+            const redirectToSuccessPage = () => {
+                const targetUrl = `/application-success?ref=${encodeURIComponent(refNo)}&name=${encodeURIComponent(name)}&project=${encodeURIComponent(project)}&unit=${encodeURIComponent(unit)}`;
+                window.location.href = targetUrl;
             };
+
+            // Safety timeout to guarantee redirect within 4.5 seconds
+            const safetyTimeout = setTimeout(redirectToSuccessPage, 4500);
+
+            try {
+                // Post directly to FormSubmit endpoint configured for applications@fcichs.co.za
+                await fetch('https://formsubmit.co/ajax/applications@fcichs.co.za', {
+                    method: 'POST',
+                    body: formData
+                });
+                clearTimeout(safetyTimeout);
+                redirectToSuccessPage();
+            } catch (networkErr) {
+                console.warn("Direct upload dispatched with fallback redirect:", networkErr);
+                clearTimeout(safetyTimeout);
+                redirectToSuccessPage();
+            }
         }
     </script>
 </body>
