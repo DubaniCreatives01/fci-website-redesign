@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="fci-api-base" content="https://api.fcichs.co.za">
     <title>Application Submitted Successfully - FCI Community Housing Services</title>
     <meta name="description" content="Your social housing application has been successfully submitted to FCI Community Housing Services. View your tracking code, submission details, and follow-up guidance.">
     <link rel="icon" type="image/jpeg" href="assets/images/favicon.jpg">
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/main.css?v=1.0.8">
     <link rel="canonical" href="https://fcichs.co.za/application-success">
     <!-- Clean URLs Client-Side Redirect -->
     <script>
@@ -32,7 +33,7 @@
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            background-color: rgba(85, 139, 47, 0.12);
+            background-color: rgba(105, 153, 54, 0.12);
             color: var(--secondary-green);
             display: flex;
             align-items: center;
@@ -40,7 +41,7 @@
             margin: 0 auto 24px;
         }
         .tracking-box {
-            background: linear-gradient(135deg, rgba(2, 59, 60, 0.04), rgba(255, 153, 0, 0.08));
+            background: linear-gradient(135deg, rgba(2, 59, 60, 0.04), rgba(255, 158, 0, 0.08));
             border: 2px dashed rgba(2, 59, 60, 0.25);
             border-radius: var(--radius-md);
             padding: 24px 32px;
@@ -80,7 +81,7 @@
             border-top: 3px solid var(--primary-teal);
         }
         .pipeline-step.completed {
-            background: rgba(85, 139, 47, 0.05);
+            background: rgba(105, 153, 54, 0.05);
             border-color: var(--secondary-green);
             border-top: 3px solid var(--secondary-green);
         }
@@ -136,7 +137,7 @@
             gap: 6px;
             padding: 6px 12px;
             border-radius: var(--radius-pill);
-            background: rgba(85, 139, 47, 0.12);
+            background: rgba(105, 153, 54, 0.12);
             color: #33691E;
             font-size: 0.82rem;
             font-weight: 700;
@@ -174,17 +175,6 @@
     </style>
 </head>
 <body>
-    <!-- ==========================================================================
-       DISCLAIMER BANNER
-       ========================================================================== -->
-    <div class="disclaimer-banner" id="disclaimer-marquee-banner">
-        <div class="disclaimer-marquee">
-            <div class="disclaimer-track">
-                <span> Important Update: Please be advised that DCI CHS has ceased all operations. As part of our transition to FCI CHS, we have officially migrated to our new website domain: fcichs.co.za]. Any and all official correspondence will come strictly from designated FCI CHS representatives utilizing their unique email addresses tied to this new domain. @fcichs.co.za</span>
-                <span> Important Update: Please be advised that DCI CHS has ceased all operations. As part of our transition to FCI CHS, we have officially migrated to our new website domain: fcichs.co.za]. Any and all official correspondence will come strictly from designated FCI CHS representatives utilizing their unique email addresses tied to this new domain. @fcichs.co.za</span>
-            </div>
-        </div>
-    </div>
 
     <!-- ==========================================================================
        TOP INFO BAR
@@ -395,7 +385,7 @@
                 </div>
 
                 <!-- Next Steps & Follow-Up Guidance -->
-                <div style="margin-top: 36px; border-left: 4px solid var(--accent-orange); padding: 20px 24px; background: rgba(255, 153, 0, 0.05); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+                <div style="margin-top: 36px; border-left: 4px solid var(--accent-orange); padding: 20px 24px; background: rgba(255, 158, 0, 0.05); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
                     <h4 style="color: var(--primary-teal); margin-bottom: 8px; font-size: 1rem;">What Happens Next?</h4>
                     <ul style="padding-left: 20px; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.65;">
                         <li>Our applications unit will review your certified documents within <strong>2 to 5 business days</strong>.</li>
@@ -485,7 +475,7 @@
                 <div class="footer-newsletter" id="footer-col-news">
                     <h3 class="footer-heading">Tenant Newsletter</h3>
                     <p>Subscribe to receive quarterly newsletters regarding active developments and applicant lotteries.</p>
-                    <form class="newsletter-form" id="newsletter-subscription-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+                    <form class="newsletter-form" id="newsletter-subscription-form">
                         <input type="email" class="newsletter-input" placeholder="Your Email Address" aria-label="Email subscription" required id="newsletter-email">
                         <button type="submit" class="newsletter-btn" id="btn-newsletter-sub">Subscribe</button>
                     </form>
@@ -513,6 +503,7 @@
 
     <!-- Scripts -->
     <script src="assets/js/jspdf.umd.min.js"></script>
+    <script src="assets/js/forms.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/motion.js"></script>
     <script>

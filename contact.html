@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="fci-api-base" content="https://api.fcichs.co.za">
     <title>Contact Us - FCI Community Housing Services</title>
     <meta name="description" content="Get in touch with FCI Community Housing Services for housing applications, partnership opportunities, and general enquiries.">
     <link rel="icon" type="image/jpeg" href="assets/images/favicon.jpg">
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/main.css?v=1.0.8">
     <style>
         /* Custom map design styles */
         .mock-map-container {
@@ -31,12 +32,12 @@
             background-size: 30px 30px;
         }
         .map-line {
-            stroke: rgba(255, 153, 0, 0.15);
+            stroke: rgba(255, 158, 0, 0.15);
             stroke-width: 2;
             fill: none;
         }
         .map-line-main {
-            stroke: rgba(255, 153, 0, 0.35);
+            stroke: rgba(255, 158, 0, 0.35);
             stroke-dasharray: 6 4;
         }
         .map-pulse {
@@ -48,21 +49,21 @@
             height: 16px;
             background-color: var(--accent-orange);
             border-radius: var(--radius-pill);
-            box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.7);
+            box-shadow: 0 0 0 0 rgba(255, 158, 0, 0.7);
             animation: pulse-orange 2s infinite;
         }
         @keyframes pulse-orange {
             0% {
                 transform: translate(-50%, -50%) scale(0.95);
-                box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.7);
+                box-shadow: 0 0 0 0 rgba(255, 158, 0, 0.7);
             }
             70% {
                 transform: translate(-50%, -50%) scale(1);
-                box-shadow: 0 0 0 15px rgba(255, 153, 0, 0);
+                box-shadow: 0 0 0 15px rgba(255, 158, 0, 0);
             }
             100% {
                 transform: translate(-50%, -50%) scale(0.95);
-                box-shadow: 0 0 0 0 rgba(255, 153, 0, 0);
+                box-shadow: 0 0 0 0 rgba(255, 158, 0, 0);
             }
         }
         .map-glass-card {
@@ -93,17 +94,6 @@
     </script>
 </head>
 <body>
-    <!-- ==========================================================================
-       DISCLAIMER BANNER
-       ========================================================================== -->
-    <div class="disclaimer-banner" id="disclaimer-marquee-banner">
-        <div class="disclaimer-marquee">
-            <div class="disclaimer-track">
-                <span> Important Update: Please be advised that DCI CHS has ceased all operations. As part of our transition to FCI CHS, we have officially migrated to our new website domain: fcichs.co.za]. Any and all official correspondence will come strictly from designated FCI CHS representatives utilizing their unique email addresses tied to this new domain. @fcichs.co.za</span>
-                <span> Important Update: Please be advised that DCI CHS has ceased all operations. As part of our transition to FCI CHS, we have officially migrated to our new website domain: fcichs.co.za]. Any and all official correspondence will come strictly from designated FCI CHS representatives utilizing their unique email addresses tied to this new domain. @fcichs.co.za</span>
-            </div>
-        </div>
-    </div>
 
     <!-- ==========================================================================
        TOP INFO BAR
@@ -216,7 +206,7 @@
                             <path d="M200 -50 L280 450" class="map-line" />
                             <path d="M50 80 C 150 120, 250 200, 450 180" class="map-line" />
                             <!-- Location circle map overlay -->
-                            <circle cx="230" cy="190" r="40" fill="none" stroke="rgba(255, 153, 0, 0.2)" stroke-width="1" />
+                            <circle cx="230" cy="190" r="40" fill="none" stroke="rgba(255, 158, 0, 0.2)" stroke-width="1" />
                         </svg>
                         <div class="map-pulse" id="map-pin-pulse"></div>
                         <div class="map-glass-card" id="map-label-card">
@@ -231,7 +221,7 @@
                     <h3 style="margin-bottom: 12px;" id="form-header-title">Send An Inquiry</h3>
                     <p style="color: var(--text-secondary); margin-bottom: 32px; font-size: 0.95rem;" id="form-header-desc">Fill in the fields below and our housing department administrators will get in touch with you as soon as possible.</p>
                     
-                    <form id="contact-inquiry-form" onsubmit="submitForm(event)">
+                    <form id="contact-inquiry-form">
                         <!-- Field 1: Name -->
                         <div class="form-group">
                             <input type="text" class="form-control" id="form-name" required placeholder=" ">
@@ -284,14 +274,17 @@
             <div class="footer-top" id="footer-links-grid">
                 <!-- Column 1: Brand Info -->
                 <div class="footer-brand" id="footer-col-brand">
-                    <img loading="lazy" src="assets/images/newLogo.png" alt="FCI Logo" style="height: 55px; width: auto; margin-bottom: 24px; filter: brightness(0) invert(1);" id="footer-logo">
+                    <img loading="lazy" src="assets/images/newLogo.png" alt="FCI Logo" style="height: 55px; width: auto; margin-bottom: 24px;" id="footer-logo">
                     <p>FCI Community Housing Services is a Level 1 BEE Section 21 NGO developing and managing quality, affordable social and rental housing since 2012.</p>
                     <div class="social-links" id="footer-social-row">
-                        <a href="https://x.com/fcichs" class="social-icon" aria-label="X/Twitter" target="_blank" rel="noopener" id="social-x">
+                        <a href="https://x.com/fcichs" class="social-icon" aria-label="X" target="_blank" rel="noopener" id="social-x">
                             <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                         </a>
                         <a href="https://facebook.com/fcichs" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener" id="social-fb">
                             <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg>
+                        </a>
+                        <a href="https://www.youtube.com/@FCICHS" class="social-icon" aria-label="YouTube" target="_blank" rel="noopener" id="social-yt">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3.04 3.04 0 0 0-2.14-2.14C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.36.46A3.04 3.04 0 0 0 .5 6.2 31.8 31.8 0 0 0 0 12a31.8 31.8 0 0 0 .5 5.8 3.04 3.04 0 0 0 2.14 2.14C4.5 20.4 12 20.4 12 20.4s7.5 0 9.36-.46a3.04 3.04 0 0 0 2.14-2.14A31.8 31.8 0 0 0 24 12a31.8 31.8 0 0 0-.5-5.8zM9.75 15.57V8.43L15.84 12l-6.09 3.57z"/></svg>
                         </a>
                     </div>
                 </div>
@@ -331,7 +324,7 @@
                 <div class="footer-newsletter" id="footer-col-news">
                     <h3 class="footer-heading">Tenant Newsletter</h3>
                     <p>Subscribe to receive quarterly newsletters regarding active developments and applicant lotteries.</p>
-                    <form class="newsletter-form" id="newsletter-subscription-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+                    <form class="newsletter-form" id="newsletter-subscription-form">
                         <input type="email" class="newsletter-input" placeholder="Your Email Address" aria-label="Email subscription" required id="newsletter-email">
                         <button type="submit" class="newsletter-btn" id="btn-newsletter-sub">Subscribe</button>
                     </form>
@@ -363,67 +356,9 @@
 <!-- ==========================================================================
        SCRIPTS
        ========================================================================== -->
+    <script src="assets/js/forms.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/motion.js"></script>
-    <script>
-        function submitForm(event) {
-            event.preventDefault();
-            
-            const name = document.getElementById('form-name').value;
-            const email = document.getElementById('form-email').value;
-            const phone = document.getElementById('form-phone').value;
-            const division = document.getElementById('form-inquiry-type').value;
-            const message = document.getElementById('form-message').value;
-            
-            if (name && email && phone && division && message) {
-                // Construct a premium dialog layout trigger
-                const popup = document.createElement('div');
-                popup.style.position = 'fixed';
-                popup.style.top = '50%';
-                popup.style.left = '50%';
-                popup.style.transform = 'translate(-50%, -50%)';
-                popup.style.backgroundColor = '#FFFFFF';
-                popup.style.border = '1px solid rgba(2, 59, 60, 0.15)';
-                popup.style.borderRadius = '16px';
-                popup.style.padding = '40px';
-                popup.style.boxShadow = '0 24px 50px rgba(2, 59, 60, 0.25)';
-                popup.style.zIndex = '9999';
-                popup.style.maxWidth = '400px';
-                popup.style.textAlign = 'center';
-                popup.style.fontFamily = "'Inter', sans-serif";
-                
-                popup.innerHTML = `
-                    <div style="width: 60px; height: 60px; border-radius: 9999px; background-color: rgba(85,139,47,0.15); color: #558B2F; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
-                        <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                    </div>
-                    <h3 style="color: #0A2526; font-family: 'Plus Jakarta Sans', sans-serif; margin-bottom: 12px; font-weight: 700;">Inquiry Sent Successfully</h3>
-                    <p style="color: #4A6061; font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px;">
-                        Thank you <strong>${name}</strong>. Your message has been delivered directly to our <strong>${division}</strong> department. An administrator will respond via <strong>${email}</strong> shortly.
-                    </p>
-                    <button id="close-success-popup" style="background-color: #023B3C; color: #FFFFFF; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 0.9rem; padding: 12px 24px; border: none; border-radius: 9999px; cursor: pointer; transition: all 0.3s;">Close Window</button>
-                `;
-                
-                // Dim overlay
-                const dimOverlay = document.createElement('div');
-                dimOverlay.style.position = 'fixed';
-                dimOverlay.style.top = '0';
-                dimOverlay.style.left = '0';
-                dimOverlay.style.width = '100%';
-                dimOverlay.style.height = '100%';
-                dimOverlay.style.backgroundColor = 'rgba(1, 31, 32, 0.6)';
-                dimOverlay.style.backdropFilter = 'blur(5px)';
-                dimOverlay.style.zIndex = '9998';
-                
-                document.body.appendChild(dimOverlay);
-                document.body.appendChild(popup);
-                
-                document.getElementById('close-success-popup').addEventListener('click', () => {
-                    dimOverlay.remove();
-                    popup.remove();
-                    document.getElementById('contact-inquiry-form').reset();
-                });
-            }
-        }
-    </script>
+
 </body>
 </html>

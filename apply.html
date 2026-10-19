@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="fci-api-base" content="https://api.fcichs.co.za">
     <title>Online Tenant Application - FCI Community Housing Services</title>
     <meta name="description" content="Apply online for FCI affordable housing developments, check eligibility, and submit required documents in 5 simple steps.">
     <link rel="icon" type="image/jpeg" href="assets/images/favicon.jpg">
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/main.css?v=1.0.8">
     <style>
         /* Custom Stepper Wizard Styles */
         .stepper-container {
@@ -128,7 +129,7 @@
 
         /* Eligibility Warning Block */
         .eligibility-alert {
-            background-color: rgba(255, 153, 0, 0.08);
+            background-color: rgba(255, 158, 0, 0.08);
             border-left: 4px solid var(--accent-orange);
             border-radius: 4px;
             padding: 16px 20px;
@@ -273,17 +274,6 @@
     </script>
 </head>
 <body>
-    <!-- ==========================================================================
-       DISCLAIMER BANNER
-       ========================================================================== -->
-    <div class="disclaimer-banner" id="disclaimer-marquee-banner">
-        <div class="disclaimer-marquee">
-            <div class="disclaimer-track">
-                <span> Important Update: Please be advised that DCI CHS has ceased all operations. As part of our transition to FCI CHS, we have officially migrated to our new website domain: fcichs.co.za]. Any and all official correspondence will come strictly from designated FCI CHS representatives utilizing their unique email addresses tied to this new domain. @fcichs.co.za</span>
-                <span> Important Update: Please be advised that DCI CHS has ceased all operations. As part of our transition to FCI CHS, we have officially migrated to our new website domain: fcichs.co.za]. Any and all official correspondence will come strictly from designated FCI CHS representatives utilizing their unique email addresses tied to this new domain. @fcichs.co.za</span>
-            </div>
-        </div>
-    </div>
 
     <!-- ==========================================================================
        TOP INFO BAR (Hidden on Mobile automatically by design system CSS)
@@ -422,7 +412,7 @@
                 <div class="eligibility-alert active" id="elig-info-banner">
                     <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="color: var(--accent-orange); flex-shrink:0; margin-top:2px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
                     <div>
-                        <strong style="color: var(--text-primary);">Municipal Income Limit:</strong> Social housing units are heavily subsidized. The combined gross household income of all applicants must strictly fall within **R1,800 to R22,000 per month** to qualify.
+                        <strong style="color: var(--text-primary);">Municipal Income Limit:</strong> Social housing units are heavily subsidized. The combined gross household income of all applicants must strictly fall within <strong>R1,800 to R22,000 per month</strong> to qualify.
                     </div>
                 </div>
 
@@ -725,14 +715,17 @@
             <div class="footer-top" id="footer-links-grid">
                 <!-- Column 1: Brand Info -->
                 <div class="footer-brand" id="footer-col-brand">
-                    <img loading="lazy" src="assets/images/newLogo.png" alt="FCI Logo" style="height: 55px; width: auto; margin-bottom: 24px; filter: brightness(0) invert(1);" id="footer-logo">
+                    <img loading="lazy" src="assets/images/newLogo.png" alt="FCI Logo" style="height: 55px; width: auto; margin-bottom: 24px;" id="footer-logo">
                     <p>FCI Community Housing Services is a Level 1 BEE Section 21 NGO developing and managing quality, affordable social and rental housing since 2012.</p>
                     <div class="social-links" id="footer-social-row">
-                        <a href="https://x.com/fcichs" class="social-icon" aria-label="X/Twitter" target="_blank" rel="noopener" id="social-x">
+                        <a href="https://x.com/fcichs" class="social-icon" aria-label="X" target="_blank" rel="noopener" id="social-x">
                             <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                         </a>
                         <a href="https://facebook.com/fcichs" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener" id="social-fb">
                             <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg>
+                        </a>
+                        <a href="https://www.youtube.com/@FCICHS" class="social-icon" aria-label="YouTube" target="_blank" rel="noopener" id="social-yt">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3.04 3.04 0 0 0-2.14-2.14C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.36.46A3.04 3.04 0 0 0 .5 6.2 31.8 31.8 0 0 0 0 12a31.8 31.8 0 0 0 .5 5.8 3.04 3.04 0 0 0 2.14 2.14C4.5 20.4 12 20.4 12 20.4s7.5 0 9.36-.46a3.04 3.04 0 0 0 2.14-2.14A31.8 31.8 0 0 0 24 12a31.8 31.8 0 0 0-.5-5.8zM9.75 15.57V8.43L15.84 12l-6.09 3.57z"/></svg>
                         </a>
                     </div>
                 </div>
@@ -772,7 +765,7 @@
                 <div class="footer-newsletter" id="footer-col-news">
                     <h3 class="footer-heading">Tenant Newsletter</h3>
                     <p>Subscribe to receive quarterly newsletters regarding active developments and applicant lotteries.</p>
-                    <form class="newsletter-form" id="newsletter-subscription-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+                    <form class="newsletter-form" id="newsletter-subscription-form">
                         <input type="email" class="newsletter-input" placeholder="Your Email Address" aria-label="Email subscription" required id="newsletter-email">
                         <button type="submit" class="newsletter-btn" id="btn-newsletter-sub">Subscribe</button>
                     </form>
@@ -805,6 +798,7 @@
        SCRIPTS
        ========================================================================== -->
     <script src="assets/js/jspdf.umd.min.js"></script>
+    <script src="assets/js/forms.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/motion.js"></script>
     <script>
@@ -904,7 +898,7 @@
             const warning = document.getElementById('income-warning');
             if (total < 1800 || total > 22000) {
                 warning.querySelector('strong').textContent = "Qualifying Income Warning:";
-                warning.querySelector('div').innerHTML = `<strong style="color: #c62828;">Qualifying Income Alert:</strong> Combined income is **R${total.toLocaleString('en-ZA')}**. This falls outside the subsidized social housing bracket (R1,800 - R22,000 per month). You may not qualify for units.`;
+                warning.querySelector('div').innerHTML = `<strong style="color: #c62828;">Qualifying Income Alert:</strong> Combined income is R${total.toLocaleString('en-ZA')}. This falls outside the subsidized social housing bracket (R1,800 - R22,000 per month). You may not qualify for units.`;
                 warning.classList.add('active');
                 // Also toggle the yes/no radio selection to match
                 document.querySelector('input[name="eligibility-income-range"][value="no"]').checked = true;
@@ -977,7 +971,7 @@
             const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
             
             const primaryColor = [2, 59, 60];    // #023B3C Deep Teal
-            const accentColor = [255, 153, 0];   // #FF9900 Gold / Orange
+            const accentColor = [255, 153, 0];   // #FF9E00 Gold / Orange
             const darkColor = [1, 31, 32];       // #011F20 Navy Dark
             const grayBg = [245, 247, 248];      // Light Section Background
             const textGray = [80, 95, 96];
@@ -1190,8 +1184,8 @@
                             <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
                                 <tr>
                                     <td valign="middle">
-                                        <div style="display: inline-block; background-color: rgba(255, 153, 0, 0.18); border: 1px solid #FF9900; border-radius: 20px; padding: 4px 14px; margin-bottom: 10px;">
-                                            <span style="font-size: 11px; font-weight: 700; color: #FFAA00; text-transform: uppercase; letter-spacing: 1.2px;">Official Tenant Application Submission</span>
+                                        <div style="display: inline-block; background-color: rgba(255, 158, 0, 0.18); border: 1px solid #FF9E00; border-radius: 20px; padding: 4px 14px; margin-bottom: 10px;">
+                                            <span style="font-size: 11px; font-weight: 700; color: #FF9E00; text-transform: uppercase; letter-spacing: 1.2px;">Official Tenant Application Submission</span>
                                         </div>
                                         <div style="font-size: 24px; font-weight: 800; color: #FFFFFF; letter-spacing: 0.5px; line-height: 1.2; margin-bottom: 4px;">
                                             FCI COMMUNITY HOUSING SERVICES
@@ -1205,7 +1199,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td height="5" style="background: linear-gradient(90deg, #FF9900 0%, #FFB84D 50%, #558B2F 100%); font-size: 0; line-height: 0;">&nbsp;</td>
+                        <td height="5" style="background: linear-gradient(90deg, #FF9E00 0%, #FFB84D 50%, #699936 100%); font-size: 0; line-height: 0;">&nbsp;</td>
                     </tr>
                     <tr>
                         <td style="padding: 28px 44px 0;" class="body-padding">
@@ -1216,7 +1210,7 @@
                                         <span style="font-size: 20px; font-weight: 800; color: #023B3C; letter-spacing: 0.5px;">${data.refNo}</span>
                                     </td>
                                     <td valign="middle" align="right" class="stack-cell">
-                                        <div style="display: inline-block; background-color: rgba(85, 139, 47, 0.14); border: 1px solid #558B2F; border-radius: 20px; padding: 6px 14px;">
+                                        <div style="display: inline-block; background-color: rgba(105, 153, 54, 0.14); border: 1px solid #699936; border-radius: 20px; padding: 6px 14px;">
                                             <span style="font-size: 12px; font-weight: 700; color: #2E5B10;">&#10003; Submitted & Attached (5 PDFs)</span>
                                         </div>
                                         <div style="font-size: 11px; color: #627A7B; margin-top: 4px; font-weight: 500;">
@@ -1252,7 +1246,7 @@
                                             <tr>
                                                 <td style="padding: 6px 0; color: #64748B; font-weight: 600;">Eligibility:</td>
                                                 <td style="padding: 6px 0; color: #2E5B10; font-weight: 700;">
-                                                    <span style="background: rgba(85, 139, 47, 0.12); padding: 2px 8px; border-radius: 4px;">&#10003; Qualifies (In Limits)</span>
+                                                    <span style="background: rgba(105, 153, 54, 0.12); padding: 2px 8px; border-radius: 4px;">&#10003; Qualifies (In Limits)</span>
                                                 </td>
                                             </tr>
                                         </table>
@@ -1317,7 +1311,7 @@
                                                 <td colspan="2" style="padding-top: 10px;">
                                                     <div style="background: #023B3C; border-radius: 6px; padding: 8px 12px; color: #FFFFFF;">
                                                         <span style="font-size: 11px; text-transform: uppercase; color: #D0E4E5; display: block;">Combined Household Gross:</span>
-                                                        <strong style="font-size: 15px; color: #FF9900;">${data.combinedIncome}</strong>
+                                                        <strong style="font-size: 15px; color: #FF9E00;">${data.combinedIncome}</strong>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -1326,7 +1320,7 @@
                                     <td width="4%">&nbsp;</td>
                                     <!-- Card 4: Attached Dossier -->
                                     <td width="48%" valign="top" class="col-half" style="background: #F7FCF8; border: 1px solid #CDE5CF; border-radius: 10px; padding: 20px;">
-                                        <div style="font-size: 12px; font-weight: 800; color: #2E5B10; text-transform: uppercase; letter-spacing: 0.6px; border-bottom: 2px solid #558B2F; padding-bottom: 8px; margin-bottom: 14px;">
+                                        <div style="font-size: 12px; font-weight: 800; color: #2E5B10; text-transform: uppercase; letter-spacing: 0.6px; border-bottom: 2px solid #699936; padding-bottom: 8px; margin-bottom: 14px;">
                                             &#128206; Attached PDF Dossier (5 Files)
                                         </div>
                                         <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="font-size: 12px; line-height: 1.5;">
@@ -1374,7 +1368,7 @@
                                 </tr>
                             </table>
                             <!-- Statutory Consent Box -->
-                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #FFFDF9; border-left: 4px solid #FF9900; border-top: 1px solid #FFE4B2; border-right: 1px solid #FFE4B2; border-bottom: 1px solid #FFE4B2; border-radius: 0 8px 8px 0; padding: 14px 18px; margin-bottom: 28px;">
+                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #FFFDF9; border-left: 4px solid #FF9E00; border-top: 1px solid #FFE4B2; border-right: 1px solid #FFE4B2; border-bottom: 1px solid #FFE4B2; border-radius: 0 8px 8px 0; padding: 14px 18px; margin-bottom: 28px;">
                                 <tr>
                                     <td style="font-size: 12px; color: #7A4F00; line-height: 1.55;">
                                         <strong>Statutory Compliance & Legal Consent Verified:</strong><br>
@@ -1404,7 +1398,7 @@
                             <div style="font-size: 14px; font-weight: 800; margin-bottom: 4px; letter-spacing: 0.5px;">FCI COMMUNITY HOUSING SERVICES NPC</div>
                             <div style="font-size: 11.5px; color: #C2DADB; line-height: 1.6; margin-bottom: 12px;">
                                 West Tower Offices 2.4, Canal Walk, Century Boulevard, Century City, Cape Town, 7441<br>
-                                Direct Line: <a href="tel:+27218797363" style="color: #FFAA00; text-decoration: none;">+27 21 879 7363</a> &bull; Email: <a href="mailto:info@fcichs.co.za" style="color: #FFAA00; text-decoration: none;">info@fcichs.co.za</a> &bull; Web: <a href="https://fcichs.co.za" style="color: #FFAA00; text-decoration: none;">fcichs.co.za</a>
+                                Direct Line: <a href="tel:+27218797363" style="color: #FF9E00; text-decoration: none;">+27 21 879 7363</a> &bull; Email: <a href="mailto:info@fcichs.co.za" style="color: #FF9E00; text-decoration: none;">info@fcichs.co.za</a> &bull; Web: <a href="https://fcichs.co.za" style="color: #FF9E00; text-decoration: none;">fcichs.co.za</a>
                             </div>
                             <div style="font-size: 10px; color: #8CA8A9; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 10px;">
                                 &copy; 2026 FCI Community Housing Services. Registered Social Housing Institution. All rights reserved.
@@ -1446,6 +1440,25 @@
             const fileStatementsInput = document.getElementById('file-statements');
             const filePayslipsInput = document.getElementById('file-payslips');
             const fileAddressInput = document.getElementById('file-address');
+
+            const uploads = [
+                ['Identity document', fileIdInput.files[0]],
+                ['Bank statements', fileStatementsInput.files[0]],
+                ['Payslips', filePayslipsInput.files[0]],
+                ['Proof of address', fileAddressInput.files[0]]
+            ];
+            for (const [label, file] of uploads) {
+                if (!file) {
+                    alert(label + ' is required.');
+                    return;
+                }
+                const problem = window.FCIForms.validateFile(file);
+                if (problem) {
+                    alert(problem);
+                    return;
+                }
+            }
+
 
             const idFile = fileIdInput.files[0]?.name || 'Not Uploaded';
             const bankFile = fileStatementsInput.files[0]?.name || 'Not Uploaded';
@@ -1511,11 +1524,11 @@
             submitOverlay.style.padding = '20px';
 
             submitOverlay.innerHTML = `
-                <div style="background: #023B3C; border: 1px solid rgba(255, 153, 0, 0.3); border-radius: 16px; padding: 40px 32px; max-width: 500px; width: 100%; box-shadow: 0 25px 50px rgba(0,0,0,0.5);">
+                <div style="background: #023B3C; border: 1px solid rgba(255, 158, 0, 0.3); border-radius: 16px; padding: 40px 32px; max-width: 500px; width: 100%; box-shadow: 0 25px 50px rgba(0,0,0,0.5);">
                     <div style="width: 56px; height: 56px; border: 4px solid rgba(255, 255, 255, 0.2); border-top-color: var(--accent-orange); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
                     <h3 style="color: #FFFFFF; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.3rem; margin-bottom: 10px; font-weight: 800;">Submitting Application</h3>
                     <p style="color: #B0C4C5; font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px;">
-                        Packaging your official application PDF and certified documents to transmit straight to <strong>info@fcichs.co.za</strong>...
+                        Packaging your application and documents for the FCI housing office. Reply from the office will come back to your email address.
                     </p>
                     <div style="font-size: 0.8rem; color: var(--accent-orange); font-weight: 600;">Please do not close or refresh this tab.</div>
                 </div>
@@ -1540,7 +1553,8 @@
                     const pdfBase64 = await blobToBase64(pdfBlob);
                     attachmentsList.push({
                         name: pdfFileName,
-                        content: pdfBase64
+                        content: pdfBase64,
+                        role: 'application'
                     });
                     // Automatically trigger PDF download
                     doc.save(pdfFileName);
@@ -1555,89 +1569,77 @@
                     const idBase64 = await blobToBase64(fileIdInput.files[0]);
                     attachmentsList.push({
                         name: fileIdInput.files[0].name,
-                        content: idBase64
+                        content: idBase64,
+                        role: 'id'
                     });
                 }
                 if (fileStatementsInput.files.length > 0) {
                     const stmtBase64 = await blobToBase64(fileStatementsInput.files[0]);
                     attachmentsList.push({
                         name: fileStatementsInput.files[0].name,
-                        content: stmtBase64
+                        content: stmtBase64,
+                        role: 'statements'
                     });
                 }
                 if (filePayslipsInput.files.length > 0) {
                     const payBase64 = await blobToBase64(filePayslipsInput.files[0]);
                     attachmentsList.push({
                         name: filePayslipsInput.files[0].name,
-                        content: payBase64
+                        content: payBase64,
+                        role: 'payslips'
                     });
                 }
                 if (fileAddressInput.files.length > 0) {
                     const addrBase64 = await blobToBase64(fileAddressInput.files[0]);
                     attachmentsList.push({
                         name: fileAddressInput.files[0].name,
-                        content: addrBase64
+                        content: addrBase64,
+                        role: 'address'
                     });
                 }
             } catch (fileErr) {
-                console.warn("Attachment encoding warning:", fileErr);
+                submitOverlay.remove();
+                alert('A document could not be read. Please choose a PDF, JPG, or PNG under 4 MB.');
+                return;
             }
 
-            // Build Brevo API Payload
-            const brevoPayload = {
-                sender: {
-                    name: 'FCICHS',
-                    email: 'dubanicreatives@gmail.com'
-                },
-                to: [
-                    {
-                        email: 'fcicommunityhousing@gmail.com',
-                        name: 'FCICHS Applications Department'
-                    },
-                    {
-                        email: 'info@fcichs.co.za',
-                        name: 'FCICHS Main Inbox'
-                    }
-                ],
-                replyTo: {
-                    email: email,
-                    name: name
-                },
-                subject: `New Social Housing Application - ${name} (${refNo})`,
-                htmlContent: buildBrandedHtmlEmail(appData),
-                attachment: attachmentsList
-            };
-
-            // Helper redirect function
             const redirectToSuccessPage = () => {
                 const targetUrl = `/application-success?ref=${encodeURIComponent(refNo)}&name=${encodeURIComponent(name)}&project=${encodeURIComponent(project)}&unit=${encodeURIComponent(unit)}`;
                 window.location.href = targetUrl;
             };
 
-            // Safety timeout to guarantee redirect within 5.5 seconds
-            const safetyTimeout = setTimeout(redirectToSuccessPage, 5500);
-
             try {
-                const k1 = 'xkeysib-';
-                const k2 = 'f244a696a69ef535cc80f0790c196ca1';
-                const k3 = '9a6b7de6e9d62c23fb6d52f425bff12b-';
-                const k4 = 'kf6bRhGX4toZVwmg';
-                const bk = k1 + k2 + k3 + k4;
-                await fetch('https://api.brevo.com/v3/smtp/email', {
-                    method: 'POST',
-                    headers: {
-                        'api-key': bk,
-                        'Content-Type': 'application/json',
-                        'accept': 'application/json'
+                const form = document.getElementById('online-application-form');
+                await window.FCIForms.postJson('/api/apply', {
+                    formStartedAt: window.FCIForms.startedAt,
+                    company_website: window.FCIForms.honeypotValue(form),
+                    refNo: refNo,
+                    applicant: {
+                        name: name,
+                        email: email,
+                        idNumber: idNumber,
+                        phone: phone,
+                        citizenship: citizenship,
+                        marital: marital,
+                        dependents: dependents,
+                        address: address,
+                        project: project,
+                        unit: unit,
+                        eligibilityStatus: eligibilityStatus,
+                        employment: employment,
+                        employer: employer,
+                        gross: gross,
+                        net: net,
+                        coName: coName,
+                        coIncome: coIncome,
+                        combinedIncome: combinedIncome
                     },
-                    body: JSON.stringify(brevoPayload)
+                    attachments: attachmentsList
                 });
-                clearTimeout(safetyTimeout);
                 redirectToSuccessPage();
             } catch (err) {
-                console.warn("Email dispatch completed with fallback redirect:", err);
-                clearTimeout(safetyTimeout);
-                redirectToSuccessPage();
+                submitOverlay.remove();
+                alert(err && err.message ? err.message : 'We could not send your application. Please email the office.');
             }
         }
     </script>
