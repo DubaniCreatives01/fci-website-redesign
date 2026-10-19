@@ -5,14 +5,14 @@
    ========================================================================== */
 
 :root {
-    /* Brand Palettes */
+    /* Brand colours from the logo master artwork */
     --primary-teal: #023B3C;
     --primary-teal-light: #0d5455;
     --primary-teal-dark: #011F20;
-    --accent-orange: #FF9900;
-    --accent-orange-hover: #E68A00;
-    --secondary-green: #558B2F;
-    --secondary-green-hover: #467326;
+    --accent-orange: #FF9E00;
+    --accent-orange-hover: #E68F00;
+    --secondary-green: #699936;
+    --secondary-green-hover: #567D2C;
     
     /* Background Systems */
     --bg-primary: #FFFFFF;
@@ -272,7 +272,7 @@ section {
     content: '';
     width: 1px;
     height: 14px;
-    background-color: rgba(255, 153, 0, 0.3);
+    background-color: rgba(255, 158, 0), 0.3);
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -420,13 +420,13 @@ section {
 .btn-primary {
     background-color: var(--accent-orange);
     color: var(--text-white);
-    box-shadow: 0 4px 15px rgba(255, 153, 0, 0.25);
+    box-shadow: 0 4px 15px rgba(255, 158, 0), 0.25);
 }
 
 .btn-primary:hover {
     background-color: var(--accent-orange-hover);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 153, 0, 0.35);
+    box-shadow: 0 8px 25px rgba(255, 158, 0), 0.35);
 }
 
 .btn-secondary {
@@ -644,12 +644,12 @@ section {
 .hero-actions .btn-primary {
     background-color: var(--accent-orange);
     color: var(--text-white);
-    box-shadow: 0 6px 20px rgba(255, 153, 0, 0.3);
+    box-shadow: 0 6px 20px rgba(255, 158, 0), 0.3);
 }
 
 .hero-actions .btn-primary:hover {
     background-color: var(--accent-orange-hover);
-    box-shadow: 0 10px 30px rgba(255, 153, 0, 0.45);
+    box-shadow: 0 10px 30px rgba(255, 158, 0), 0.45);
     transform: translateY(-3px);
 }
 
@@ -1221,7 +1221,7 @@ section {
 .apply-widget {
     animation: float-apply 6s ease-in-out infinite;
     animation-delay: 2s;
-    border-color: rgba(255, 153, 0, 0.25);
+    border-color: rgba(255, 158, 0), 0.25);
 }
 
 @keyframes float-apply {
@@ -1692,14 +1692,14 @@ section {
 
 .floating-email:hover {
     background-color: #e08600;
-    box-shadow: 0 15px 30px rgba(255, 153, 0, 0.4);
+    box-shadow: 0 15px 30px rgba(255, 158, 0), 0.4);
     transform: translateY(-4px);
 }
 
 @keyframes pulse-email {
-    0% { box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.4); }
-    70% { box-shadow: 0 0 0 15px rgba(255, 153, 0, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(255, 153, 0, 0); }
+    0% { box-shadow: 0 0 0 0 rgba(255, 158, 0), 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 158, 0), 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 158, 0), 0); }
 }
 
 /* Slide-out Tooltip Labels */
@@ -1811,7 +1811,7 @@ section {
 }
 
 .hero-award-tag:hover .award-tag-img {
-    filter: drop-shadow(0 12px 24px rgba(255, 153, 0, 0.35)); /* Sleek gold glow */
+    filter: drop-shadow(0 12px 24px rgba(255, 158, 0), 0.35)); /* Sleek gold glow */
 }
 
 /* Tablet view adjustment */
@@ -2144,7 +2144,7 @@ section {
     background-color: rgba(1, 31, 32, 0.98); /* Matches sticky nav backdrop */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 153, 0, 0.25);
+    border: 1px solid rgba(255, 158, 0), 0.25);
     border-top: 2px solid var(--accent-orange);
     border-radius: var(--radius-sm);
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -2181,7 +2181,7 @@ section {
 
 .dropdown-menu li a:hover,
 .dropdown-menu li a.active-sub {
-    background-color: rgba(255, 153, 0, 0.1);
+    background-color: rgba(255, 158, 0), 0.1);
     color: var(--accent-orange);
 }
 
@@ -2265,7 +2265,7 @@ section {
 .tiktok-container:hover {
     transform: translateY(-6px);
     box-shadow: var(--shadow-premium);
-    border-color: rgba(255, 153, 0, 0.25);
+    border-color: rgba(255, 158, 0), 0.25);
     background: rgba(2, 59, 60, 0.05);
 }
 
@@ -2274,7 +2274,7 @@ section {
    ========================================================================== */
 .disclaimer-banner {
     width: 100%;
-    background-color: #FF9900; /* High contrast brand accent orange */
+    background-color: var(--accent-orange);
     color: #011F20; /* High contrast brand dark teal text */
     padding: 10px 0;
     overflow: hidden;

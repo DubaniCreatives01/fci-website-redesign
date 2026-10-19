@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="fci-api-base" content="https://fcichs-forms.dubanicreatives.workers.dev">
     <title>Programmes & Social Impact - FCI Community Housing Services</title>
     <meta name="description" content="Explore FCI Community Housing Services' social impact initiatives, community development, and educational funding through our bursary trusts.">
     <link rel="icon" type="image/jpeg" href="assets/images/favicon.jpg">
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/main.css?v=1.0.8">
     <link rel="canonical" href="https://fcichs.co.za/programmes">
     <!-- Clean URLs Client-Side Redirect -->
     <script>
@@ -21,17 +22,6 @@
     </script>
 </head>
 <body>
-    <!-- ==========================================================================
-       DISCLAIMER BANNER
-       ========================================================================== -->
-    <div class="disclaimer-banner" id="disclaimer-marquee-banner">
-        <div class="disclaimer-marquee">
-            <div class="disclaimer-track">
-                <span> Important Update: Please be advised that DCI CHS has ceased all operations. As part of our transition to FCI CHS, we have officially migrated to our new website domain: fcichs.co.za]. Any and all official correspondence will come strictly from designated FCI CHS representatives utilizing their unique email addresses tied to this new domain. @fcichs.co.za</span>
-                <span> Important Update: Please be advised that DCI CHS has ceased all operations. As part of our transition to FCI CHS, we have officially migrated to our new website domain: fcichs.co.za]. Any and all official correspondence will come strictly from designated FCI CHS representatives utilizing their unique email addresses tied to this new domain. @fcichs.co.za</span>
-            </div>
-        </div>
-    </div>
 
     <!-- ==========================================================================
        TOP INFO BAR
@@ -148,7 +138,7 @@
             <div class="grid grid-2 reveal" id="trusts-grid">
                 <!-- Trust 1 -->
                 <div class="card" style="padding: 40px; border-radius: var(--radius-lg); background-color: var(--bg-primary);" id="trust-card-nonduna">
-                    <div style="width: 50px; height: 50px; border-radius: var(--radius-md); background-color: rgba(255,153,0,0.1); color: var(--accent-orange); display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+                    <div style="width: 50px; height: 50px; border-radius: var(--radius-md); background-color: rgba(255,158,0,0.1); color: var(--accent-orange); display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
                         <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 13.5c-3.31 0-6-2.69-6-6 0-.76.15-1.48.41-2.14L12 11.5l5.59-3.14c.26.66.41 1.38.41 2.14 0 3.31-2.69 6-6 6z"/></svg>
                     </div>
                     <h3 style="margin-bottom: 16px;">Nonduna – Vasi Trust</h3>
@@ -160,7 +150,7 @@
                 
                 <!-- Trust 2 -->
                 <div class="card" style="padding: 40px; border-radius: var(--radius-lg); background-color: var(--bg-primary);" id="trust-card-nwcoast">
-                    <div style="width: 50px; height: 50px; border-radius: var(--radius-md); background-color: rgba(85,139,47,0.1); color: var(--secondary-green); display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+                    <div style="width: 50px; height: 50px; border-radius: var(--radius-md); background-color: rgba(105,153,54,0.1); color: var(--secondary-green); display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
                         <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
                     </div>
                     <h3 style="margin-bottom: 16px;">The North-West Coast Development Trust</h3>
@@ -223,14 +213,17 @@
             <div class="footer-top" id="footer-links-grid">
                 <!-- Column 1: Brand Info -->
                 <div class="footer-brand" id="footer-col-brand">
-                    <img loading="lazy" src="assets/images/newLogo.png" alt="FCI Logo" style="height: 55px; width: auto; margin-bottom: 24px; filter: brightness(0) invert(1);" id="footer-logo">
+                    <img loading="lazy" src="assets/images/newLogo.png" alt="FCI Logo" style="height: 55px; width: auto; margin-bottom: 24px;" id="footer-logo">
                     <p>FCI Community Housing Services is a Level 1 BEE Section 21 NGO developing and managing quality, affordable social and rental housing since 2012.</p>
                     <div class="social-links" id="footer-social-row">
-                        <a href="https://x.com/fcichs" class="social-icon" aria-label="X/Twitter" target="_blank" rel="noopener" id="social-x">
+                        <a href="https://x.com/fcichs" class="social-icon" aria-label="X" target="_blank" rel="noopener" id="social-x">
                             <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                         </a>
                         <a href="https://facebook.com/fcichs" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener" id="social-fb">
                             <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg>
+                        </a>
+                        <a href="https://www.youtube.com/@FCICHS" class="social-icon" aria-label="YouTube" target="_blank" rel="noopener" id="social-yt">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3.04 3.04 0 0 0-2.14-2.14C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.36.46A3.04 3.04 0 0 0 .5 6.2 31.8 31.8 0 0 0 0 12a31.8 31.8 0 0 0 .5 5.8 3.04 3.04 0 0 0 2.14 2.14C4.5 20.4 12 20.4 12 20.4s7.5 0 9.36-.46a3.04 3.04 0 0 0 2.14-2.14A31.8 31.8 0 0 0 24 12a31.8 31.8 0 0 0-.5-5.8zM9.75 15.57V8.43L15.84 12l-6.09 3.57z"/></svg>
                         </a>
                     </div>
                 </div>
@@ -270,7 +263,7 @@
                 <div class="footer-newsletter" id="footer-col-news">
                     <h3 class="footer-heading">Tenant Newsletter</h3>
                     <p>Subscribe to receive quarterly newsletters regarding active developments and applicant lotteries.</p>
-                    <form class="newsletter-form" id="newsletter-subscription-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+                    <form class="newsletter-form" id="newsletter-subscription-form">
                         <input type="email" class="newsletter-input" placeholder="Your Email Address" aria-label="Email subscription" required id="newsletter-email">
                         <button type="submit" class="newsletter-btn" id="btn-newsletter-sub">Subscribe</button>
                     </form>
@@ -302,6 +295,7 @@
 <!-- ==========================================================================
        SCRIPTS
        ========================================================================== -->
+    <script src="assets/js/forms.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/motion.js"></script>
 </body>

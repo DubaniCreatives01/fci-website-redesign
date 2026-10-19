@@ -1,0 +1,18 @@
+# Copy to worker/.dev.vars for `npx wrangler dev`. Never commit .dev.vars.
+# SMTP_PASSWORD is a Google App Password for fcicommunityhousing@gmail.com.
+# Create it only after 2-Step Verification is on. Never put that password in git.
+# See DEPLOYMENT.md.
+
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=465
+SMTP_USER=fcicommunityhousing@gmail.com
+SMTP_PASSWORD=
+SMTP_FROM_EMAIL=fcicommunityhousing@gmail.com
+SMTP_FROM_NAME=FCI Community Housing Services
+# Leave the lists blank to deliver to fcicommunityhousing@gmail.com.
+APPLICATION_TO_EMAILS=
+CONTACT_TO_EMAILS=
+NEWSLETTER_TO_EMAILS=
+PARTNERSHIP_TO_EMAILS=
+ALLOWED_ORIGINS=
+ALLOW_LOCAL_ORIGINS=
