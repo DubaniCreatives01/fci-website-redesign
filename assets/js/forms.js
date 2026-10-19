@@ -5,7 +5,7 @@
 
   function apiBase() {
     const meta = document.querySelector('meta[name="fci-api-base"]');
-    const value = meta && meta.content ? meta.content.trim() : 'https://api.fcichs.co.za';
+    const value = meta && meta.content ? meta.content.trim() : 'https://fcichs-forms.dubanicreatives.workers.dev';
     return value.replace(/\/$/, '');
   }
 

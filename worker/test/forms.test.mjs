@@ -23,7 +23,7 @@ const env = {
 };
 
 function request(path, body, headers = {}) {
-  return new Request(`https://api.fcichs.co.za${path}`, {
+  return new Request(`https://fcichs-forms.dubanicreatives.workers.dev${path}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

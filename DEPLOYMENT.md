@@ -102,7 +102,7 @@ The Gmail host, port, username, and From address are already in `worker/wrangler
 
 `wrangler secret put` deploys a new version immediately. Secrets are not overwritten by a later code deploy. Do not put `SMTP_PASSWORD` in `wrangler.jsonc`. A code deploy replaces plain variables with the values in that file.
 
-The website calls `https://api.fcichs.co.za` (the `fci-api-base` meta tag on each page). Change that tag if the Worker URL is different.
+There is **no DNS cutover**. The site stays on GitHub Pages. Every page’s `<meta name="fci-api-base">` is `https://fcichs-forms.dubanicreatives.workers.dev`, and `assets/js/forms.js` uses that same address if the tag is missing. The browser posts there. CORS allows `https://fcichs.co.za` and `https://www.fcichs.co.za` only. `api.fcichs.co.za` is not used.
 
 ## Deploy the Worker beside GitHub Pages
 
@@ -116,12 +116,9 @@ The website calls `https://api.fcichs.co.za` (the `fci-api-base` meta tag on eac
    ```
 
 3. Set the App Password: `npx wrangler@4 secret put SMTP_PASSWORD`. That is the only required secret. Add recipient secrets only if mail should go somewhere other than `fcicommunityhousing@gmail.com`.
-4. Open `https://<worker-name>.<account>.workers.dev/api/health`. It should return `"smtpConfigured": true` once `SMTP_PASSWORD` is present. It does not reveal the password or the mailbox.
-5. Point the site at that Worker:
-   - **No DNS cutover:** set each page’s `<meta name="fci-api-base">` to the `workers.dev` URL printed by `wrangler deploy`, then push to GitHub Pages. The browser will call that host. CORS allows `https://fcichs.co.za` and `https://www.fcichs.co.za`.
-   - **Custom hostname `api.fcichs.co.za`:** add the domain to the same Cloudflare account and attach it to the Worker (Workers → Settings → Domains & Routes). A Worker custom domain normally needs the DNS zone on Cloudflare. If you move the zone from 1-grid, recreate the GitHub Pages `A`/`CNAME` records, and keep the existing mail records (MX, SPF, Outlook) or sending and receiving will break. Leave the apex on GitHub Pages; only `api` needs to reach the Worker.
-
-6. Send a test enquiry with an ordinary file (a small PDF). Confirm `fcicommunityhousing@gmail.com` receives it, the From address is that Gmail account, and Reply goes to the address you typed.
+4. Open `https://fcichs-forms.dubanicreatives.workers.dev/api/health`. It should return `"smtpConfigured": true` once `SMTP_PASSWORD` is present. It does not reveal the password or the mailbox. Deploy from the Cloudflare account whose workers.dev subdomain is `dubanicreatives`, with the Worker name `fcichs-forms` (already set in `wrangler.jsonc`).
+5. Push this site to GitHub Pages. The pages already call `https://fcichs-forms.dubanicreatives.workers.dev`. Do not move the DNS zone and do not add `api.fcichs.co.za` for this step. CORS already allows `https://fcichs.co.za` and `https://www.fcichs.co.za`.
+6. Send a test enquiry from the live site. Confirm `fcicommunityhousing@gmail.com` receives it, the From address is that Gmail account, and Reply goes to the address you typed.
 
 Until those secrets exist, the forms tell the visitor to email the office. They no longer pretend a message was sent, and they no longer call Brevo from the browser.
 
