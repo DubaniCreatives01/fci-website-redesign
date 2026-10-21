@@ -106,6 +106,20 @@
             display: block;
             animation: fadeIn 0.5s ease-out;
         }
+        .prescreen-result {
+            border-radius: var(--radius-sm);
+            padding: 20px 22px;
+            margin: 0 0 24px;
+            display: none;
+            gap: 14px;
+            align-items: flex-start;
+            animation: slideDown 0.35s ease-out;
+        }
+        .prescreen-result.active { display: flex; }
+        .prescreen-result.pass { background: rgba(46, 139, 87, 0.1); border: 1px solid rgba(46, 139, 87, 0.35); color: #245b3c; }
+        .prescreen-result.fail { background: rgba(198, 40, 40, 0.08); border: 1px solid rgba(198, 40, 40, 0.3); color: #7f1d1d; }
+        .prescreen-result ul { margin: 10px 0 0 18px; padding: 0; line-height: 1.65; }
+        .prescreen-result strong { color: inherit; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
@@ -263,7 +277,7 @@
     <link rel="canonical" href="https://fcichs.co.za/apply">
     <!-- Clean URLs Client-Side Redirect -->
     <script>
-        if (window.location.pathname.endsWith('.html')) {
+        if (window.location.pathname.endsWith('.html') && !['localhost', '127.0.0.1'].includes(window.location.hostname)) {
             let cleanPath = window.location.pathname.slice(0, -5);
             if (cleanPath.endsWith('/index')) {
                 cleanPath = cleanPath.slice(0, -5);
@@ -392,9 +406,8 @@
                     <div class="form-group">
                         <select class="form-control" id="app-project" required style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill=%22%23023B3C%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>'); background-repeat: no-repeat; background-position: right 16px center;">
                             <option value="" disabled selected hidden>Select Housing Development</option>
-                            <option value="Goodwood Station Development">Goodwood Station Development (Cape Town)</option>
-                            <option value="Heideveld Station Complex">Heideveld Station Complex (Archived Complex)</option>
-                            <option value="General Rental Waitlist">General Rental Housing Waitlist</option>
+                            <option value="Goodwood Development">Goodwood Development</option>
+                            <option value="Ruyterwacht Development">Ruyterwacht Development</option>
                         </select>
                     </div>
                     
@@ -402,9 +415,7 @@
                     <div class="form-group">
                         <select class="form-control" id="app-unit-type" required style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill=%22%23023B3C%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>'); background-repeat: no-repeat; background-position: right 16px center;">
                             <option value="" disabled selected hidden>Preferred Unit Layout</option>
-                            <option value="Bachelor Unit">Bachelor Apartment</option>
-                            <option value="1 Bedroom Unit">1 Bedroom Apartment</option>
-                            <option value="2 Bedroom Unit">2 Bedroom Apartment</option>
+                            <option value="2 Bedroom Unit">2-bedroom apartment (currently available)</option>
                         </select>
                     </div>
                 </div>
@@ -412,17 +423,17 @@
                 <div class="eligibility-alert active" id="elig-info-banner">
                     <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="color: var(--accent-orange); flex-shrink:0; margin-top:2px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
                     <div>
-                        <strong style="color: var(--text-primary);">Municipal Income Limit:</strong> Social housing units are heavily subsidized. The combined gross household income of all applicants must strictly fall within <strong>R1,800 to R22,000 per month</strong> to qualify.
+                    <strong style="color: var(--text-primary);">Current availability:</strong> Goodwood and Ruyterwacht are accepting applications for 2-bedroom units. The combined basic/fixed household income must be between <strong>R11,301 and R22,000 per month</strong>.
                     </div>
                 </div>
 
                 <!-- Income Threshold Check -->
                 <div style="background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 24px; margin-top: 30px;">
-                    <p style="font-weight: 700; color: var(--text-primary); margin-bottom: 12px;">Does your combined household monthly income fall within the R1,800 to R22,000 range?</p>
+                    <p style="font-weight: 700; color: var(--text-primary); margin-bottom: 12px;">Does your combined basic/fixed household monthly income fall within the current R11,301 to R22,000 range?</p>
                     <div style="display: flex; gap: 24px;">
                         <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                             <input type="radio" name="eligibility-income-range" value="yes" checked onchange="toggleIncomeWarning(false)" style="accent-color: var(--primary-teal); width:18px; height:18px;">
-                            <span>Yes, my income qualifies</span>
+                            <span>Yes, my income is in range</span>
                         </label>
                         <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                             <input type="radio" name="eligibility-income-range" value="no" onchange="toggleIncomeWarning(true)" style="accent-color: var(--primary-teal); width:18px; height:18px;">
@@ -433,7 +444,7 @@
                     <div class="eligibility-alert" id="income-warning" style="margin-top: 16px; background-color: rgba(211,47,47,0.06); border-left-color: #d32f2f;">
                         <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="color: #d32f2f; flex-shrink:0;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
                         <div>
-                            <strong style="color: #c62828;">Qualifying Alert:</strong> Based on your input, you may not satisfy the regulatory threshold. Applications with combined incomes outside this bracket cannot be approved for active social housing.
+                            <strong style="color: #c62828;">Before you continue:</strong> The currently available 2-bedroom units are for households with combined basic/fixed income from R11,301 to R22,000. You can still review the requirements below before deciding whether to apply.
                         </div>
                     </div>
                 </div>
@@ -498,6 +509,27 @@
                     </div>
                 </div>
 
+                <div class="grid grid-3">
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="app-age" required placeholder=" " min="21" max="65">
+                        <label class="form-label" for="app-age">Applicant age (21–65)</label>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id="app-homeowner" required>
+                            <option value="" disabled selected hidden>Property ownership</option>
+                            <option value="no">I do not own property</option>
+                            <option value="yes">I own / previously owned property</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id="app-credit" required>
+                            <option value="" disabled selected hidden>Credit position</option>
+                            <option value="favourable">Favourable — no debt review, blacklisting, defaults or judgements</option>
+                            <option value="negative">I have debt review, blacklisting, defaults, judgements or arrears</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <textarea class="form-control" id="app-address" required rows="3" placeholder=" "></textarea>
                     <label class="form-label" for="app-address">Current Residential Address</label>
@@ -541,6 +573,22 @@
                     <div class="form-group">
                         <input type="number" class="form-control" id="app-net" required placeholder=" " min="0">
                         <label class="form-label" for="app-net">Primary Applicant Net Take-home (ZAR)</label>
+                    </div>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="app-surplus" required placeholder=" " min="0">
+                        <label class="form-label" for="app-surplus">Estimated monthly surplus after expenses (minimum R1,000)</label>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id="app-employment-proof" required onchange="handleEmploymentChange()">
+                            <option value="" disabled selected hidden>Employment status confirmation</option>
+                            <option value="permanent">Permanently employed</option>
+                            <option value="fixed-guaranteed">Fixed-term with permanency guaranteed in contract</option>
+                            <option value="self-employed">Self-employed — I can provide the required business records</option>
+                            <option value="other">Grant, casual, temporary or other income only</option>
+                        </select>
                     </div>
                 </div>
 
@@ -606,10 +654,10 @@
                 <div class="grid grid-2" style="gap: 24px; margin-top: 24px;">
                     <!-- Doc 3: Proof of income -->
                     <div>
-                        <p style="font-weight: 700; font-size: 0.9rem; color: var(--text-primary); margin-bottom: 8px;">3. Proof of income (Latest 2 months pay slips or accountants letter verifying income if self-employed). <span style="color:#d32f2f;">*</span></p>
+                        <p style="font-weight: 700; font-size: 0.9rem; color: var(--text-primary); margin-bottom: 8px;">3. Proof of income (Latest 3 months’ payslips or accountant’s letter if self-employed). <span style="color:#d32f2f;">*</span></p>
                         <div class="upload-zone" id="upload-zone-payslips">
                             <svg class="upload-icon" width="32" height="32" fill="currentColor" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
-                            <div style="font-size: 0.85rem; font-weight: 700;">Drag or click to choose proof of income</div>
+                            <div style="font-size: 0.85rem; font-weight: 700;">Drag or click to choose latest 3 payslips</div>
                             <span style="font-size: 0.72rem; color: var(--text-muted);">PDF or JPEG format capped at 4MB</span>
                             <input type="file" id="file-payslips" accept=".pdf,.png,.jpg,.jpeg" required onchange="handleFileSelect('payslips')">
                             <div class="file-status" id="status-payslips">No file selected</div>
@@ -627,6 +675,23 @@
                             <div class="file-status" id="status-address">No file selected</div>
                         </div>
                     </div>
+                </div>
+
+                <div style="margin-top:24px;">
+                    <p style="font-weight:700; font-size:.9rem; color:var(--text-primary); margin-bottom:8px;">5. Employment contract or letter of employment <span style="color:#d32f2f;">*</span></p>
+                    <div class="upload-zone" id="upload-zone-employment">
+                        <svg class="upload-icon" width="32" height="32" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm1 7V3.5L18.5 9H15zM8 13h8v2H8v-2zm0 4h8v2H8v-2z"/></svg>
+                        <div style="font-size:.85rem; font-weight:700;">Drag or click to choose employment proof</div>
+                        <span style="font-size:.72rem; color:var(--text-muted);">PDF or JPEG format capped at 4MB</span>
+                        <input type="file" id="file-employment" accept=".pdf,.png,.jpg,.jpeg" required onchange="handleFileSelect('employment')">
+                        <div class="file-status" id="status-employment">No file selected</div>
+                    </div>
+                </div>
+
+                <div id="self-employed-docs" style="display:none; margin-top:24px; padding:20px; border:1px solid rgba(255,153,0,.35); border-radius:var(--radius-sm); background:rgba(255,153,0,.06);">
+                    <p style="font-weight:700; color:var(--primary-teal); margin-bottom:6px;">Self-employed supporting records</p>
+                    <p style="font-size:.82rem; color:var(--text-secondary); margin-bottom:14px;">If you selected self-employed, bring your business registration, financial audit report, accountant letter and the business’s updated 6-month bank statements.</p>
+                    <label style="display:block; font-size:.85rem; margin-bottom:8px;">Business records checklist <input type="checkbox" id="self-employed-check" style="accent-color:var(--primary-teal); margin-left:8px;"></label>
                 </div>
 
                 <div class="wizard-actions">
@@ -651,6 +716,8 @@
                         <div class="summary-item">Eligible Income Status: <strong id="sum-eligibility">-</strong></div>
                     </div>
                 </div>
+
+                <div class="prescreen-result" id="prescreen-result" role="status" aria-live="polite"></div>
 
                 <div class="summary-block">
                     <div class="summary-title">Applicant profile</div>
@@ -701,7 +768,7 @@
 
                 <div class="wizard-actions">
                     <button type="button" class="btn btn-secondary" onclick="prevStep(5)">Back</button>
-                    <button type="submit" class="btn btn-primary" style="background-color: var(--secondary-green); border-color: var(--secondary-green);" id="btn-submit-app">Submit Official Application Pack</button>
+                    <button type="submit" class="btn btn-primary" style="background-color: var(--secondary-green); border-color: var(--secondary-green);" id="btn-submit-app">Submit qualifying application</button>
                 </div>
             </div>
         </form>
@@ -875,6 +942,30 @@
                 }
             });
             
+            if (isValid && stepNum === 1) {
+                const project = document.getElementById('app-project').value;
+                const unit = document.getElementById('app-unit-type').value;
+                if (!['Goodwood Development', 'Ruyterwacht Development'].includes(project) || unit !== '2 Bedroom Unit') {
+                    alert('Only Goodwood and Ruyterwacht 2-bedroom units are currently accepting applications.');
+                    return false;
+                }
+            }
+            if (isValid && stepNum === 3) {
+                const result = runPrescreen(false);
+                if (result.reasons.length) {
+                    showPrescreenResult(result);
+                    alert(`Before you continue, please fix these items:\n\n• ${result.reasons.join('\n• ')}`);
+                    return false;
+                }
+            }
+            if (isValid && stepNum === 4) {
+                const result = runPrescreen(false);
+                if (result.reasons.length) {
+                    showPrescreenResult(result);
+                    alert(`Before you continue, please fix these items:\n\n• ${result.reasons.join('\n• ')}`);
+                    return false;
+                }
+            }
             return isValid;
         }
 
@@ -896,9 +987,9 @@
             
             // Check threshold rules dynamically
             const warning = document.getElementById('income-warning');
-            if (total < 1800 || total > 22000) {
+            if (total < 11301 || total > 22000) {
                 warning.querySelector('strong').textContent = "Qualifying Income Warning:";
-                warning.querySelector('div').innerHTML = `<strong style="color: #c62828;">Qualifying Income Alert:</strong> Combined income is R${total.toLocaleString('en-ZA')}. This falls outside the subsidized social housing bracket (R1,800 - R22,000 per month). You may not qualify for units.`;
+                warning.querySelector('div').innerHTML = `<strong style="color: #c62828;">Qualifying Income Alert:</strong> Combined basic/fixed income is R${total.toLocaleString('en-ZA')}. The currently available 2-bedroom units require R11,301–R22,000 per month.`;
                 warning.classList.add('active');
                 // Also toggle the yes/no radio selection to match
                 document.querySelector('input[name="eligibility-income-range"][value="no"]').checked = true;
@@ -919,6 +1010,55 @@
                     employerInput.value = "";
                 }
                 employerInput.removeAttribute('disabled');
+            }
+            const proof = document.getElementById('app-employment-proof');
+            const selfEmployedDocs = document.getElementById('self-employed-docs');
+            if (proof && selfEmployedDocs) {
+                selfEmployedDocs.style.display = proof.value === 'self-employed' ? 'block' : 'none';
+                document.getElementById('self-employed-check').required = proof.value === 'self-employed';
+            }
+        }
+
+        function runPrescreen(showResult = true) {
+            const reasons = [];
+            const project = document.getElementById('app-project').value;
+            const unit = document.getElementById('app-unit-type').value;
+            const citizenship = document.getElementById('app-citizenship').value;
+            const age = Number(document.getElementById('app-age').value || 0);
+            const homeowner = document.getElementById('app-homeowner').value;
+            const credit = document.getElementById('app-credit').value;
+            const gross = Number(document.getElementById('app-gross').value || 0);
+            const coIncome = Number(document.getElementById('co-income').value || 0);
+            const total = gross + coIncome;
+            const surplus = Number(document.getElementById('app-surplus').value || 0);
+            const employment = document.getElementById('app-employment-proof').value;
+            const coName = document.getElementById('co-name').value.trim();
+
+            if (!['Goodwood Development', 'Ruyterwacht Development'].includes(project)) reasons.push('Choose Goodwood or Ruyterwacht; these are the developments currently accepting applications.');
+            if (unit !== '2 Bedroom Unit') reasons.push('Only 2-bedroom units are currently available.');
+            if (!['SA Citizen', 'Permanent Resident'].includes(citizenship)) reasons.push('The applicant must be a South African citizen or permanent resident with the required identity documents.');
+            if (age < 21 || age > 65) reasons.push('The applicant must be between 21 and 65 years old.');
+            if (homeowner === 'yes') reasons.push('Applicants and co-applicants cannot be current or previous homeowners.');
+            if (credit !== 'favourable') reasons.push('The application requires a favourable credit position without debt review, blacklisting, defaults, judgements or significant arrears.');
+            if (total < 11301 || total > 22000) reasons.push(`Combined basic/fixed income must be between R11,301 and R22,000. Your current total is R${total.toLocaleString('en-ZA')}.`);
+            if (surplus < 1000) reasons.push('The household must have an affordability surplus of at least R1,000 after expenses and debts.');
+            if (!['permanent', 'fixed-guaranteed', 'self-employed'].includes(employment)) reasons.push('The applicant must be permanently employed, have guaranteed permanency in a fixed-term contract, or provide the required self-employed records.');
+            if (coName && (coIncome <= 0 || coIncome + gross > 22000)) reasons.push('Check the co-applicant income: joint household income cannot exceed R22,000 and must be supported by documents.');
+            const result = { reasons, total, project, unit };
+            if (showResult) showPrescreenResult(result);
+            return result;
+        }
+
+        function showPrescreenResult(result) {
+            const panel = document.getElementById('prescreen-result');
+            if (!panel) return;
+            panel.className = `prescreen-result active ${result.reasons.length ? 'fail' : 'pass'}`;
+            if (result.reasons.length) {
+                panel.innerHTML = `<div aria-hidden="true" style="font-size:1.4rem;">!</div><div><strong>This application is not ready to submit yet.</strong><ul>${result.reasons.map(reason => `<li>${reason}</li>`).join('')}</ul><p style="margin:12px 0 0;">Please fix these items or bring the missing supporting documents before trying again. FCI staff still make the final assessment.</p></div>`;
+                document.getElementById('btn-submit-app').disabled = true;
+            } else {
+                panel.innerHTML = `<div aria-hidden="true" style="font-size:1.4rem;">✓</div><div><strong>Your answers pass the initial FCI prescreen.</strong><p style="margin:8px 0 0;">Your documents will still be checked by FCI staff. You can now submit the completed application pack.</p></div>`;
+                document.getElementById('btn-submit-app').disabled = false;
             }
         }
 
@@ -946,7 +1086,7 @@
 
             document.getElementById('sum-project').textContent = document.getElementById('app-project').value || 'Not selected';
             document.getElementById('sum-unit').textContent = document.getElementById('app-unit-type').value || 'Not selected';
-            document.getElementById('sum-eligibility').textContent = (totalVal >= 1800 && totalVal <= 22000) ? 'Qualifies (In limits)' : 'Does not qualify (Outside limits)';
+            document.getElementById('sum-eligibility').textContent = (totalVal >= 11301 && totalVal <= 22000) ? 'Passes income screen' : 'Needs correction';
             
             document.getElementById('sum-name').textContent = document.getElementById('app-fullname').value || '-';
             document.getElementById('sum-id').textContent = document.getElementById('app-idnumber').value || '-';
@@ -960,6 +1100,7 @@
             document.getElementById('sum-gross').textContent = `R${grossVal.toLocaleString('en-ZA', { minimumFractionDigits: 2 })}`;
             document.getElementById('sum-co-income').textContent = `R${coVal.toLocaleString('en-ZA', { minimumFractionDigits: 2 })}`;
             document.getElementById('sum-total-income').textContent = `R${totalVal.toLocaleString('en-ZA', { minimumFractionDigits: 2 })}`;
+            runPrescreen(true);
         }
 
         function generateApplicationPDF(data) {
@@ -1224,7 +1365,7 @@
                     <tr>
                         <td style="padding: 24px 44px 36px;" class="body-padding">
                             <p style="font-size: 14.5px; line-height: 1.6; color: #334155; margin: 0 0 24px;">
-                                A new online residential application has been compiled by <strong style="color: #023B3C;">${data.name}</strong> for social housing allocation. All verified metadata and <strong>5 attached certified PDF files</strong> are detailed below:
+                                A new online residential application has been compiled by <strong style="color: #023B3C;">${data.name}</strong> for social housing allocation. All verified metadata and <strong>6 attached certified files</strong> are detailed below:
                             </p>
                             <!-- 2-COLUMN GRID ROW 1 -->
                             <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom: 20px;">
@@ -1320,8 +1461,8 @@
                                     <td width="4%">&nbsp;</td>
                                     <!-- Card 4: Attached Dossier -->
                                     <td width="48%" valign="top" class="col-half" style="background: #F7FCF8; border: 1px solid #CDE5CF; border-radius: 10px; padding: 20px;">
-                                        <div style="font-size: 12px; font-weight: 800; color: #2E5B10; text-transform: uppercase; letter-spacing: 0.6px; border-bottom: 2px solid #699936; padding-bottom: 8px; margin-bottom: 14px;">
-                                            &#128206; Attached PDF Dossier (5 Files)
+                                        <div style="font-size: 12px; font-weight: 800; color: #2E5B10; text-transform: uppercase; letter-spacing: 0.6px; border-bottom: 2px solid #558B2F; padding-bottom: 8px; margin-bottom: 14px;">
+                                            &#128206; Attached Application Dossier (6 Files)
                                         </div>
                                         <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="font-size: 12px; line-height: 1.5;">
                                             <tr>
@@ -1415,6 +1556,12 @@
 
         async function handleFormSubmission(event) {
             event.preventDefault();
+
+            const prescreen = runPrescreen(true);
+            if (prescreen.reasons.length) {
+                document.getElementById('step-card-5').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
             
             // Collect Form Metadata
             const name = document.getElementById('app-fullname').value;
@@ -1440,6 +1587,7 @@
             const fileStatementsInput = document.getElementById('file-statements');
             const filePayslipsInput = document.getElementById('file-payslips');
             const fileAddressInput = document.getElementById('file-address');
+            const fileEmploymentInput = document.getElementById('file-employment');
 
             const uploads = [
                 ['Identity document', fileIdInput.files[0]],
@@ -1464,6 +1612,7 @@
             const bankFile = fileStatementsInput.files[0]?.name || 'Not Uploaded';
             const payFile = filePayslipsInput.files[0]?.name || 'Not Uploaded';
             const addressFile = fileAddressInput.files[0]?.name || 'Not Uploaded';
+            const employmentFile = fileEmploymentInput.files[0]?.name || 'Not Uploaded';
 
             const refNo = `FCI-APP-${Date.now().toString().slice(-6)}`;
             const submissionDate = new Date().toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -1494,7 +1643,12 @@
                 idFile,
                 bankFile,
                 payFile,
-                addressFile
+                addressFile,
+                employmentFile,
+                applicantAge: document.getElementById('app-age').value,
+                affordabilitySurplus: document.getElementById('app-surplus').value,
+                homeownerStatus: document.getElementById('app-homeowner').value,
+                creditPosition: document.getElementById('app-credit').value
             };
 
             // Store in sessionStorage for tracking page display
@@ -1597,6 +1751,13 @@
                         role: 'address'
                     });
                 }
+                if (fileEmploymentInput.files.length > 0) {
+                    const employmentBase64 = await blobToBase64(fileEmploymentInput.files[0]);
+                    attachmentsList.push({
+                        name: fileEmploymentInput.files[0].name,
+                        content: employmentBase64
+                    });
+                }
             } catch (fileErr) {
                 submitOverlay.remove();
                 alert('A document could not be read. Please choose a PDF, JPG, or PNG under 4 MB.');
@@ -1632,7 +1793,11 @@
                         net: net,
                         coName: coName,
                         coIncome: coIncome,
-                        combinedIncome: combinedIncome
+                        combinedIncome: combinedIncome,
+                        applicantAge: document.getElementById('app-age').value,
+                        affordabilitySurplus: document.getElementById('app-surplus').value,
+                        homeownerStatus: document.getElementById('app-homeowner').value,
+                        creditPosition: document.getElementById('app-credit').value
                     },
                     attachments: attachmentsList
                 });
