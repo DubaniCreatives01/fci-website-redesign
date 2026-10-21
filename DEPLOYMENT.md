@@ -16,6 +16,8 @@ Applications, contact messages, and newsletter signups are therefore posted to a
 
 Housing applications also use the Worker’s **Workers AI binding** for server-side document extraction. PDFs and images are converted to text before any email is sent. The Worker validates the South African ID checksum and match to the typed ID/name, and requires bank statements and payslips to show three recent monthly periods. If OCR cannot read the documents or any check fails, the application is rejected and no email is sent.
 
+If OCR finds a borderline result — for example, only two recent periods or a partial name match — the application is emailed with a **manual review required** status instead of being silently treated as passed. The applicant receives a manual-review confirmation page. The Worker emits privacy-safe structured screening, rejection, and failure events to Workers Logs. Set the optional `ALERT_WEBHOOK_URL` secret to a private HTTPS alert endpoint if the office wants failure and high-rejection notifications; the alert payload never includes applicant names, ID numbers, income, or uploaded documents.
+
 ## Gmail mailbox
 
 Forms send through the Google account **fcicommunityhousing@gmail.com**.
@@ -102,6 +104,7 @@ The Gmail host, port, username, and From address are already in `worker/wrangler
 | `ALLOWED_ORIGINS` | No | `wrangler.jsonc` or secret | Comma-separated browser origins. Defaults to `https://fcichs.co.za,https://www.fcichs.co.za`. |
 | `ALLOW_LOCAL_ORIGINS` | No | local `.dev.vars` only | `true` only for `http://localhost`. Do not enable it in production. |
 | `AI` | **Yes** | Wrangler binding | Workers AI binding configured as `AI`; required for document OCR/extraction. |
+| `ALERT_WEBHOOK_URL` | No | Worker secret | Optional private HTTPS endpoint for privacy-safe failure/high-rejection alerts. |
 
 `wrangler secret put` deploys a new version immediately. Secrets are not overwritten by a later code deploy. Do not put `SMTP_PASSWORD` in `wrangler.jsonc`. A code deploy replaces plain variables with the values in that file.
 
@@ -129,6 +132,8 @@ Until those secrets exist, the forms tell the visitor to email the office. They 
 
 - Documents must be PDF, JPG, or PNG, at most 4 MB each and 16 MB together. The type is checked from the file contents, not only the name.
 - Applications fail closed when document extraction is unavailable. The Worker does not treat an uploaded filename or a client-side prescreen result as proof of eligibility.
+- Borderline but readable documents are routed to manual review; unreadable, stale, mismatched, or incomplete documents are rejected with a fix/bring explanation.
+- The browser shows the same actionable issues returned by the Worker, while the Worker independently enforces consent, eligibility, document roles, and extraction checks.
 - A hidden field and a short minimum time on the form drop simple automated posts. Each IP is limited to a few submissions per ten minutes (newsletter: per hour).
 - The previous client-side behaviour redirected to the success page even when sending failed. That redirect now happens only after the Worker accepts the message.
 

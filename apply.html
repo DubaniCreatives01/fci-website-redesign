@@ -747,7 +747,7 @@
                     <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer;">
                         <input type="checkbox" id="popia-check" required style="accent-color: var(--primary-teal); width:20px; height:20px; margin-top:2px; flex-shrink:0;">
                         <div style="font-size: 0.88rem; line-height: 1.5;">
-                            <strong>POPI Act Consent Compliance:</strong> I hereby grant consent to FCI Community Housing Services to process and store my personal information for the express purpose of evaluating my eligibility for subsidized social housing units under the Protection of Personal Information Act, No 4 of 2013.
+                            <strong>Personal-information and document-screening consent:</strong> I consent to FCI Community Housing Services processing my personal information and using automated document extraction to check my eligibility and uploaded identity, income, address and employment documents. The results are screening support only; FCI staff make the final assessment. FCI may retain the application and supporting documents for its lawful housing-vetting and record-keeping period. Please read the FCI privacy notice/POPIA manual before submitting.
                         </div>
                     </label>
                     
@@ -1650,7 +1650,10 @@
                 affordabilitySurplus: document.getElementById('app-surplus').value,
                 homeownerStatus: document.getElementById('app-homeowner').value,
                 creditPosition: document.getElementById('app-credit').value,
-                employmentProof: document.getElementById('app-employment-proof').value
+                employmentProof: document.getElementById('app-employment-proof').value,
+                privacyConsent: document.getElementById('popia-check').checked,
+                declarationAccepted: document.getElementById('declaration-check').checked,
+                termsAccepted: document.getElementById('tc-check').checked
             };
 
             // Store in sessionStorage for tracking page display
@@ -1767,14 +1770,14 @@
                 return;
             }
 
-            const redirectToSuccessPage = () => {
-                const targetUrl = `/application-success?ref=${encodeURIComponent(refNo)}&name=${encodeURIComponent(name)}&project=${encodeURIComponent(project)}&unit=${encodeURIComponent(unit)}`;
+            const redirectToSuccessPage = (status = 'passed') => {
+                const targetUrl = `/application-success?ref=${encodeURIComponent(refNo)}&name=${encodeURIComponent(name)}&project=${encodeURIComponent(project)}&unit=${encodeURIComponent(unit)}&status=${encodeURIComponent(status)}`;
                 window.location.href = targetUrl;
             };
 
             try {
                 const form = document.getElementById('online-application-form');
-                await window.FCIForms.postJson('/api/apply', {
+                const result = await window.FCIForms.postJson('/api/apply', {
                     formStartedAt: window.FCIForms.startedAt,
                     company_website: window.FCIForms.honeypotValue(form),
                     refNo: refNo,
@@ -1801,14 +1804,20 @@
                         affordabilitySurplus: document.getElementById('app-surplus').value,
                         homeownerStatus: document.getElementById('app-homeowner').value,
                         creditPosition: document.getElementById('app-credit').value,
-                        employmentProof: document.getElementById('app-employment-proof').value
+                        employmentProof: document.getElementById('app-employment-proof').value,
+                        privacyConsent: document.getElementById('popia-check').checked,
+                        declarationAccepted: document.getElementById('declaration-check').checked,
+                        termsAccepted: document.getElementById('tc-check').checked
                     },
                     attachments: attachmentsList
                 });
-                redirectToSuccessPage();
+                redirectToSuccessPage(result.status || 'passed');
             } catch (err) {
                 submitOverlay.remove();
-                alert(err && err.message ? err.message : 'We could not send your application. Please email the office.');
+                const details = err && Array.isArray(err.issues) && err.issues.length
+                    ? `\n\nPlease fix or bring:\n• ${err.issues.join('\n• ')}`
+                    : '';
+                alert((err && err.message ? err.message : 'We could not send your application. Please email the office.') + details);
             }
         }
     </script>

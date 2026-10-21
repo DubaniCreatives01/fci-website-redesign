@@ -66,19 +66,25 @@ export async function handleRequest(request, env, ctx, deps = {}) {
       return json(429, { ok: false, error: 'Too many submissions. Please wait a few minutes and try again.' }, origin);
     }
 
-    if (route === 'apply') return await handleApply(payload, env, deliver, origin);
+    if (route === 'apply') return await handleApply(payload, env, deliver, origin, ctx);
     if (route === 'contact') return await handleContact(payload, env, deliver, origin);
     return await handleNewsletter(payload, env, deliver, origin);
   } catch (error) {
     const status = error.status || 500;
     if (status >= 500) {
-      console.log(JSON.stringify({ event: 'form_error', route, status, code: error.code || null }));
+      const event = { event: 'form_error', route, status, code: error.code || null };
+      console.error(JSON.stringify(event));
+      if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(sendMonitoringAlert(env, event));
+    } else if (route === 'apply' && status === 400) {
+      const event = { event: 'application_rejected', route, status, thresholdReached: rejectionThresholdReached() };
+      console.log(JSON.stringify(event));
+      if (event.thresholdReached && ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(sendMonitoringAlert(env, event));
     }
-    return json(status, { ok: false, error: error.publicMessage || 'We could not send that just now. Please try again or email the office.' }, origin);
+    return json(status, { ok: false, error: error.publicMessage || 'We could not send that just now. Please try again or email the office.', issues: error.issues || [] }, origin);
   }
 }
 
-async function handleApply(payload, env, deliver, origin) {
+async function handleApply(payload, env, deliver, origin, ctx) {
   const smtp = requireSmtp(env);
   const recipients = recipientsFor(env, ['APPLICATION_TO_EMAILS']);
   const applicant = payload.applicant;
@@ -114,10 +120,21 @@ async function handleApply(payload, env, deliver, origin) {
     homeownerStatus: cleanOptional(applicant.homeownerStatus, 20),
     creditPosition: cleanOptional(applicant.creditPosition, 30),
     employmentProof: cleanOptional(applicant.employmentProof, 30),
+    privacyConsent: applicant.privacyConsent === true,
+    declarationAccepted: applicant.declarationAccepted === true,
+    termsAccepted: applicant.termsAccepted === true,
   };
   validateApplicationRules(fields);
   const attachments = normaliseAttachments(payload.attachments, true);
   const documentScreening = await screenDocuments(env, attachments, fields);
+  const manualReview = documentScreening.status === 'manual_review';
+  console.log(JSON.stringify({
+    event: 'application_screened',
+    status: documentScreening.status,
+    refNo,
+    statementMonths: documentScreening.statementMonths,
+    payslipMonths: documentScreening.payslipMonths,
+  }));
   const rows = [
     ['Reference', refNo],
     ['Applicant', fields.name],
@@ -138,17 +155,23 @@ async function handleApply(payload, env, deliver, origin) {
     ['Co-applicant', fields.coName || '—'],
     ['Co-applicant income', fields.coIncome],
     ['Combined income', fields.combinedIncome || '—'],
-    ['Document screening', `Passed: ID matched; bank statements ${documentScreening.statementMonths.join(', ')}; payslips ${documentScreening.payslipMonths.join(', ')}`],
+    ['Document screening', `${manualReview ? 'Manual review required' : 'Passed'}: ID matched; bank statements ${documentScreening.statementMonths.join(', ')}; payslips ${documentScreening.payslipMonths.join(', ')}`],
+    ...(manualReview ? [['Manual review notes', documentScreening.manualReviewReasons.join(' ')]] : []),
   ];
   await deliver(env, {
     smtp,
     to: recipients,
     replyTo: { name: viaWebsite(fields.name), email: fields.email },
-    subject: subjectLine('Application', refNo, fields.name),
-    html: renderEmail('New housing application', rows, 'Documents supplied by the applicant are attached. The message is sent from the FCI mailbox. Reply goes to the applicant.'),
+    subject: subjectLine(manualReview ? 'Application - Manual review' : 'Application', refNo, fields.name),
+    html: renderEmail(manualReview ? 'Housing application - manual review required' : 'New housing application', rows, 'Documents supplied by the applicant are attached. The message is sent from the FCI mailbox. Reply goes to the applicant.'),
     attachments,
   });
-  return json(200, { ok: true, refNo }, origin);
+  return json(manualReview ? 202 : 200, {
+    ok: true,
+    refNo,
+    status: manualReview ? 'manual_review' : 'passed',
+    message: manualReview ? 'Your application was received and requires a manual document review.' : 'Your qualifying application was received.',
+  }, origin);
 }
 
 async function handleContact(payload, env, deliver, origin) {
@@ -269,7 +292,34 @@ function validateApplicationRules(fields) {
     reasons.push('The applicant must provide an accepted employment record.');
   }
   if (fields.coName && (coIncome <= 0 || total > 22000)) reasons.push('Check the co-applicant income: joint household income cannot exceed R22,000.');
-  if (reasons.length) fail(400, `This application does not currently qualify: ${reasons.join(' ')}`);
+  if (!fields.privacyConsent) reasons.push('Consent to document extraction and personal-information processing is required.');
+  if (!fields.declarationAccepted) reasons.push('The truth and accuracy declaration is required.');
+  if (!fields.termsAccepted) reasons.push('The application terms must be accepted.');
+  if (reasons.length) fail(400, `This application does not currently qualify: ${reasons.join(' ')}`, reasons);
+}
+
+const rejectionWindow = [];
+function rejectionThresholdReached() {
+  const now = Date.now();
+  while (rejectionWindow.length && now - rejectionWindow[0] > 10 * 60 * 1000) rejectionWindow.shift();
+  rejectionWindow.push(now);
+  return rejectionWindow.length === 10;
+}
+
+async function sendMonitoringAlert(env, event) {
+  const target = String(env.ALERT_WEBHOOK_URL || '').trim();
+  if (!target) return;
+  try {
+    const url = new URL(target);
+    if (url.protocol !== 'https:') return;
+    await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ source: 'fcichs-forms', occurredAt: new Date().toISOString(), ...event }),
+    });
+  } catch (error) {
+    console.error(JSON.stringify({ event: 'monitoring_alert_failed', code: error?.name || 'alert_error' }));
+  }
 }
 
 function smtpConfig(env) {
@@ -434,8 +484,8 @@ function decodeBase64(value) {
   }
 }
 
-function fail(status, publicMessage) {
-  throw Object.assign(new Error(publicMessage), { status, publicMessage });
+function fail(status, publicMessage, issues = []) {
+  throw Object.assign(new Error(publicMessage), { status, publicMessage, issues });
 }
 
 function corsHeaders(origin) {

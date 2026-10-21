@@ -521,6 +521,7 @@
         // Fallback to URL search params
         const urlParams = new URLSearchParams(window.location.search);
         const refNo = urlParams.get('ref') || appData?.refNo || `FCI-APP-${Date.now().toString().slice(-6)}`;
+        const screeningStatus = urlParams.get('status') || appData?.screeningStatus || 'passed';
         const applicantName = urlParams.get('name') || appData?.name || 'Applicant';
         const project = urlParams.get('project') || appData?.project || 'Goodwood Station Development';
         const unit = urlParams.get('unit') || appData?.unit || 'Preferred Apartment';
@@ -539,6 +540,15 @@
         document.getElementById('sum-disp-email').textContent = appData?.email || '-';
         document.getElementById('sum-disp-employment').textContent = appData?.employment ? `${appData.employment} (${appData.employer || 'Private'})` : '-';
         document.getElementById('sum-disp-income').textContent = appData?.combinedIncome || 'R0.00';
+
+        if (screeningStatus === 'manual_review') {
+            document.getElementById('success-main-heading').textContent = 'Application Received for Manual Review';
+            document.getElementById('success-lead-text').innerHTML = `Thank you <strong id="lead-applicant-name">${applicantName}</strong>. Your application and documents were received, but FCI must manually confirm some document details before the assessment can continue.`;
+            document.getElementById('track-step-2').querySelector('h4').textContent = '2. Manual Document Review';
+            document.getElementById('track-step-2').querySelector('span').textContent = 'FCI confirmation required';
+            document.getElementById('track-step-2').querySelector('span').style.color = 'var(--accent-orange)';
+            document.getElementById('success-support-footer').querySelector('p').textContent = 'If FCI needs a clearer document, the applications team will contact you using the details supplied.';
+        }
 
         if (appData?.idFile) document.getElementById('doc-disp-id').textContent = appData.idFile;
         if (appData?.bankFile) document.getElementById('doc-disp-statements').textContent = appData.bankFile;

@@ -86,6 +86,9 @@ function applicant(overrides = {}) {
     homeownerStatus: 'no',
     creditPosition: 'favourable',
     employmentProof: 'permanent',
+    privacyConsent: true,
+    declarationAccepted: true,
+    termsAccepted: true,
     ...overrides,
   };
 }
@@ -251,6 +254,66 @@ test('application rejects statements and payslips that do not cover the latest t
   assert.equal(response.status, 400);
   assert.equal(sent.length, 0);
   assert.match(json.error, /latest three months/);
+});
+
+test('application routes borderline document extraction to manual review', async () => {
+  const reviewEnv = {
+    ...env,
+    AI: {
+      async toMarkdown(files) {
+        return files.map((file) => ({
+          name: file.name,
+          format: 'text',
+          data: file.name.startsWith('id')
+            ? 'Jane 8001015009087 South African Identity Document'
+            : '01/08/2026 31/08/2026 01/09/2026 30/09/2026',
+        }));
+      },
+    },
+  };
+  const { response, json, sent } = await captured('/api/apply', {
+    formStartedAt: started(),
+    refNo: 'FCI-APP-123456',
+    applicant: applicant(),
+    attachments: docs(),
+  }, reviewEnv);
+  assert.equal(response.status, 202);
+  assert.equal(json.status, 'manual_review');
+  assert.equal(sent.length, 1);
+  assert.match(sent[0].subject, /Manual review/);
+});
+
+test('application requires server-side consent flags', async () => {
+  const { response, sent, json } = await captured('/api/apply', {
+    formStartedAt: started(),
+    refNo: 'FCI-APP-123456',
+    applicant: applicant({ privacyConsent: false }),
+    attachments: docs(),
+  });
+  assert.equal(response.status, 400);
+  assert.equal(sent.length, 0);
+  assert.match(json.error, /Consent/);
+  assert.ok(json.issues.includes('Consent to document extraction and personal-information processing is required.'));
+});
+
+test('unreadable documents fail with a clear replacement instruction', async () => {
+  const unreadableEnv = {
+    ...env,
+    AI: {
+      async toMarkdown(files) {
+        return files.map((file) => ({ name: file.name, format: 'error', data: '' }));
+      },
+    },
+  };
+  const { response, sent, json } = await captured('/api/apply', {
+    formStartedAt: started(),
+    refNo: 'FCI-APP-123456',
+    applicant: applicant(),
+    attachments: docs(),
+  }, unreadableEnv);
+  assert.equal(response.status, 400);
+  assert.equal(sent.length, 0);
+  assert.match(json.error, /clear PDF or image/);
 });
 
 test('plain SMTP on port 25 is not used', async () => {

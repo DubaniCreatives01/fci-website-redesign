@@ -49,23 +49,30 @@ export async function screenDocuments(env, attachments, applicant, now = new Dat
   if (!idCandidates.some((candidate) => candidate === enteredId && validSouthAfricanId(candidate))) {
     fail(400, 'The uploaded identity document could not be matched to a valid South African ID number.');
   }
-  if (!nameMatches(applicant.name, idText)) {
+  const nameQuality = nameMatchQuality(applicant.name, idText);
+  if (nameQuality === 'none') {
     fail(400, 'The name on the uploaded identity document does not match the application.');
   }
 
   const statementMonths = recentMonths(statementsText, now);
   const payslipMonths = recentMonths(payslipsText, now);
-  if (statementMonths.size < 3) {
+  if (statementMonths.size < 2) {
     fail(400, 'The bank statements must clearly cover the latest three months.');
   }
-  if (payslipMonths.size < 3) {
+  if (payslipMonths.size < 2) {
     fail(400, 'The payslips must clearly cover the latest three months.');
   }
 
+  const manualReviewReasons = [];
+  if (nameQuality === 'partial') manualReviewReasons.push('The ID name could only be partially matched; FCI must confirm it manually.');
+  if (statementMonths.size === 2) manualReviewReasons.push('Only two recent bank-statement months were confidently detected.');
+  if (payslipMonths.size === 2) manualReviewReasons.push('Only two recent payslip months were confidently detected.');
+
   return {
-    status: 'passed',
+    status: manualReviewReasons.length ? 'manual_review' : 'passed',
     idMatched: true,
-    nameMatched: true,
+    nameMatched: nameQuality === 'full',
+    manualReviewReasons,
     statementMonths: [...statementMonths].sort(),
     payslipMonths: [...payslipMonths].sort(),
   };
@@ -74,8 +81,8 @@ export async function screenDocuments(env, attachments, applicant, now = new Dat
 function recentMonths(text, now) {
   const dates = extractDates(text);
   const current = new Date(now.getFullYear(), now.getMonth(), 1);
-  const earliest = new Date(current.getFullYear(), current.getMonth() - 4, 1);
-  const latest = new Date(current.getFullYear(), current.getMonth() + 1, 0);
+  const earliest = new Date(current.getFullYear(), current.getMonth() - 3, 1);
+  const latest = new Date(current.getFullYear(), current.getMonth(), 0);
   return new Set(dates
     .filter((date) => date >= earliest && date <= latest)
     .map((date) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`));
@@ -122,10 +129,14 @@ function validSouthAfricanId(value) {
   return (10 - (sum % 10)) % 10 === Number(value[12]);
 }
 
-function nameMatches(name, text) {
+function nameMatchQuality(name, text) {
   const tokens = String(name).toLowerCase().replace(/[^a-z\s-]/g, ' ').split(/\s+/).filter((token) => token.length >= 3);
   const haystack = text.toLowerCase().replace(/[^a-z\s-]/g, ' ');
-  return tokens.length > 0 && tokens.filter((token) => haystack.includes(token)).length >= Math.max(1, Math.ceil(tokens.length * 0.5));
+  if (!tokens.length) return 'none';
+  const matched = tokens.filter((token) => haystack.includes(token)).length;
+  if (matched === tokens.length) return 'full';
+  if (matched > 0) return 'partial';
+  return 'none';
 }
 
 function digits(value) { return String(value || '').replace(/\D/g, ''); }

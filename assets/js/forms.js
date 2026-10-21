@@ -65,7 +65,9 @@
     let data = {};
     try { data = await response.json(); } catch (error) { data = {}; }
     if (!response.ok || !data.ok) {
-      throw new Error(data.error || 'We could not send that just now. Please try again or email the office.');
+      const problem = new Error(data.error || 'We could not send that just now. Please try again or email the office.');
+      problem.issues = Array.isArray(data.issues) ? data.issues : [];
+      throw problem;
     }
     return data;
   }
