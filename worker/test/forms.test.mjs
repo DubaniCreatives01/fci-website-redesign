@@ -20,6 +20,17 @@ const env = {
   PARTNERSHIP_TO_EMAILS: 'development@fcichs.co.za',
   NEWSLETTER_TO_EMAILS: 'news@fcichs.co.za',
   ALLOWED_ORIGINS: 'https://fcichs.co.za',
+  AI: {
+    async toMarkdown(files) {
+      return files.map((file) => ({
+        name: file.name,
+        format: 'text',
+        data: file.name.startsWith('id')
+          ? 'FCI Community Housing Services\nJane Applicant Bcc evil example com\n8001015009087\nSouth African Identity Document'
+          : 'Statement / Payslip\n01/07/2026 31/07/2026\n01/08/2026 31/08/2026\n01/09/2026 30/09/2026\nGross salary Net salary',
+      }));
+    },
+  },
 };
 
 function request(path, body, headers = {}) {
@@ -44,7 +55,7 @@ function pdf(name = 'id.pdf') {
 }
 
 function docs() {
-  return ['id', 'statements', 'payslips', 'address'].map((role) => ({
+  return ['id', 'statements', 'payslips', 'address', 'employment'].map((role) => ({
     ...pdf(`${role}.pdf`),
     role,
   }));
@@ -60,23 +71,29 @@ function applicant(overrides = {}) {
     marital: 'Single',
     dependents: '0',
     address: '1 Test Street, Cape Town',
-    project: 'Goodwood Station Development',
-    unit: 'Bachelor Unit',
+    project: 'Goodwood Development',
+    unit: '2 Bedroom Unit',
     eligibilityStatus: 'Qualifies',
     employment: 'Employed (Full-Time)',
     employer: 'Example Co',
-    gross: 8000,
-    net: 7000,
+    gross: 15000,
+    net: 12000,
     coName: '',
     coIncome: 0,
-    combinedIncome: 'R8 000.00',
+    combinedIncome: 'R15 000.00',
+    applicantAge: '35',
+    affordabilitySurplus: '1500',
+    homeownerStatus: 'no',
+    creditPosition: 'favourable',
+    employmentProof: 'permanent',
     ...overrides,
   };
 }
 
 async function captured(path, body, customEnv = env) {
   const sent = [];
-  const response = await handleRequest(request(path, body), customEnv, {}, {
+  const effectiveEnv = customEnv === env ? env : { ...customEnv, AI: customEnv.AI || env.AI };
+  const response = await handleRequest(request(path, body), effectiveEnv, {}, {
     deliver: async (_env, mail) => { sent.push(mail); },
   });
   const json = await response.json();
@@ -101,7 +118,7 @@ test('application mail keeps the FCI mailbox as From and replies to the applican
   assert.equal(mail.replyTo.name, 'Jane Bcc: evil@example.com via FCI Website');
   assert.equal(mail.subject, 'Application FCI-APP-123456 - Jane Bcc: evil@example.com');
   assert.equal(mail.subject.includes('\n'), false);
-  assert.equal(mail.attachments.length, 4);
+  assert.equal(mail.attachments.length, 5);
 
   const raw = buildRawMessage({
     fromName: mail.smtp.fromName,
@@ -197,6 +214,43 @@ test('honeypot and incomplete uploads do not send mail', async () => {
   });
   assert.equal(badFile.response.status, 400);
   assert.equal(badFile.sent.length, 0);
+});
+
+test('application rejects an ID that does not match the uploaded document', async () => {
+  const { response, sent } = await captured('/api/apply', {
+    formStartedAt: started(),
+    refNo: 'FCI-APP-123456',
+    applicant: applicant({ idNumber: '8001015009088' }),
+    attachments: docs(),
+  });
+  assert.equal(response.status, 400);
+  assert.equal(sent.length, 0);
+});
+
+test('application rejects statements and payslips that do not cover the latest three months', async () => {
+  const staleEnv = {
+    ...env,
+    AI: {
+      async toMarkdown(files) {
+        return files.map((file) => ({
+          name: file.name,
+          format: 'text',
+          data: file.name.startsWith('id')
+            ? 'Jane Applicant 8001015009087 South African Identity Document'
+            : '01/01/2025 31/01/2025 01/02/2025 28/02/2025',
+        }));
+      },
+    },
+  };
+  const { response, sent, json } = await captured('/api/apply', {
+    formStartedAt: started(),
+    refNo: 'FCI-APP-123456',
+    applicant: applicant(),
+    attachments: docs(),
+  }, staleEnv);
+  assert.equal(response.status, 400);
+  assert.equal(sent.length, 0);
+  assert.match(json.error, /latest three months/);
 });
 
 test('plain SMTP on port 25 is not used', async () => {

@@ -1,9 +1,10 @@
 import { escapeHtml, sanitizeHeader } from './mime.js';
+import { screenDocuments } from './document-screening.js';
 
 const MAX_BODY_BYTES = 22 * 1024 * 1024;
 const MAX_FILE_BYTES = 4 * 1024 * 1024;
 const MAX_TOTAL_BYTES = 16 * 1024 * 1024;
-const MAX_FILES = 5;
+const MAX_FILES = 6;
 const MIN_FILL_MS = 3000;
 const MAX_AGE_MS = 24 * 60 * 60 * 1000;
 const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
@@ -43,6 +44,7 @@ export async function handleRequest(request, env, ctx, deps = {}) {
       ok: true,
       service: 'fcichs-forms',
       smtpConfigured: Boolean(smtp),
+      documentScreeningConfigured: Boolean(env.AI && typeof env.AI.toMarkdown === 'function'),
     }, originOk ? origin : null);
   }
 
@@ -107,8 +109,15 @@ async function handleApply(payload, env, deliver, origin) {
     coName: cleanOptional(applicant.coName, 120),
     coIncome: cleanMoney(applicant.coIncome || 0),
     combinedIncome: cleanOptional(applicant.combinedIncome, 40),
+    applicantAge: cleanOptional(applicant.applicantAge, 3),
+    affordabilitySurplus: cleanOptional(applicant.affordabilitySurplus, 20),
+    homeownerStatus: cleanOptional(applicant.homeownerStatus, 20),
+    creditPosition: cleanOptional(applicant.creditPosition, 30),
+    employmentProof: cleanOptional(applicant.employmentProof, 30),
   };
+  validateApplicationRules(fields);
   const attachments = normaliseAttachments(payload.attachments, true);
+  const documentScreening = await screenDocuments(env, attachments, fields);
   const rows = [
     ['Reference', refNo],
     ['Applicant', fields.name],
@@ -129,6 +138,7 @@ async function handleApply(payload, env, deliver, origin) {
     ['Co-applicant', fields.coName || '—'],
     ['Co-applicant income', fields.coIncome],
     ['Combined income', fields.combinedIncome || '—'],
+    ['Document screening', `Passed: ID matched; bank statements ${documentScreening.statementMonths.join(', ')}; payslips ${documentScreening.payslipMonths.join(', ')}`],
   ];
   await deliver(env, {
     smtp,
@@ -227,14 +237,39 @@ function normaliseAttachments(input, required) {
     if (!type.sniff(bytes)) fail(400, `${filename} is not a valid PDF, JPG, or PNG.`);
     total += bytes.length;
     if (total > MAX_TOTAL_BYTES) fail(400, 'The combined documents are larger than 16 MB.');
-    return { filename, contentType: type.mime, base64: String(file.content).replace(/\s/g, '') };
+    return { role, filename, contentType: type.mime, base64: String(file.content).replace(/\s/g, '') };
   });
   if (required) {
-    for (const role of ['id', 'statements', 'payslips', 'address']) {
+    for (const role of ['id', 'statements', 'payslips', 'address', 'employment']) {
       if (!roles.has(role)) fail(400, 'A required document is missing.');
     }
   }
   return files;
+}
+
+function validateApplicationRules(fields) {
+  const age = Number(fields.applicantAge);
+  const gross = Number(fields.gross);
+  const coIncome = Number(fields.coIncome);
+  const surplus = Number(fields.affordabilitySurplus);
+  const total = gross + coIncome;
+  const reasons = [];
+
+  if (!['Goodwood Development', 'Ruyterwacht Development'].includes(fields.project)) {
+    reasons.push('Choose Goodwood or Ruyterwacht; these are the developments currently accepting applications.');
+  }
+  if (fields.unit !== '2 Bedroom Unit') reasons.push('Only 2-bedroom units are currently available.');
+  if (!['SA Citizen', 'Permanent Resident'].includes(fields.citizenship)) reasons.push('The applicant must be a South African citizen or permanent resident.');
+  if (!Number.isFinite(age) || age < 21 || age > 65) reasons.push('The applicant must be between 21 and 65 years old.');
+  if (fields.homeownerStatus === 'yes') reasons.push('Applicants and co-applicants cannot be current or previous homeowners.');
+  if (fields.creditPosition !== 'favourable') reasons.push('The application requires a favourable credit position.');
+  if (!Number.isFinite(total) || total < 11301 || total > 22000) reasons.push('Combined basic/fixed income must be between R11,301 and R22,000.');
+  if (!Number.isFinite(surplus) || surplus < 1000) reasons.push('The household must have an affordability surplus of at least R1,000.');
+  if (!['permanent', 'fixed-guaranteed', 'self-employed'].includes(fields.employmentProof)) {
+    reasons.push('The applicant must provide an accepted employment record.');
+  }
+  if (fields.coName && (coIncome <= 0 || total > 22000)) reasons.push('Check the co-applicant income: joint household income cannot exceed R22,000.');
+  if (reasons.length) fail(400, `This application does not currently qualify: ${reasons.join(' ')}`);
 }
 
 function smtpConfig(env) {

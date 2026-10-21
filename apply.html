@@ -1593,7 +1593,8 @@
                 ['Identity document', fileIdInput.files[0]],
                 ['Bank statements', fileStatementsInput.files[0]],
                 ['Payslips', filePayslipsInput.files[0]],
-                ['Proof of address', fileAddressInput.files[0]]
+                ['Proof of address', fileAddressInput.files[0]],
+                ['Employment contract or letter', fileEmploymentInput.files[0]]
             ];
             for (const [label, file] of uploads) {
                 if (!file) {
@@ -1648,7 +1649,8 @@
                 applicantAge: document.getElementById('app-age').value,
                 affordabilitySurplus: document.getElementById('app-surplus').value,
                 homeownerStatus: document.getElementById('app-homeowner').value,
-                creditPosition: document.getElementById('app-credit').value
+                creditPosition: document.getElementById('app-credit').value,
+                employmentProof: document.getElementById('app-employment-proof').value
             };
 
             // Store in sessionStorage for tracking page display
@@ -1755,7 +1757,8 @@
                     const employmentBase64 = await blobToBase64(fileEmploymentInput.files[0]);
                     attachmentsList.push({
                         name: fileEmploymentInput.files[0].name,
-                        content: employmentBase64
+                        content: employmentBase64,
+                        role: 'employment'
                     });
                 }
             } catch (fileErr) {
@@ -1797,7 +1800,8 @@
                         applicantAge: document.getElementById('app-age').value,
                         affordabilitySurplus: document.getElementById('app-surplus').value,
                         homeownerStatus: document.getElementById('app-homeowner').value,
-                        creditPosition: document.getElementById('app-credit').value
+                        creditPosition: document.getElementById('app-credit').value,
+                        employmentProof: document.getElementById('app-employment-proof').value
                     },
                     attachments: attachmentsList
                 });
