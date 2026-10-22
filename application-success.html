@@ -547,7 +547,7 @@
             const manualName = document.createElement('strong');
             manualName.id = 'lead-applicant-name';
             manualName.textContent = applicantName;
-            manualLead.replaceChildren('Thank you ', manualName, '. Your application and documents were received, but FCI must manually confirm some document details before the assessment can continue.');
+            manualLead.replaceChildren('Thank you ', manualName, '. Your application and documents were received. FCI staff will verify your documents by hand and contact you if anything else is needed.');
             document.getElementById('track-step-2').querySelector('h4').textContent = '2. Manual Document Review';
             document.getElementById('track-step-2').querySelector('span').textContent = 'FCI confirmation required';
             document.getElementById('track-step-2').querySelector('span').style.color = 'var(--accent-orange)';

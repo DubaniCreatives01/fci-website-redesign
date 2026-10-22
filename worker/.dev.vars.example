@@ -9,8 +9,9 @@ SMTP_USER=fcicommunityhousing@gmail.com
 SMTP_PASSWORD=
 SMTP_FROM_EMAIL=fcicommunityhousing@gmail.com
 SMTP_FROM_NAME=FCI Community Housing Services
-# Leave the lists blank to deliver to fcicommunityhousing@gmail.com.
-APPLICATION_TO_EMAILS=
+# Applications go to info@fcichs.co.za and the Gmail mailbox (see wrangler.jsonc).
+# Leave the other lists blank to deliver to fcicommunityhousing@gmail.com.
+APPLICATION_TO_EMAILS=info@fcichs.co.za,fcicommunityhousing@gmail.com
 CONTACT_TO_EMAILS=
 NEWSLETTER_TO_EMAILS=
 PARTNERSHIP_TO_EMAILS=

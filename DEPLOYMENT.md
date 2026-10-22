@@ -16,7 +16,7 @@ Applications, contact messages, and newsletter signups are therefore posted to a
 
 Housing applications also use the Worker’s **Workers AI binding** for server-side document extraction. PDFs and images are converted to text before any email is sent. The Worker validates the South African ID checksum and match to the typed ID/name, and requires bank statements and payslips to show three recent monthly periods. If OCR cannot read the documents or any check fails, the application is rejected and no email is sent.
 
-If OCR finds a borderline result — for example, only two recent periods or a partial name match — the application is emailed with a **manual review required** status instead of being silently treated as passed. The applicant receives a manual-review confirmation page. The Worker emits privacy-safe structured screening, rejection, and failure events to Workers Logs. Set the optional `ALERT_WEBHOOK_URL` secret to a private HTTPS alert endpoint if the office wants failure and high-rejection notifications; the alert payload never includes applicant names, ID numbers, income, or uploaded documents.
+If the automated document checks cannot verify something — an unreadable photo or scan, an ID number or name that cannot be found or does not match, or statement/payslip dates that cannot be detected — the application is still emailed, with **NEEDS MANUAL REVIEW** in the subject and a list of the checks that could not be verified, and the Worker returns HTTP 202. Only clear eligibility-rule failures (income band, age, citizenship, development/unit, consents) and invalid input (missing files, wrong file types, size limits) are rejected with HTTP 400. The applicant receives a manual-review confirmation page. The Worker emits privacy-safe structured screening, rejection, and failure events to Workers Logs. Set the optional `ALERT_WEBHOOK_URL` secret to a private HTTPS alert endpoint if the office wants failure and high-rejection notifications; the alert payload never includes applicant names, ID numbers, income, or uploaded documents.
 
 ## Gmail mailbox
 
@@ -70,7 +70,7 @@ A consumer Gmail account can send about **500 messages per day**. Each applicati
 
 ### Recipient overrides
 
-If `APPLICATION_TO_EMAILS`, `CONTACT_TO_EMAILS`, `PARTNERSHIP_TO_EMAILS`, and `NEWSLETTER_TO_EMAILS` are unset, every form is delivered to `fcicommunityhousing@gmail.com`.
+`APPLICATION_TO_EMAILS` is set in `worker/wrangler.jsonc` to `info@fcichs.co.za,fcicommunityhousing@gmail.com`, so applications reach both inboxes. If `CONTACT_TO_EMAILS`, `PARTNERSHIP_TO_EMAILS`, and `NEWSLETTER_TO_EMAILS` are unset, those forms are delivered to `fcicommunityhousing@gmail.com`.
 
 To send a form somewhere else, set that name as a **Worker secret** (so the next code deploy does not wipe it) to a comma-separated list of up to 10 addresses:
 
@@ -97,7 +97,7 @@ The Gmail host, port, username, and From address are already in `worker/wrangler
 | `SMTP_FROM_EMAIL` | Already set | `wrangler.jsonc` | `fcicommunityhousing@gmail.com`. Gmail requires this to match `SMTP_USER`. |
 | `SMTP_FROM_NAME` | Already set | `wrangler.jsonc` | `FCI Community Housing Services` |
 | `SMTP_PASSWORD` | **Yes** | Worker **secret** only | The 16-character Google App Password. Never commit it. |
-| `APPLICATION_TO_EMAILS` | No | Worker secret | Applications and their documents. Blank means `fcicommunityhousing@gmail.com`. |
+| `APPLICATION_TO_EMAILS` | No | Var in `wrangler.jsonc` | Applications and their documents. Set to `info@fcichs.co.za,fcicommunityhousing@gmail.com`. Blank means `fcicommunityhousing@gmail.com`. |
 | `CONTACT_TO_EMAILS` | No | Worker secret | Contact form. Blank means the Gmail address. |
 | `PARTNERSHIP_TO_EMAILS` | No | Worker secret | Partnership enquiries. Blank means the contact list, then the Gmail address. |
 | `NEWSLETTER_TO_EMAILS` | No | Worker secret | Signup notices. Blank means the contact list, then the Gmail address. |
@@ -132,7 +132,7 @@ Until those secrets exist, the forms tell the visitor to email the office. They 
 
 - Documents must be PDF, JPG, or PNG, at most 4 MB each and 16 MB together. The type is checked from the file contents, not only the name.
 - Applications fail closed when document extraction is unavailable. The Worker does not treat an uploaded filename or a client-side prescreen result as proof of eligibility.
-- Borderline but readable documents are routed to manual review; unreadable, stale, mismatched, or incomplete documents are rejected with a fix/bring explanation.
+- Documents the automated checks cannot verify (unreadable, stale, mismatched, or dates not found) are routed to manual review and still emailed; only eligibility-rule failures and invalid or missing files are rejected with a fix/bring explanation.
 - The browser shows the same actionable issues returned by the Worker, while the Worker independently enforces consent, eligibility, document roles, and extraction checks.
 - A hidden field and a short minimum time on the form drop simple automated posts. Each IP is limited to a few submissions per ten minutes (newsletter: per hour).
 - The previous client-side behaviour redirected to the success page even when sending failed. That redirect now happens only after the Worker accepts the message.

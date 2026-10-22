@@ -219,18 +219,24 @@ test('honeypot and incomplete uploads do not send mail', async () => {
   assert.equal(badFile.sent.length, 0);
 });
 
-test('application rejects an ID that does not match the uploaded document', async () => {
-  const { response, sent } = await captured('/api/apply', {
+test('an ID that does not match the uploaded document goes to manual review', async () => {
+  const { response, json, sent } = await captured('/api/apply', {
     formStartedAt: started(),
     refNo: 'FCI-APP-123456',
     applicant: applicant({ idNumber: '8001015009088' }),
     attachments: docs(),
   });
-  assert.equal(response.status, 400);
-  assert.equal(sent.length, 0);
+  assert.equal(response.status, 202);
+  assert.equal(json.ok, true);
+  assert.equal(json.status, 'manual_review');
+  assert.match(json.message, /staff will verify your documents/);
+  assert.equal(sent.length, 1);
+  assert.match(sent[0].subject, /^NEEDS MANUAL REVIEW - Application FCI-APP-123456 - /);
+  assert.match(sent[0].html, /does not match the number entered on the form/);
+  assert.equal(sent[0].attachments.length, 5);
 });
 
-test('application rejects statements and payslips that do not cover the latest three months', async () => {
+test('statements and payslips without recent dates go to manual review', async () => {
   const staleEnv = {
     ...env,
     AI: {
@@ -251,9 +257,13 @@ test('application rejects statements and payslips that do not cover the latest t
     applicant: applicant(),
     attachments: docs(),
   }, staleEnv);
-  assert.equal(response.status, 400);
-  assert.equal(sent.length, 0);
-  assert.match(json.error, /latest three months/);
+  assert.equal(response.status, 202);
+  assert.equal(json.status, 'manual_review');
+  assert.equal(sent.length, 1);
+  assert.match(sent[0].subject, /^NEEDS MANUAL REVIEW/);
+  assert.match(sent[0].html, /No recent bank-statement months/);
+  assert.match(sent[0].html, /No recent payslip months/);
+  assert.deepEqual(sent[0].to, ['applications@fcichs.co.za', 'info@fcichs.co.za']);
 });
 
 test('application routes borderline document extraction to manual review', async () => {
@@ -280,7 +290,9 @@ test('application routes borderline document extraction to manual review', async
   assert.equal(response.status, 202);
   assert.equal(json.status, 'manual_review');
   assert.equal(sent.length, 1);
-  assert.match(sent[0].subject, /Manual review/);
+  assert.match(sent[0].subject, /^NEEDS MANUAL REVIEW - Application/);
+  assert.match(sent[0].html, /Checks not verified/);
+  assert.match(sent[0].html, /partially matched/);
 });
 
 test('application requires server-side consent flags', async () => {
@@ -296,7 +308,7 @@ test('application requires server-side consent flags', async () => {
   assert.ok(json.issues.includes('Consent to document extraction and personal-information processing is required.'));
 });
 
-test('unreadable documents fail with a clear replacement instruction', async () => {
+test('unreadable documents are still delivered for manual review', async () => {
   const unreadableEnv = {
     ...env,
     AI: {
@@ -311,9 +323,137 @@ test('unreadable documents fail with a clear replacement instruction', async () 
     applicant: applicant(),
     attachments: docs(),
   }, unreadableEnv);
-  assert.equal(response.status, 400);
-  assert.equal(sent.length, 0);
-  assert.match(json.error, /clear PDF or image/);
+  assert.equal(response.status, 202);
+  assert.equal(json.status, 'manual_review');
+  assert.equal(sent.length, 1);
+  assert.match(sent[0].subject, /^NEEDS MANUAL REVIEW/);
+  assert.match(sent[0].html, /identity document could not be read automatically/);
+  assert.match(sent[0].html, /bank statements could not be read automatically/);
+  assert.match(sent[0].html, /payslips could not be read automatically/);
+  assert.equal(sent[0].attachments.length, 5);
+});
+
+test('a document conversion error or missing AI binding still delivers for manual review', async () => {
+  const body = () => ({
+    formStartedAt: started(),
+    refNo: 'FCI-APP-123456',
+    applicant: applicant(),
+    attachments: docs(),
+  });
+  const throwing = await captured('/api/apply', body(), {
+    ...env,
+    AI: { async toMarkdown() { throw new Error('conversion failed'); } },
+  });
+  assert.equal(throwing.response.status, 202);
+  assert.equal(throwing.sent.length, 1);
+  assert.match(throwing.sent[0].html, /could not be read automatically/);
+
+  const noAi = { ...env };
+  delete noAi.AI;
+  const sent = [];
+  const response = await handleRequest(request('/api/apply', body()), noAi, {}, {
+    deliver: async (_env, mail) => { sent.push(mail); },
+  });
+  assert.equal(response.status, 202);
+  assert.equal(sent.length, 1);
+  assert.match(sent[0].html, /screening was unavailable/);
+});
+
+test('passed applications are not marked for manual review', async () => {
+  const { response, json, sent } = await captured('/api/apply', {
+    formStartedAt: started(),
+    refNo: 'FCI-APP-123456',
+    applicant: applicant(),
+    attachments: docs(),
+  });
+  assert.equal(response.status, 200);
+  assert.equal(json.status, 'passed');
+  assert.equal(sent[0].subject.includes('MANUAL REVIEW'), false);
+});
+
+async function withLogs(fn) {
+  const lines = [];
+  const original = console.log;
+  console.log = (...args) => { lines.push(args.join(' ')); };
+  try {
+    await fn();
+  } finally {
+    console.log = original;
+  }
+  return lines;
+}
+
+test('eligibility failures still hard-reject and log only non-personal reason codes', async () => {
+  let result;
+  const lines = await withLogs(async () => {
+    result = await captured('/api/apply', {
+      formStartedAt: started(),
+      refNo: 'FCI-APP-123456',
+      applicant: applicant({ gross: 90000 }),
+      attachments: docs(),
+    });
+  });
+  assert.equal(result.response.status, 400);
+  assert.equal(result.sent.length, 0);
+  assert.match(result.json.error, /R11,301 and R22,000/);
+  const event = lines.map((line) => JSON.parse(line)).find((item) => item.event === 'application_rejected');
+  assert.deepEqual(event.reasons, ['rule_income_band']);
+  const logged = lines.join('\n');
+  for (const secret of ['Jane', 'Applicant', '8001015009087', 'jane.applicant@example.com', '0820000000']) {
+    assert.equal(logged.includes(secret), false, `log leaked ${secret}`);
+  }
+});
+
+test('invalid files still hard-reject with a reason code', async () => {
+  let result;
+  const lines = await withLogs(async () => {
+    result = await captured('/api/apply', {
+      formStartedAt: started(),
+      refNo: 'FCI-APP-123456',
+      applicant: applicant(),
+      attachments: docs().filter((file) => file.role !== 'payslips'),
+    });
+  });
+  assert.equal(result.response.status, 400);
+  assert.equal(result.sent.length, 0);
+  const event = lines.map((line) => JSON.parse(line)).find((item) => item.event === 'application_rejected');
+  assert.deepEqual(event.reasons, ['attachment_missing_role']);
+});
+
+test('manual-review screening logs reason codes without personal data', async () => {
+  const lines = await withLogs(async () => {
+    await captured('/api/apply', {
+      formStartedAt: started(),
+      refNo: 'FCI-APP-123456',
+      applicant: applicant({ idNumber: '8001015009088' }),
+      attachments: docs(),
+    });
+  });
+  const event = lines.map((line) => JSON.parse(line)).find((item) => item.event === 'application_screened');
+  assert.equal(event.status, 'manual_review');
+  assert.ok(event.reviewCodes.includes('id_number_mismatch'));
+  const logged = lines.join('\n');
+  for (const secret of ['Jane', '8001015009088', 'jane.applicant@example.com']) {
+    assert.equal(logged.includes(secret), false, `log leaked ${secret}`);
+  }
+});
+
+test('wrangler config sends applications to info@ and the Gmail mailbox only', () => {
+  const config = readFileSync(join(root, 'worker', 'wrangler.jsonc'), 'utf8');
+  const vars = JSON.parse(config.replace(/^\s*\/\/.*$/gm, '')).vars;
+  assert.equal(vars.APPLICATION_TO_EMAILS, 'info@fcichs.co.za,fcicommunityhousing@gmail.com');
+  assert.equal(vars.CONTACT_TO_EMAILS, undefined);
+  assert.equal(vars.NEWSLETTER_TO_EMAILS, undefined);
+  assert.equal(vars.PARTNERSHIP_TO_EMAILS, undefined);
+  assert.equal(Object.keys(vars).some((key) => /PASSWORD/i.test(key)), false);
+});
+
+test('the apply page treats a manual-review response as success', () => {
+  const page = readFileSync(join(root, 'apply.html'), 'utf8');
+  assert.match(page, /result\.status === 'manual_review' \? 'manual_review' : 'passed'/);
+  assert.match(page, /redirectToSuccessPage\(screeningStatus\)/);
+  const forms = readFileSync(join(root, 'assets', 'js', 'forms.js'), 'utf8');
+  assert.match(forms, /!response\.ok \|\| !data\.ok/);
 });
 
 test('plain SMTP on port 25 is not used', async () => {

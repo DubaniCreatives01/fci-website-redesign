@@ -4,14 +4,50 @@ const MONTHS = {
   jan: 0, feb: 1, mar: 2, apr: 3, jun: 5, jul: 6, aug: 7, sep: 8, sept: 8, oct: 9, nov: 10, dec: 11,
 };
 
-export async function screenDocuments(env, attachments, applicant, now = new Date()) {
-  if (!env.AI || typeof env.AI.toMarkdown !== 'function') {
-    fail(503, 'Automated document screening is temporarily unavailable. No application was sent.');
-  }
+// Document checks never hard-reject an application. Anything the automated
+// extraction cannot confirm is routed to FCI staff for manual review, with a
+// non-personal reason code per check. Only invalid input (missing roles) fails.
+const REVIEW_NOTES = {
+  screening_unavailable: 'Automated document screening was unavailable; all documents must be checked manually.',
+  documents_unreadable: 'One or more documents could not be read automatically (likely a photo or scan); check them manually.',
+  id_unreadable: 'The identity document could not be read automatically.',
+  id_number_not_found: 'No valid South African ID number could be read from the identity document.',
+  id_number_mismatch: 'The ID number read from the identity document does not match the number entered on the form.',
+  id_name_not_found: 'The applicant name could not be found on the identity document.',
+  id_name_partial: 'The ID name could only be partially matched.',
+  statements_unreadable: 'The bank statements could not be read automatically.',
+  statements_dates_not_found: 'No recent bank-statement months (latest three months) could be detected.',
+  statements_two_months: 'Only two recent bank-statement months were confidently detected.',
+  payslips_unreadable: 'The payslips could not be read automatically.',
+  payslips_dates_not_found: 'No recent payslip months (latest three months) could be detected.',
+  payslips_two_months: 'Only two recent payslip months were confidently detected.',
+};
 
+export function reviewNote(code) {
+  return REVIEW_NOTES[code] || code;
+}
+
+export async function screenDocuments(env, attachments, applicant, now = new Date()) {
   const required = ['id', 'statements', 'payslips'];
   const byRole = new Map(attachments.map((file) => [file.role, file]));
   for (const role of required) if (!byRole.has(role)) fail(400, `The ${role} document is required.`);
+
+  const codes = [];
+  const review = (code) => { if (!codes.includes(code)) codes.push(code); };
+  const result = (statementMonths = new Set(), payslipMonths = new Set(), nameQuality = 'none', idMatched = false) => ({
+    status: codes.length ? 'manual_review' : 'passed',
+    idMatched,
+    nameMatched: nameQuality === 'full',
+    reviewCodes: [...codes],
+    manualReviewReasons: codes.map(reviewNote),
+    statementMonths: [...statementMonths].sort(),
+    payslipMonths: [...payslipMonths].sort(),
+  });
+
+  if (!env.AI || typeof env.AI.toMarkdown !== 'function') {
+    review('screening_unavailable');
+    return result();
+  }
 
   const files = required.map((role) => {
     const file = byRole.get(role);
@@ -28,54 +64,52 @@ export async function screenDocuments(env, attachments, applicant, now = new Dat
     });
   } catch (error) {
     console.log(JSON.stringify({ event: 'document_ocr_error', code: error?.name || 'ocr_error' }));
-    fail(503, 'The uploaded documents could not be read automatically. Please upload clearer copies.');
+    review('documents_unreadable');
+    return result();
   }
 
   const results = Array.isArray(converted) ? converted : [converted];
   const textByRole = new Map();
-  for (const result of results) {
-    if (!result || result.format === 'error' || !result.data) {
-      fail(400, 'One of the uploaded documents could not be read. Please upload a clear PDF or image.');
-    }
-    const role = [...byRole.values()].find((file) => file.filename === result.name)?.role;
-    if (role) textByRole.set(role, String(result.data));
+  for (const item of results) {
+    if (!item || item.format === 'error' || !item.data) continue;
+    const role = [...byRole.values()].find((file) => file.filename === item.name)?.role;
+    if (role) textByRole.set(role, String(item.data));
   }
 
-  const idText = textByRole.get('id') || '';
-  const statementsText = textByRole.get('statements') || '';
-  const payslipsText = textByRole.get('payslips') || '';
-  const idCandidates = findIdNumbers(idText);
-  const enteredId = digits(applicant.idNumber);
-  if (!idCandidates.some((candidate) => candidate === enteredId && validSouthAfricanId(candidate))) {
-    fail(400, 'The uploaded identity document could not be matched to a valid South African ID number.');
-  }
-  const nameQuality = nameMatchQuality(applicant.name, idText);
-  if (nameQuality === 'none') {
-    fail(400, 'The name on the uploaded identity document does not match the application.');
-  }
-
-  const statementMonths = recentMonths(statementsText, now);
-  const payslipMonths = recentMonths(payslipsText, now);
-  if (statementMonths.size < 2) {
-    fail(400, 'The bank statements must clearly cover the latest three months.');
-  }
-  if (payslipMonths.size < 2) {
-    fail(400, 'The payslips must clearly cover the latest three months.');
+  let idMatched = false;
+  let nameQuality = 'none';
+  if (!textByRole.has('id')) {
+    review('id_unreadable');
+  } else {
+    const idText = textByRole.get('id');
+    const validIds = findIdNumbers(idText).filter(validSouthAfricanId);
+    const enteredId = digits(applicant.idNumber);
+    idMatched = validIds.includes(enteredId);
+    if (!idMatched) review(validIds.length ? 'id_number_mismatch' : 'id_number_not_found');
+    nameQuality = nameMatchQuality(applicant.name, idText);
+    if (nameQuality === 'none') review('id_name_not_found');
+    if (nameQuality === 'partial') review('id_name_partial');
   }
 
-  const manualReviewReasons = [];
-  if (nameQuality === 'partial') manualReviewReasons.push('The ID name could only be partially matched; FCI must confirm it manually.');
-  if (statementMonths.size === 2) manualReviewReasons.push('Only two recent bank-statement months were confidently detected.');
-  if (payslipMonths.size === 2) manualReviewReasons.push('Only two recent payslip months were confidently detected.');
+  let statementMonths = new Set();
+  if (!textByRole.has('statements')) {
+    review('statements_unreadable');
+  } else {
+    statementMonths = recentMonths(textByRole.get('statements'), now);
+    if (statementMonths.size < 2) review('statements_dates_not_found');
+    else if (statementMonths.size === 2) review('statements_two_months');
+  }
 
-  return {
-    status: manualReviewReasons.length ? 'manual_review' : 'passed',
-    idMatched: true,
-    nameMatched: nameQuality === 'full',
-    manualReviewReasons,
-    statementMonths: [...statementMonths].sort(),
-    payslipMonths: [...payslipMonths].sort(),
-  };
+  let payslipMonths = new Set();
+  if (!textByRole.has('payslips')) {
+    review('payslips_unreadable');
+  } else {
+    payslipMonths = recentMonths(textByRole.get('payslips'), now);
+    if (payslipMonths.size < 2) review('payslips_dates_not_found');
+    else if (payslipMonths.size === 2) review('payslips_two_months');
+  }
+
+  return result(statementMonths, payslipMonths, nameQuality, idMatched);
 }
 
 function recentMonths(text, now) {

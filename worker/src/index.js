@@ -76,7 +76,13 @@ export async function handleRequest(request, env, ctx, deps = {}) {
       console.error(JSON.stringify(event));
       if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(sendMonitoringAlert(env, event));
     } else if (route === 'apply' && status === 400) {
-      const event = { event: 'application_rejected', route, status, thresholdReached: rejectionThresholdReached() };
+      const event = {
+        event: 'application_rejected',
+        route,
+        status,
+        reasons: Array.isArray(error.reasonCodes) && error.reasonCodes.length ? error.reasonCodes : [error.reasonCode || 'invalid_input'],
+        thresholdReached: rejectionThresholdReached(),
+      };
       console.log(JSON.stringify(event));
       if (event.thresholdReached && ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(sendMonitoringAlert(env, event));
     }
@@ -131,7 +137,7 @@ async function handleApply(payload, env, deliver, origin, ctx) {
   console.log(JSON.stringify({
     event: 'application_screened',
     status: documentScreening.status,
-    refNo,
+    reviewCodes: documentScreening.reviewCodes,
     statementMonths: documentScreening.statementMonths,
     payslipMonths: documentScreening.payslipMonths,
   }));
@@ -155,22 +161,31 @@ async function handleApply(payload, env, deliver, origin, ctx) {
     ['Co-applicant', fields.coName || '—'],
     ['Co-applicant income', fields.coIncome],
     ['Combined income', fields.combinedIncome || '—'],
-    ['Document screening', `${manualReview ? 'Manual review required' : 'Passed'}: ID matched; bank statements ${documentScreening.statementMonths.join(', ')}; payslips ${documentScreening.payslipMonths.join(', ')}`],
-    ...(manualReview ? [['Manual review notes', documentScreening.manualReviewReasons.join(' ')]] : []),
+    ['Document screening', manualReview
+      ? 'NEEDS MANUAL REVIEW: some document checks could not be verified automatically (see below).'
+      : `Passed: ID number and name matched; bank statements ${documentScreening.statementMonths.join(', ')}; payslips ${documentScreening.payslipMonths.join(', ')}`],
+    ...(manualReview ? [
+      ['Checks not verified', documentScreening.manualReviewReasons.map((reason) => `- ${reason}`).join('\n')],
+      ['Detected automatically', `ID number match: ${documentScreening.idMatched ? 'yes' : 'no'}; bank-statement months: ${documentScreening.statementMonths.join(', ') || 'none'}; payslip months: ${documentScreening.payslipMonths.join(', ') || 'none'}`],
+    ] : []),
   ];
   await deliver(env, {
     smtp,
     to: recipients,
     replyTo: { name: viaWebsite(fields.name), email: fields.email },
-    subject: subjectLine(manualReview ? 'Application - Manual review' : 'Application', refNo, fields.name),
-    html: renderEmail(manualReview ? 'Housing application - manual review required' : 'New housing application', rows, 'Documents supplied by the applicant are attached. The message is sent from the FCI mailbox. Reply goes to the applicant.'),
+    subject: subjectLine(manualReview ? 'NEEDS MANUAL REVIEW - Application' : 'Application', refNo, fields.name),
+    html: renderEmail(manualReview ? 'Housing application - NEEDS MANUAL REVIEW' : 'New housing application', rows, manualReview
+      ? 'The applicant meets the eligibility answers on the form, but the automated document checks listed above could not be verified. Please check the attached documents manually. The message is sent from the FCI mailbox. Reply goes to the applicant.'
+      : 'Documents supplied by the applicant are attached. The message is sent from the FCI mailbox. Reply goes to the applicant.'),
     attachments,
   });
   return json(manualReview ? 202 : 200, {
     ok: true,
     refNo,
     status: manualReview ? 'manual_review' : 'passed',
-    message: manualReview ? 'Your application was received and requires a manual document review.' : 'Your qualifying application was received.',
+    message: manualReview
+      ? 'Thank you. Your application was received. FCI staff will verify your documents and contact you if anything else is needed.'
+      : 'Your qualifying application was received.',
   }, origin);
 }
 
@@ -240,31 +255,31 @@ function renderEmail(title, rows, note) {
 }
 
 function normaliseAttachments(input, required) {
-  if (!Array.isArray(input) || (required && input.length === 0)) fail(400, 'Required documents are missing.');
-  if (input.length > MAX_FILES) fail(400, 'Too many files were attached.');
+  if (!Array.isArray(input) || (required && input.length === 0)) fail(400, 'Required documents are missing.', [], 'attachments_missing');
+  if (input.length > MAX_FILES) fail(400, 'Too many files were attached.', [], 'attachments_too_many');
   let total = 0;
   const roles = new Set();
   const files = input.map((file) => {
-    if (!file || typeof file !== 'object') fail(400, 'A document could not be read.');
+    if (!file || typeof file !== 'object') fail(400, 'A document could not be read.', [], 'attachment_invalid');
     const role = String(file.role || 'document');
-    if (!/^[a-z-]{2,20}$/.test(role)) fail(400, 'A document could not be read.');
-    if (roles.has(role)) fail(400, 'A document was sent twice.');
+    if (!/^[a-z-]{2,20}$/.test(role)) fail(400, 'A document could not be read.', [], 'attachment_invalid');
+    if (roles.has(role)) fail(400, 'A document was sent twice.', [], 'attachment_duplicate');
     roles.add(role);
     const filename = safeFilename(file.name, role);
     const ext = filename.split('.').pop().toLowerCase();
     const type = FILE_TYPES[ext];
-    if (!type) fail(400, `${filename} must be a PDF, JPG, or PNG.`);
+    if (!type) fail(400, `${filename} must be a PDF, JPG, or PNG.`, [], 'attachment_type');
     const bytes = decodeBase64(file.content);
-    if (!bytes) fail(400, `${filename} could not be read.`);
-    if (bytes.length > MAX_FILE_BYTES) fail(400, `${filename} is larger than 4 MB.`);
-    if (!type.sniff(bytes)) fail(400, `${filename} is not a valid PDF, JPG, or PNG.`);
+    if (!bytes) fail(400, `${filename} could not be read.`, [], 'attachment_encoding');
+    if (bytes.length > MAX_FILE_BYTES) fail(400, `${filename} is larger than 4 MB.`, [], 'attachment_too_large');
+    if (!type.sniff(bytes)) fail(400, `${filename} is not a valid PDF, JPG, or PNG.`, [], 'attachment_type');
     total += bytes.length;
-    if (total > MAX_TOTAL_BYTES) fail(400, 'The combined documents are larger than 16 MB.');
+    if (total > MAX_TOTAL_BYTES) fail(400, 'The combined documents are larger than 16 MB.', [], 'attachments_total_too_large');
     return { role, filename, contentType: type.mime, base64: String(file.content).replace(/\s/g, '') };
   });
   if (required) {
     for (const role of ['id', 'statements', 'payslips', 'address', 'employment']) {
-      if (!roles.has(role)) fail(400, 'A required document is missing.');
+      if (!roles.has(role)) fail(400, 'A required document is missing.', [], 'attachment_missing_role');
     }
   }
   return files;
@@ -277,25 +292,27 @@ function validateApplicationRules(fields) {
   const surplus = Number(fields.affordabilitySurplus);
   const total = gross + coIncome;
   const reasons = [];
+  const codes = [];
+  const reject = (code, reason) => { codes.push(code); reasons.push(reason); };
 
   if (!['Goodwood Development', 'Ruyterwacht Development'].includes(fields.project)) {
-    reasons.push('Choose Goodwood or Ruyterwacht; these are the developments currently accepting applications.');
+    reject('rule_development', 'Choose Goodwood or Ruyterwacht; these are the developments currently accepting applications.');
   }
-  if (fields.unit !== '2 Bedroom Unit') reasons.push('Only 2-bedroom units are currently available.');
-  if (!['SA Citizen', 'Permanent Resident'].includes(fields.citizenship)) reasons.push('The applicant must be a South African citizen or permanent resident.');
-  if (!Number.isFinite(age) || age < 21 || age > 65) reasons.push('The applicant must be between 21 and 65 years old.');
-  if (fields.homeownerStatus === 'yes') reasons.push('Applicants and co-applicants cannot be current or previous homeowners.');
-  if (fields.creditPosition !== 'favourable') reasons.push('The application requires a favourable credit position.');
-  if (!Number.isFinite(total) || total < 11301 || total > 22000) reasons.push('Combined basic/fixed income must be between R11,301 and R22,000.');
-  if (!Number.isFinite(surplus) || surplus < 1000) reasons.push('The household must have an affordability surplus of at least R1,000.');
+  if (fields.unit !== '2 Bedroom Unit') reject('rule_unit', 'Only 2-bedroom units are currently available.');
+  if (!['SA Citizen', 'Permanent Resident'].includes(fields.citizenship)) reject('rule_citizenship', 'The applicant must be a South African citizen or permanent resident.');
+  if (!Number.isFinite(age) || age < 21 || age > 65) reject('rule_age', 'The applicant must be between 21 and 65 years old.');
+  if (fields.homeownerStatus === 'yes') reject('rule_homeowner', 'Applicants and co-applicants cannot be current or previous homeowners.');
+  if (fields.creditPosition !== 'favourable') reject('rule_credit', 'The application requires a favourable credit position.');
+  if (!Number.isFinite(total) || total < 11301 || total > 22000) reject('rule_income_band', 'Combined basic/fixed income must be between R11,301 and R22,000.');
+  if (!Number.isFinite(surplus) || surplus < 1000) reject('rule_surplus', 'The household must have an affordability surplus of at least R1,000.');
   if (!['permanent', 'fixed-guaranteed', 'self-employed'].includes(fields.employmentProof)) {
-    reasons.push('The applicant must provide an accepted employment record.');
+    reject('rule_employment', 'The applicant must provide an accepted employment record.');
   }
-  if (fields.coName && (coIncome <= 0 || total > 22000)) reasons.push('Check the co-applicant income: joint household income cannot exceed R22,000.');
-  if (!fields.privacyConsent) reasons.push('Consent to document extraction and personal-information processing is required.');
-  if (!fields.declarationAccepted) reasons.push('The truth and accuracy declaration is required.');
-  if (!fields.termsAccepted) reasons.push('The application terms must be accepted.');
-  if (reasons.length) fail(400, `This application does not currently qualify: ${reasons.join(' ')}`, reasons);
+  if (fields.coName && (coIncome <= 0 || total > 22000)) reject('rule_co_applicant_income', 'Check the co-applicant income: joint household income cannot exceed R22,000.');
+  if (!fields.privacyConsent) reject('rule_privacy_consent', 'Consent to document extraction and personal-information processing is required.');
+  if (!fields.declarationAccepted) reject('rule_declaration', 'The truth and accuracy declaration is required.');
+  if (!fields.termsAccepted) reject('rule_terms', 'The application terms must be accepted.');
+  if (reasons.length) fail(400, `This application does not currently qualify: ${reasons.join(' ')}`, reasons, codes);
 }
 
 const rejectionWindow = [];
@@ -484,8 +501,10 @@ function decodeBase64(value) {
   }
 }
 
-function fail(status, publicMessage, issues = []) {
-  throw Object.assign(new Error(publicMessage), { status, publicMessage, issues });
+function fail(status, publicMessage, issues = [], reason = null) {
+  const reasonCodes = Array.isArray(reason) ? reason : [];
+  const reasonCode = Array.isArray(reason) ? null : reason;
+  throw Object.assign(new Error(publicMessage), { status, publicMessage, issues, reasonCode, reasonCodes });
 }
 
 function corsHeaders(origin) {

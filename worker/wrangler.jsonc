@@ -4,16 +4,18 @@
   "compatibility_date": "2026-10-19",
   // Non-secret Gmail submission settings. SMTP_PASSWORD is a Google App Password
   // and must be set with `npx wrangler secret put SMTP_PASSWORD` — never here.
-  // Leave recipient vars unset so mail goes to fcicommunityhousing@gmail.com.
-  // Override with a Worker secret (APPLICATION_TO_EMAILS, CONTACT_TO_EMAILS,
-  // PARTNERSHIP_TO_EMAILS, NEWSLETTER_TO_EMAILS) if a different inbox is needed.
+  // Applications go to both the FCI office inbox and the Gmail mailbox.
+  // Contact, partnership and newsletter recipients are left unset so they fall
+  // back to fcicommunityhousing@gmail.com; set CONTACT_TO_EMAILS,
+  // PARTNERSHIP_TO_EMAILS or NEWSLETTER_TO_EMAILS here if that should change.
   // SMTP_PORT 465 is implicit TLS. Set SMTP_PORT to "587" for STARTTLS instead.
   "vars": {
     "SMTP_HOST": "smtp.gmail.com",
     "SMTP_PORT": "465",
     "SMTP_USER": "fcicommunityhousing@gmail.com",
     "SMTP_FROM_EMAIL": "fcicommunityhousing@gmail.com",
-    "SMTP_FROM_NAME": "FCI Community Housing Services"
+    "SMTP_FROM_NAME": "FCI Community Housing Services",
+    "APPLICATION_TO_EMAILS": "info@fcichs.co.za,fcicommunityhousing@gmail.com"
   },
   "ai": {
     "binding": "AI"

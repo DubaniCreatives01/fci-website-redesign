@@ -1811,7 +1811,14 @@
                     },
                     attachments: attachmentsList
                 });
-                redirectToSuccessPage(result.status || 'passed');
+                // HTTP 202 (manual_review) is a successful submission: the application
+                // was emailed to FCI and staff will verify the documents by hand.
+                const screeningStatus = result && result.status === 'manual_review' ? 'manual_review' : 'passed';
+                try {
+                    const stored = JSON.parse(sessionStorage.getItem('fci_last_submission') || 'null');
+                    if (stored) sessionStorage.setItem('fci_last_submission', JSON.stringify({ ...stored, screeningStatus }));
+                } catch (storageErr) { /* sessionStorage is optional */ }
+                redirectToSuccessPage(screeningStatus);
             } catch (err) {
                 submitOverlay.remove();
                 const details = err && Array.isArray(err.issues) && err.issues.length
