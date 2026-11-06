@@ -1665,6 +1665,13 @@ section {
     transform: scale(1.15) rotate(5deg);
 }
 
+/* Keep the no-walk-ins notice clear of the fixed email button on small screens. */
+@media (max-width: 768px) {
+    #no-walkins-notice {
+        padding-right: 76px !important;
+    }
+}
+
 /* WhatsApp Button */
 .floating-whatsapp {
     background-color: #25D366; /* Official WhatsApp Green */
