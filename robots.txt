@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Allow: /brand-resources
+Allow: /assets/brand/
+
+Sitemap: https://fcichs.co.za/sitemap.xml
